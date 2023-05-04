@@ -24,7 +24,9 @@
     <!-- ChartistJS -->
     <script src="{{ asset('assets/plugins/chartist/js/chartist.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js') }}"></script>
-
-
-
     <script src="{{ asset('assets/js/dashboard/dashboard-1.js') }}"></script>
+    <!-- datatables -->
+    <script src="{{ asset('assets/plugins/tables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ asset('assets/datatables/datatables.min.js') }}"></script> -->
