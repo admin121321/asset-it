@@ -1,6 +1,7 @@
 @extends('layouts.app-backend')
+
 @section('content')
-<!--**********************************
+ <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
@@ -102,150 +103,132 @@
         <!--**********************************
             Content body end
         ***********************************-->
-<!-- <script>
-    tinymce.init({
-      selector: '#deskripsi',
-      menubar: true,
-      toolbar: true,
-      inline: false,
-    });
-  </script> -->
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    var table = $('.logo_datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('logo.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'gambar_logo', name: 'gambar_logo', "render": function (data, type, row, meta) {
-                    return '<img src="/images-logo/' + data + '" alt="' + data + '"height="100px" width="100px"/>';
-                } },
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
-    });
- 
-    $('#create_record').click(function(){
-        $('.modal-title').text('Add New Record');
-        $('#action_button').val('Add');
-        $('#action').val('Add');
-        $('#form_result').html('');
- 
-        $('#formModal').modal('show');
-    });
- 
-    $('#sample_form').on('submit', function(event){
-        event.preventDefault();
-        var formData = new FormData($(this)[0]); 
-        var action_url = '';
- 
-        if($('#action').val() == 'Add')
-        {
-            action_url = "{{ route('logo.store') }}";
-        }
- 
-        if($('#action').val() == 'Edit')
-        {
-            action_url = "{{ route('logo.update') }}";
-        }
- 
-        $.ajax({
-            type: 'post',
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: action_url,
-            data:$(this).serialize(),
-            dataType: 'json',
-            processData: false,  // Important!
-            contentType: false,
-            cache: false,
-            data: formData,
-            success: function(data) {
-                console.log('success: '+data);
-                var html = '';
-                if(data.errors)
-                {
-                    html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
-                        html += '<p>' + data.errors[count] + '</p>';
-                    }
-                    html += '</div>';
-                }
-                if(data.success)
-                {
-                    html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#sample_form')[0].reset();
-                    $('#posting_table').DataTable().ajax.reload();
-                    window.location.reload();
-                }
-                $('#form_result').html(html);
-            },
-            error: function(data) {
-                var errors = data.responseJSON;
-                console.log(errors);
-            }
-        });
-    });
- 
-    $(document).on('click', '.edit', function(event){
-        event.preventDefault(); 
-        var id = $(this).attr('id'); alert(id);
-        $('#form_result').html('');
- 
-         
- 
-        $.ajax({
-            url :"/logo/edit/"+id+"/",
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            dataType:"json",
-            processData: false,  
-            contentType: false,
-            cache: false,
-            success:function(data)
-            {
-                console.log('success: '+data);
-                // tinyMCE.activeEditor.setContent(data.result.deskripsi);
-                $('#tampilgambar').html(
-                `<img src="/images-logo/${data.result.gambar_logo}" width="100" class="img-fluid img-thumbnail">`);
-                // $('#deskripsi').val(data.result.deskripsi);
-                $('#hidden_id').val(id);
-                $('.modal-title').text('Edit Record');
-                $('#action_button').val('Update');
-                $('#action').val('Edit'); 
-                $('.editpass').hide(); 
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('.logo_datatable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('logo.index') }}",
+                    columns: [
+                        {data: 'id', name: 'id'},
+                        {data: 'gambar_logo', name: 'gambar_logo', "render": function (data, type, row, meta) {
+                        return '<img src="/images-logo/' + data + '" alt="' + data + '"height="100px" width="100px"/>';
+                        } },
+                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                    ]
+                });
+        
+            $('#create_record').click(function(){
+                $('.modal-title').text('Add New Record');
+                $('#action_button').val('Add');
+                $('#action').val('Add');
+                $('#form_result').html('');
+        
                 $('#formModal').modal('show');
-            },
-            error: function(data) {
-                var errors = data.responseJSON;
-                console.log(errors);
-            }
-        })
-    });
- 
-    var id;
- 
-    $(document).on('click', '.delete', function(){
-        id = $(this).attr('id');
-        $('#confirmModal').modal('show');
-    });
- 
-    $('#ok_button').click(function(){
-        $.ajax({
-            url:"logo/destroy/"+id,
-            beforeSend:function(){
-                $('#ok_button').text('Deleting...');
-            },
-            success:function(data)
-            {
-                setTimeout(function(){
-                $('#confirmModal').modal('hide');
-                $('#posting_table').DataTable().ajax.reload();
-                alert('Data Deleted');
-                }, 2000);
-            }
-        })
-    });
-});
-</script>
+            });
+        
+            $('#sample_form').on('submit', function(event){
+                event.preventDefault(); 
+                var action_url = '';
+        
+                if($('#action').val() == 'Add')
+                {
+                    action_url = "{{ route('logo.store') }}";
+                }
+        
+                if($('#action').val() == 'Edit')
+                {
+                    action_url = "{{ route('logo.update') }}";
+                }
+        
+                $.ajax({
+                    type: 'post',
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: action_url,
+                    data:$(this).serialize(),
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log('success: '+data);
+                        var html = '';
+                        if(data.errors)
+                        {
+                            html = '<div class="alert alert-danger">';
+                            for(var count = 0; count < data.errors.length; count++)
+                            {
+                                html += '<p>' + data.errors[count] + '</p>';
+                            }
+                            html += '</div>';
+                        }
+                        if(data.success)
+                        {
+                            html = '<div class="alert alert-success">' + data.success + '</div>';
+                            $('#sample_form')[0].reset();
+                            $('#logo_table').DataTable().ajax.reload();
+                        }
+                        $('#form_result').html(html);
+                    },
+                    error: function(data) {
+                        var errors = data.responseJSON;
+                        console.log(errors);
+                    }
+                });
+            });
+        
+            $(document).on('click', '.edit', function(event){
+                event.preventDefault(); 
+                var id = $(this).attr('id'); alert(id);
+                $('#form_result').html('');
+        
+                
+        
+                $.ajax({
+                    url :"/logo/edit/"+id+"/",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        console.log('success: '+data);
+                        // $('#gambar_logo').val(data.result.gambar_logo);
+                        $('#tampilgambar').html(
+                        `<img src="/images-logo/${data.result.gambar_logo}" width="100" class="img-fluid img-thumbnail">`);
+                        $('#hidden_id').val(id);
+                        $('.modal-title').text('Edit Record');
+                        $('#action_button').val('Update');
+                        $('#action').val('Edit'); 
+                        $('.editpass').hide(); 
+                        $('#formModal').modal('show');
+                    },
+                    error: function(data) {
+                        var errors = data.responseJSON;
+                        console.log(errors);
+                    }
+                })
+            });
+        
+            var id;
+        
+            $(document).on('click', '.delete', function(){
+                id = $(this).attr('id');
+                $('#confirmModal').modal('show');
+            });
+        
+            $('#ok_button').click(function(){
+                $.ajax({
+                    url:"logo/destroy/"+id,
+                    beforeSend:function(){
+                        $('#ok_button').text('Deleting...');
+                    },
+                    success:function(data)
+                    {
+                        setTimeout(function(){
+                        $('#confirmModal').modal('hide');
+                        $('#logo_table').DataTable().ajax.reload();
+                        alert('Data Deleted');
+                        }, 2000);
+                    }
+                })
+            });
+        });
+    </script>
 @endsection

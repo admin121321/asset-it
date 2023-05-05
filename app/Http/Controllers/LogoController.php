@@ -33,7 +33,7 @@ class LogoController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'gambar_logo'             =>  'required'
+            'gambar_logo'             =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         );
  
         $error = Validator::make($request->all(), $rules);
@@ -44,7 +44,7 @@ class LogoController extends Controller
         }else {
             $form_data = $request->all();
             $form_data['gambar_logo'] = date('YmdHis').'.'.$request->gambar_logo->getClientOriginalExtension();
-            $request->gambar_logo->move(public_path('images_logo'), $form_data['gambar_logo']);
+            $request->gambar_logo->move(public_path('images-logo'), $form_data['gambar_logo']);
             
             Logo::create($form_data);
  
@@ -74,14 +74,14 @@ class LogoController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
         $form_data = Logo::find($request->hidden_id);
-        $fileName  = public_path('images_logo/').$form_data->gambar_logo;
+        $fileName  = public_path('images-logo/').$form_data->gambar_logo;
         $currentImage = $logo->gambar_logo;
         
         if ($request->gambar_logo != $currentImage) {
             $file = $request->file('gambar_logo');
             $fileName_new = date('YmdHis') . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images_logo/'), $fileName_new);
-            $logoImage = public_path('images_logo/').$currentImage;
+            $file->move(public_path('images-logo/'), $fileName_new);
+            $logoImage = public_path('images-logo/').$currentImage;
             $form_data = [ 
                 'gambar_logo'              =>  $fileName_new
             ];
@@ -106,6 +106,17 @@ class LogoController extends Controller
             'success' => 'Data is successfully updated',
             
         ]);
+    }
+
+    public function destroy($id)
+    {
+        // hapus file
+		$data = Logo::where('id',$id)->first();
+		File::delete('images-logo/'.$data->gambar_logo);
+
+        Logo::where('id',$id)->delete();
+		return redirect()->back();
+        
     }
 
 }
