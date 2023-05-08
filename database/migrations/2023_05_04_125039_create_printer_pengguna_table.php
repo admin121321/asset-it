@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('printer_users', function (Blueprint $table) {
+        Schema::create('printer_pengguna', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id');
             $table->foreignUuid('printer_id');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('printer_users');
+        Schema::dropIfExists('printer_pengguna');
     }
 };
