@@ -8,4 +8,8 @@ use App\Models\PrinterPengguna;
 class PrinterPenggunaController extends Controller
 {
     //
+    public function index()
+    {
+        return view('printer-pengguna.index');
+    }
 }

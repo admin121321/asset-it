@@ -21,7 +21,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <p>SSID Wifi</p>
+                                <p>Users Divisi</p>
                             </div>
                         </div>
                     </div>
