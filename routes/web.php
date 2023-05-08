@@ -77,9 +77,9 @@ Route::get('/network-lokasi/destroy/{id}', [App\Http\Controllers\NetworkLokasiCo
 // Printer Device
 Route::get('/printer-device', [App\Http\Controllers\PrinterDeviceController::class, 'index'])->name('printer-device.index');
 Route::post('/printer-device/store', [App\Http\Controllers\PrinterDeviceController::class, 'store'])->name('printer-device.store');
-Route::get('/printer-device/edit/{id}', [App\Http\Controllers\PrinterDeviceController::class, 'edit'])->name('printer-device.edit');
+Route::get('/printer-device/edit/{serial_number}', [App\Http\Controllers\PrinterDeviceController::class, 'edit'])->name('printer-device.edit');
 Route::post('/printer-device/update', [App\Http\Controllers\PrinterDeviceController::class, 'update'])->name('printer-device.update');
-Route::get('/printer-device/destroy/{id}', [App\Http\Controllers\PrinterDeviceController::class, 'destroy'])->name('printer-device.destroy');
+Route::get('/printer-device/destroy/{serial_number}', [App\Http\Controllers\PrinterDeviceController::class, 'destroy'])->name('printer-device.destroy');
 // Printer Pengguna
 Route::get('/printer-pengguna', [App\Http\Controllers\PrinterPenggunaController::class, 'index'])->name('printer-pengguna.index');
 Route::post('/printer-pengguna/store', [App\Http\Controllers\PrinterPenggunaController::class, 'store'])->name('printer-pengguna.store');
