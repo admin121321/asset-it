@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('printer_devices', function (Blueprint $table) {
+            $table->id();
             $table->string('serial_number');
             $table->string('brand_printer');
             $table->string('model_printer');
             $table->string('type_printer');
             $table->string('tahun_anggaran');
             $table->string('harga_printer');
+            $table->string('stok');
             $table->string('foto_printer');
             $table->timestamps();
         });

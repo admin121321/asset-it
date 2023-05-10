@@ -96,7 +96,7 @@
                             <li><a href="{{ route('users-divisi.index') }}">Data User</a></li>
                         </ul>
                     </li>
-                    <li class="mega-menu mega-menu-sm">
+                    <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Logo</span>
                         </a>

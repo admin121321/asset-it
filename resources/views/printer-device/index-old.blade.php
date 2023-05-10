@@ -57,10 +57,6 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <span id="form_result"></span>
-                                                        <!-- <div class="form-group">
-                                                            <label>ID: </label>
-                                                            <input type="text" name="id" id="id" class="form-control" />
-                                                        </div> -->
                                                         <div class="form-group">
                                                             <label>Serial Number: </label>
                                                             <input type="text" name="serial_number" id="serial_number" class="form-control" />
@@ -98,9 +94,6 @@
                                                             <label>Foto Printer: </label>
                                                             <input type="file" name="foto_printer" id="foto_printer" class="form-control form-control-sm" accept="images-printer/*" onchange="readURL(this);" />
                                                             <input type="hidden" name="hidden_image" id="hidden_image">
-                                                        </div>
-                                                        <div class="form-floating mb-3" name="tampilgambar" id="tampilgambar">
-                                                            <img name="tampilgambar" id="tampilgambar">
                                                         </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
@@ -220,7 +213,7 @@ $(document).ready(function() {
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#sample_form')[0].reset();
-                    $('#printerdevice_datatable').DataTable().ajax.reload();
+                    $('#posting_table').DataTable().ajax.reload();
                     window.location.reload();
                 }
                 $('#form_result').html(html);
@@ -290,7 +283,7 @@ $(document).ready(function() {
             {
                 setTimeout(function(){
                 $('#confirmModal').modal('hide');
-                $('#printerdevice_datatable').DataTable().ajax.reload();
+                $('#posting_table').DataTable().ajax.reload();
                 alert('Data Deleted');
                 }, 2000);
             }

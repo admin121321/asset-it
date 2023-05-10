@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('user_id');
             $table->foreignUuid('printer_id');
+            $table->string('qty');
             $table->timestamps();
         });
     }
