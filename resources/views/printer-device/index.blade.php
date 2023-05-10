@@ -79,7 +79,7 @@
                                                                 <option>---Pilih Type Printer---</option>
                                                                 <option value="SCANNER">Scaner</option>
                                                                 <option value="PRINTER">Printer</option>
-                                                                <option value="SCAN/PRINTER">Scan/Printer</option>
+                                                                <option value="SCAN & PRINTER">Scan & Printer</option>
                                                             </select>             
                                                         </div>
                                                         <div class="form-group">

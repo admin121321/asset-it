@@ -93,7 +93,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('users.index') }}">Data User</a></li>
-                            <li><a href="{{ route('users-divisi.index') }}">Data User</a></li>
+                            <li><a href="{{ route('users-divisi.index') }}">Data Divisi</a></li>
                         </ul>
                     </li>
                     <li>

@@ -57,12 +57,25 @@
                                                     <div class="modal-body">
                                                         <span id="form_result"></span>
                                                         <div class="form-group">
-                                                            <label>ID User: </label>
-                                                            <input type="text" name="user_id" id="user_id" class="form-control" />
+                                                            <label>ID Pengguna: </label>
+                                                            <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
+                                                                <option>--Pilih Unit Kerja--</option>
+                                                                @foreach(App\Models\User::all() as $user)
+                                                                <option value="{{ $user->id}}" id="user_id">{{ $user->card_id }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>ID Printer: </label>
-                                                            <input type="text" name="printer_id" id="printer_id" class="form-control" />
+                                                            <label>Printer: </label>
+                                                            <select class="form-control" id="printer_id" name="printer_id" aria-label="Floating label select example">
+                                                                <option>--Pilih Unit Kerja--</option>
+                                                                @foreach(App\Models\PrinterDevice::all() as $printer)
+                                                                    @if ($printer->stok=='0')
+                                                                    @else
+                                                                    <option value="{{ $printer->id}}" id="printer_id">{{ $printer->model_printer }}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Qty: </label>

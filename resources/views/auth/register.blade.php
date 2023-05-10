@@ -40,6 +40,34 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="card_id" class="col-md-4 col-form-label text-md-end">{{ __('ID Card') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="card_id" type="text" class="form-control @error('card_id') is-invalid @enderror" name="card_id" value="{{ old('card_id') }}" required autocomplete="card_id" autofocus>
+
+                                @error('card_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="divisi_id" class="col-md-4 col-form-label text-md-end">{{ __('ID Divisi') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="divisi_id" type="text" class="form-control @error('divisi_id') is-invalid @enderror" name="divisi_id" value="{{ old('divisi_id') }}" required autocomplete="divisi_id" autofocus>
+
+                                @error('divisi_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
