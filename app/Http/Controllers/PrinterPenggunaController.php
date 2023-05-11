@@ -97,7 +97,7 @@ class PrinterPenggunaController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
         $printer_pengguna = PrinterPengguna::find($request->hidden_id);
-            if($printer_pengguna->qty=''){
+            if($printer_pengguna->qty='1'){
                 $printer_pengguna->update([
                     'user_id'   =>  $request->user_id,
                     // 'printer_id'=>  $request->printer_id,

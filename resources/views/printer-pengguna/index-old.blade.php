@@ -95,25 +95,25 @@
                                         </div>
                         
                                         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form method="post" id="sample_form" class="form-horizontal">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="ModalLabel">Confirmation</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
-                                                        </div>
-                                                    </form>  
-                                                </div>
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form method="post" id="sample_form" class="form-horizontal">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="ModalLabel">Confirmation</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
+                                                    </div>
+                                                </form>  
+                                            </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 <!-- End DataTabels -->
                             </div>
                         </div>
@@ -122,6 +122,38 @@
             </div>
             <!-- #/ container -->
         </div>
+
+        <!-- detail -->
+        <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">Tambah Printer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        </div>
+                        <div class="modal-body">
+                            <span id="form_detail"></span>
+                            <div class="form-group">
+                                <label>ID Pengguna: </label>
+                                <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
+                                    <option>--Pilih Pengguna--</option>
+                                    @foreach(App\Models\User::all() as $user)
+                                    <option value="{{ $user->id}}" id="user_id">{{ $user->card_id }} - {{ $user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Printer: </label>
+                                <input type="text" name="printer_id" id="printer_id" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
         <!--**********************************
             Content body end
         ***********************************-->
@@ -243,7 +275,6 @@ $(document).ready(function() {
                 $('#confirmModal').modal('hide');
                 alert('Data Tidak Berhasil Diupdate');
                 }, 2000);
-                window.location.reload();
             }
         })
     });
@@ -254,10 +285,10 @@ $(document).ready(function() {
         id = $(this).attr('id');
         $('#confirmModal').modal('show');
     });
- 
+
     $('#ok_button').click(function(){
         $.ajax({
-            url:"printer-pengguna/destroy/"+id,
+            url:"printer-device/destroy/"+id,
             beforeSend:function(){
                 $('#ok_button').text('Deleting...');
             },
@@ -265,10 +296,9 @@ $(document).ready(function() {
             {
                 setTimeout(function(){
                 $('#confirmModal').modal('hide');
-                $('#printerpengguna_datatable').DataTable().ajax.reload();
+                $('#printerdevice_datatable').DataTable().ajax.reload();
                 alert('Data Deleted');
                 }, 2000);
-                window.location.reload();
             }
         })
     });
