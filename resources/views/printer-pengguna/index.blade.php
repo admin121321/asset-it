@@ -113,52 +113,7 @@
                                             </div>
                                             </div>
                                         </div>
-                                    </div> 
-                                    <!-- detail -->
-                                    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <form method="post" id="detail_form" enctype="multipart/form-data" class="form-horizontal">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="ModalLabel">Tambah Printer</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <span id="form_detail"></span>
-                                                        <div class="form-group">
-                                                            <label>ID Pengguna: </label>
-                                                            <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
-                                                                <option>--Pilih Pengguna--</option>
-                                                                @foreach(App\Models\User::all() as $user)
-                                                                <option value="{{ $user->id}}" id="user_id">{{ $user->card_id }} - {{ $user->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Printer: </label>
-                                                            <select class="form-control" id="printer_id" name="printer_id" aria-label="Floating label select example">
-                                                                <option>--Pilih Printer--</option>
-                                                                @foreach(App\Models\PrinterDevice::all() as $printer)
-                                                                    <option value="{{ $printer->id}}" id="printer_id">{{ $printer->model_printer }} - {{ $printer->serial_number }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group" hidden>
-                                                            <label>Qty: </label>
-                                                            <input type="text" name="qty" id="qty" value="1" class="form-control" />
-                                                        </div>
-                                                        <input type="hidden" name="action" id="action" value="Add" />
-                                                        <input type="hidden" name="hidden_id" id="hidden_id" />
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <input type="submit" name="action_button" id="action_button" value="Add" class="btn btn-info" />
-                                                    </div>
-                                                </form>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
+                                    </div>
                                 <!-- End DataTabels -->
                             </div>
                         </div>
@@ -167,6 +122,38 @@
             </div>
             <!-- #/ container -->
         </div>
+
+        <!-- detail -->
+        <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">Tambah Printer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        </div>
+                        <div class="modal-body">
+                            <span id="form_detail"></span>
+                            <div class="form-group">
+                                <label>ID Pengguna: </label>
+                                <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
+                                    <option>--Pilih Pengguna--</option>
+                                    @foreach(App\Models\User::all() as $user)
+                                    <option value="{{ $user->id}}" id="user_id">{{ $user->card_id }} - {{ $user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Printer: </label>
+                                <input type="text" name="printer_id" id="printer_id" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
         <!--**********************************
             Content body end
         ***********************************-->
@@ -199,8 +186,9 @@ $(document).ready(function() {
         $('#action_button').val('Add');
         $('#action').val('Add');
         $('#form_result').html('');
-        $('#detailModal').modal('show');
         $('#formModal').modal('show');
+        $('#form_detail').html('');
+        $('#detailModal').modal('show');
     });
  
     $('#sample_form').on('submit', function(event){
@@ -299,44 +287,33 @@ $(document).ready(function() {
         id = $(this).attr('id');
         $('#confirmModal').modal('show');
     });
-
-    // detail
-    $(document).on('click', '.detail', function(event){
+});
+</script>
+<script type="text/javascript">
+     // detail
+     $(document).on('click', '.detail', function(event){
         event.preventDefault(); 
         var id = $(this).attr('id'); alert(id);
         $('#form_detail').html('');
-       $.ajax({
-            url :"/printer-pengguna/detail/"+id+"/",
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            dataType:"json",
-            processData: false,  
-            contentType: false,
-            cache: false,
-            success:function(data)
-            {
-                console.log('success: '+data);
-                // tinyMCE.activeEditor.setContent(data.result.deskripsi);
-                $('#user_id').val(data.detail.user_id);
-                $('#printer_id').val(data.detail.printer_id);
-                $('#qty').val(data.detail.qty);
-                $('#hidden_id').val(id);
-                $('.modal-title').text('Edit Record');
-                $('#action_button').val('Update');
-                $('#action').val('Edit'); 
-                $('.editpass').hide(); 
-                $('#formModal').modal('show');
-            },
-            error: function(data) {
-                var errors = data.responseJSON;
-                console.log(errors);
-                setTimeout(function(){
-                $('#confirmModal').modal('hide');
-                alert('Data Tidak Berhasil Diupdate');
-                }, 2000);
-            }
-        })
+
+        $.ajax({
+                url :"/printer-pengguna/detail/"+id+"/",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                dataType:"json",
+                processData: false,  
+                contentType: false,
+                cache: false,
+                success:function(data)
+                {
+                    console.log('success: '+data);
+                    $('#user_id').val(data.detail.user_id);
+                    $('#printer_id').val(data.detail.printer_id);
+                    $('#qty').val(data.detail.qty);
+                    $('#hidden_id').val(id);
+                    $('.modal-title').text('Detail Data');
+                    $('#detailModal').modal('show');
+                },
+            })
     });
-    
-});
 </script>
 @endsection

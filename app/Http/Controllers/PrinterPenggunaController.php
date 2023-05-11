@@ -97,7 +97,7 @@ class PrinterPenggunaController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
         $printer_pengguna = PrinterPengguna::find($request->hidden_id);
-            if($printer_pengguna->qty='0'){
+            if($printer_pengguna->qty=''){
                 $printer_pengguna->update([
                     'user_id'   =>  $request->user_id,
                     // 'printer_id'=>  $request->printer_id,
@@ -126,11 +126,18 @@ class PrinterPenggunaController extends Controller
 
     public function detail($id)
     {
-        if(request()->ajax())
+        // if(request()->ajax())
+        // {
+        //     $data = PrinterPengguna::findOrFail($id);
+        //     return response()->json(['detail' => $data]);
+        // }
+
+        if (request()->ajax()) 
         {
             $data = PrinterPengguna::findOrFail($id);
             return response()->json(['detail' => $data]);
         }
+
     }
 
     public function destroy($id)
