@@ -126,49 +126,27 @@
             Content body end
         ***********************************-->
          <!-- detail -->
-         <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel"></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                        </div>
-                        <div class="modal-body">
-                            <span id="detail_result"></span>
-                            <div class="form-group">
-                                <label>ID Pengguna: </label>
-                                <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
-                                    <option>--Pilih Pengguna--</option>
-                                    @foreach(App\Models\User::all() as $user)
-                                    <option value="{{ $user->id}}" id="user_id">{{ $user->card_id }} - {{ $user->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Printer: </label>
-                                <select class="form-control" id="printer_id" name="printer_id" aria-label="Floating label select example">
-                                    <option>--Pilih Printer--</option>
-                                    @foreach(App\Models\PrinterDevice::all() as $printer)
-                                        <option value="{{ $printer->id}}" id="printer_id">{{ $printer->model_printer }} - {{ $printer->serial_number }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-<!-- <script>
-    tinymce.init({
-      selector: '#deskripsi',
-      menubar: true,
-      toolbar: true,
-      inline: false,
-    });
-  </script> -->
+
+
+        <!-- Modal -->
+<div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>ID:</strong> <span id="user-id"></span></p>
+        <p><strong>Name:</strong> <span id="printer-id"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -313,7 +291,7 @@ $(document).ready(function() {
     $(document).on('click', '.detail', function(event){
         event.preventDefault(); 
         var id = $(this).attr('id'); alert(id);
-        $('#detail_result').html('');
+        // $('#detail_result').html('');
 
         $.ajax({
             url :"/printer-pengguna/detail/"+id+"/",
@@ -322,19 +300,37 @@ $(document).ready(function() {
             processData: false,  
             contentType: false,
             cache: false,
-            success:function(datadetail)
+            success:function(data)
             {
-                console.log('success: '+datadetail);
-                $('#user_id').val(datadetail.result.user_id);
-                // $('#printer_id').val(data.result.printer_id);
+                
+                $('#fModal').modal('show');
+                console.log('success: '+data);
+                $('#user-id').val(data.result.user_id);
+                $('#printer-id').val(data.result.printer_id);
                 // $('#qty').val(data.result.qty);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Detail');
-                $('#fModal').modal('show');
             },
         })
     });
 
 });
+</script>
+<script type="text/javascript">
+       
+    // $(document).ready(function () {
+        
+    //     $('body').on('click', '#form-detail', function () {
+    //       var printerURL = $(this).data('url');
+    //       $.get(printerURL, function (data) {
+    //           $('#fModal').modal('show');
+    //           $('#user-id').val(data.user_id);
+    //           $('#printer-id').val(data.printer_id);
+    //         //   $('#qty').val(data.qty);
+    //       })
+    //    });
+        
+    });
+   
 </script>
 @endsection

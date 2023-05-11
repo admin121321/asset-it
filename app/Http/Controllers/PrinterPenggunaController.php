@@ -127,11 +127,14 @@ class PrinterPenggunaController extends Controller
     public function detail($id)
     {
 
-        if (request()->ajax()) 
-        {
-            $datadetail = PrinterPengguna::findOrFail($id);
-            return response()->json(['result' => $datadetail]);
-        }
+        // if (request()->ajax()) 
+        // {
+        //     $data = PrinterPengguna::findOrFail($id);
+        //     return response()->json(['result' => $data]);
+        // }
+        $data = PrinterPengguna::find($id);
+   
+        return response()->json($data);
         
         // $data = PrinterPengguna::get();
         // dd ($data);
