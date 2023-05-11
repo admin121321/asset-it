@@ -35,8 +35,9 @@ class PrinterPenggunaController extends Controller
                     return $data->model_printer;
                 })
                 ->addColumn('action', function($data){
-                    $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Edit</button>';
-                    $button .= '   <button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Delete</button>';
+                    $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Ubah</button>';
+                    $button .= '   <button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Hapus</button>';
+                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="detail btn btn-success btn-sm"> <i class="bi bi-pencil-square"></i>Detail</button>';
                     return $button;
                 })
                 ->make(true);
@@ -85,7 +86,7 @@ class PrinterPenggunaController extends Controller
     {
         $rules = array(
             'user_id'   =>  'required',
-            'printer_id'=>  'required',
+            // 'printer_id'=>  'required',
             'qty'       =>  'required',
         );
  
@@ -95,12 +96,18 @@ class PrinterPenggunaController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }
-        $printer_pengguna = PrinterPengguna::findOrFail($request->hidden_id);
-        $printer_pengguna->update($request->all());
-
-        $form_data = PrinterDevice::findOrFail($request->printer_id);
-        $form_data->stok -= $request->qty;
-        $form_data->update();
+        $printer_pengguna = PrinterPengguna::find($request->hidden_id);
+            if($printer_pengguna->qty='0'){
+                $printer_pengguna->update([
+                    'user_id'   =>  $request->user_id,
+                    // 'printer_id'=>  $request->printer_id,
+                ]);
+            }
+            else{    
+                $printer_pengguna->update($request->all());
+                $form_data = PrinterDevice::findOrFail($request->printer_id);
+                $form_data->stok -= $request->qty;
+            }
 
         // $form_data = PrinterPengguna::find($request->hidden_id);
         // $form_data = [
@@ -112,9 +119,18 @@ class PrinterPenggunaController extends Controller
         // PrinterPengguna::whereId($request->hidden_id)->update($form_data);
  
         return response()->json([
-            'success' => 'Data is successfully updated',
+            'success' => 'Data Berhasil di Update',
             
         ]);
+    }
+
+    public function detail($id)
+    {
+        if(request()->ajax())
+        {
+            $data = PrinterPengguna::findOrFail($id);
+            return response()->json(['detail' => $data]);
+        }
     }
 
     public function destroy($id)

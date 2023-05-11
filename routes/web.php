@@ -83,6 +83,7 @@ Route::get('/printer-device/destroy/{id}', [App\Http\Controllers\PrinterDeviceCo
 // Printer Pengguna
 Route::get('/printer-pengguna', [App\Http\Controllers\PrinterPenggunaController::class, 'index'])->name('printer-pengguna.index');
 Route::post('/printer-pengguna/store', [App\Http\Controllers\PrinterPenggunaController::class, 'store'])->name('printer-pengguna.store');
+Route::get('/printer-pengguna/detail/{id}', [App\Http\Controllers\PrinterPenggunaController::class, 'detail'])->name('printer-pengguna.detail');
 Route::get('/printer-pengguna/edit/{id}', [App\Http\Controllers\PrinterPenggunaController::class, 'edit'])->name('printer-pengguna.edit');
 Route::post('/printer-pengguna/update', [App\Http\Controllers\PrinterPenggunaController::class, 'update'])->name('printer-pengguna.update');
 Route::get('/printer-pengguna/destroy/{id}', [App\Http\Controllers\PrinterPenggunaController::class, 'destroy'])->name('printer-pengguna.destroy');
