@@ -36,7 +36,7 @@ class PrinterPenggunaController extends Controller
                 })
                 ->addColumn('action', function($data){
                     $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Ubah</button>';
-                    $button .= '   <button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Hapus</button>';
+                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Hapus</button>';
                     $button .= '<button type="button" name="edit" id="'.$data->id.'" class="detail btn btn-success btn-sm"> <i class="bi bi-pencil-square"></i>Detail</button>';
                     return $button;
                 })
@@ -126,17 +126,15 @@ class PrinterPenggunaController extends Controller
 
     public function detail($id)
     {
-        // if(request()->ajax())
-        // {
-        //     $data = PrinterPengguna::findOrFail($id);
-        //     return response()->json(['detail' => $data]);
-        // }
 
         if (request()->ajax()) 
         {
-            $data = PrinterPengguna::findOrFail($id);
-            return response()->json(['detail' => $data]);
+            $datadetail = PrinterPengguna::findOrFail($id);
+            return response()->json(['result' => $datadetail]);
         }
+        
+        // $data = PrinterPengguna::get();
+        // dd ($data);
 
     }
 

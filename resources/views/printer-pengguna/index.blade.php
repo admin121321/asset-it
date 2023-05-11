@@ -125,6 +125,42 @@
         <!--**********************************
             Content body end
         ***********************************-->
+         <!-- detail -->
+         <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        </div>
+                        <div class="modal-body">
+                            <span id="detail_result"></span>
+                            <div class="form-group">
+                                <label>ID Pengguna: </label>
+                                <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
+                                    <option>--Pilih Pengguna--</option>
+                                    @foreach(App\Models\User::all() as $user)
+                                    <option value="{{ $user->id}}" id="user_id">{{ $user->card_id }} - {{ $user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Printer: </label>
+                                <select class="form-control" id="printer_id" name="printer_id" aria-label="Floating label select example">
+                                    <option>--Pilih Printer--</option>
+                                    @foreach(App\Models\PrinterDevice::all() as $printer)
+                                        <option value="{{ $printer->id}}" id="printer_id">{{ $printer->model_printer }} - {{ $printer->serial_number }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
 <!-- <script>
     tinymce.init({
       selector: '#deskripsi',
@@ -227,8 +263,8 @@ $(document).ready(function() {
                 console.log('success: '+data);
                 // tinyMCE.activeEditor.setContent(data.result.deskripsi);
                 $('#user_id').val(data.result.user_id);
-                $('#printer_id').val(data.result.printer_id);
-                $('#qty').val(data.result.qty);
+                // $('#printer_id').val(data.result.printer_id);
+                // $('#qty').val(data.result.qty);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Edit Record');
                 $('#action_button').val('Update');
@@ -272,34 +308,33 @@ $(document).ready(function() {
             }
         })
     });
-});
-</script>
-
-<script type="text/javascript">
-     // detail
-     $(document).on('click', '.detail', function(event){
+    
+    // detail
+    $(document).on('click', '.detail', function(event){
         event.preventDefault(); 
         var id = $(this).attr('id'); alert(id);
-        $('#form_detail').html('');
+        $('#detail_result').html('');
 
         $.ajax({
-                url :"/printer-pengguna/detail/"+id+"/",
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                dataType:"json",
-                processData: false,  
-                contentType: false,
-                cache: false,
-                success:function(data)
-                {
-                    console.log('success: '+data);
-                    $('#user_id').val(data.detail.user_id);
-                    $('#printer_id').val(data.detail.printer_id);
-                    $('#qty').val(data.detail.qty);
-                    $('#hidden_id').val(id);
-                    $('.modal-title').text('Detail Data');
-                    $('#detailModal').modal('show');
-                },
-            })
+            url :"/printer-pengguna/detail/"+id+"/",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType:"json",
+            processData: false,  
+            contentType: false,
+            cache: false,
+            success:function(datadetail)
+            {
+                console.log('success: '+datadetail);
+                $('#user_id').val(datadetail.result.user_id);
+                // $('#printer_id').val(data.result.printer_id);
+                // $('#qty').val(data.result.qty);
+                $('#hidden_id').val(id);
+                $('.modal-title').text('Detail');
+                $('#fModal').modal('show');
+            },
+        })
     });
+
+});
 </script>
 @endsection
