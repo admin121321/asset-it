@@ -4,7 +4,6 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
@@ -14,7 +13,6 @@
                 </div>
             </div>
             <!-- row -->
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -129,17 +127,18 @@
 
 
         <!-- Modal -->
-        @foreach ($data as $row)
         <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+            <span id="detail_result"></span>
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p><strong>ID:</strong> <span id="user-id">{{$row->name}}</span></p>
-                <p><strong>Name:</strong> <span id="printer-id">{{$row->model_printer}}</span></p>
+                <p><strong>ID:</strong><span id="user-id"></span></p>
+                <p><strong>Name:</strong> <span id="printer-id"></span></p>
+                <p><strong>Qty:</strong> <span id="qty"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -147,7 +146,6 @@
             </div>
         </div>
         </div>
-        @endforeach
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
@@ -244,7 +242,7 @@ $(document).ready(function() {
                 // tinyMCE.activeEditor.setContent(data.result.deskripsi);
                 $('#user_id').val(data.result.user_id);
                 // $('#printer_id').val(data.result.printer_id);
-                // $('#qty').val(data.result.qty);
+                $('#qty').val(data.result.qty);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Edit Record');
                 $('#action_button').val('Update');
@@ -290,10 +288,10 @@ $(document).ready(function() {
     });
     
     // detail
-    $(document).on('click', '.detail', function(event){
+    $(document).on('click', '.detailButton', function(event){
         event.preventDefault(); 
         var id = $(this).attr('id'); alert(id);
-        // $('#detail_result').html('');
+        $('#detail_result').html('');
 
         $.ajax({
             url :"/printer-pengguna/detail/"+id+"/",
@@ -305,34 +303,23 @@ $(document).ready(function() {
             success:function(data)
             {
                 
-                $('#fModal').modal('show');
-                console.log('success: '+data);
-                // $('#user-id').val(data.result.user_id);
-                // $('#printer-id').val(data.result.printer_id);
-                // $('#qty').val(data.result.qty);
+                $('#user-id').text(data.user_id);
+                $('#printer-id').text(data.printer_id);
+                $('#qty').text(data.qty);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Detail');
+                $('#fModal').modal('show');
+
+                console.log(
+                    'id user: '+data.user_id,
+                    'id printer:'+ data.printer_id,
+                     $('#user-id')
+                    );
+                
             },
         })
     });
 
 });
-</script>
-<script type="text/javascript">
-       
-    // $(document).ready(function () {
-        
-    //     $('body').on('click', '#form-detail', function () {
-    //       var printerURL = $(this).data('url');
-    //       $.get(printerURL, function (data) {
-    //           $('#fModal').modal('show');
-    //           $('#user-id').val(data.user_id);
-    //           $('#printer-id').val(data.printer_id);
-    //         //   $('#qty').val(data.qty);
-    //       })
-    //    });
-        
-    });
-   
 </script>
 @endsection

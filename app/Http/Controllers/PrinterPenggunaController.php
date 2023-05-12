@@ -37,7 +37,7 @@ class PrinterPenggunaController extends Controller
                 ->addColumn('action', function($data){
                     $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Ubah</button>';
                     $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Hapus</button>';
-                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="detail btn btn-success btn-sm"> <i class="bi bi-pencil-square"></i>Detail</button>';
+                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="detailButton btn btn-success btn-sm"> <i class="bi bi-pencil-square"></i>Detail</button>';
                     return $button;
                 })
                 ->make(true);
@@ -134,7 +134,7 @@ class PrinterPenggunaController extends Controller
         if (request()->ajax()) 
         {
             $data = PrinterPengguna::findOrFail($id);
-            return response()->json(['result' => $data]);
+            return response()->json($data);
         }
         // $data = PrinterPengguna::find($id);
    
