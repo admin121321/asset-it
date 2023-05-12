@@ -44,7 +44,11 @@ class PrinterPenggunaController extends Controller
         }
         // $data = PrinterDevice::get();
         // dd ($data);
-        return view('printer-pengguna.index');
+        $data = PrinterPengguna::join('users', 'users.id', '=' ,'printer_pengguna.user_id')
+        ->join('printer_devices', 'printer_devices.id', '=', 'printer_pengguna.printer_id')
+        ->select('printer_pengguna.*', 'users.name', 'printer_devices.brand_printer', 'printer_devices.model_printer') 
+        ->get();
+        return view('printer-pengguna.index', compact('data'));
     }
 
     public function store(Request $request)
@@ -127,14 +131,14 @@ class PrinterPenggunaController extends Controller
     public function detail($id)
     {
 
-        // if (request()->ajax()) 
-        // {
-        //     $data = PrinterPengguna::findOrFail($id);
-        //     return response()->json(['result' => $data]);
-        // }
-        $data = PrinterPengguna::find($id);
+        if (request()->ajax()) 
+        {
+            $data = PrinterPengguna::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
+        // $data = PrinterPengguna::find($id);
    
-        return response()->json($data);
+        // return response()->json($data);
         
         // $data = PrinterPengguna::get();
         // dd ($data);

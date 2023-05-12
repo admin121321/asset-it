@@ -129,23 +129,25 @@
 
 
         <!-- Modal -->
-<div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>ID:</strong> <span id="user-id"></span></p>
-        <p><strong>Name:</strong> <span id="printer-id"></span></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+        @foreach ($data as $row)
+        <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>ID:</strong> <span id="user-id">{{$row->name}}</span></p>
+                <p><strong>Name:</strong> <span id="printer-id">{{$row->model_printer}}</span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        @endforeach
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
@@ -305,8 +307,8 @@ $(document).ready(function() {
                 
                 $('#fModal').modal('show');
                 console.log('success: '+data);
-                $('#user-id').val(data.result.user_id);
-                $('#printer-id').val(data.result.printer_id);
+                // $('#user-id').val(data.result.user_id);
+                // $('#printer-id').val(data.result.printer_id);
                 // $('#qty').val(data.result.qty);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Detail');
