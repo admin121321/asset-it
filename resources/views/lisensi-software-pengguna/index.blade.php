@@ -18,7 +18,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <p>Printer Pengguna</p>
+                                <p>Lisensi Pengguna</p>
                                 <!-- DataTables -->
                                 <div align="right">
                                     <button type="button" name="create_record" id="create_record" class="btn btn-success"> <i class="bi bi-plus-square"></i> Add</button>

@@ -20,7 +20,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <p>Printer Device</p>
+                                <p>Aksesoris Device</p>
                                 <!-- DataTables -->
                                 <div align="right">
                                     <button type="button" name="create_record" id="create_record" class="btn btn-success"> <i class="bi bi-plus-square"></i> Add</button>
@@ -75,7 +75,7 @@
                                                             <input type="text" name="model_aksesoris" id="model_aksesoris" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Type printer: </label>
+                                                            <label>Type Aksesoris: </label>
                                                             <select name="type_aksesoris" class="form-control" required>
                                                                 <option>---Pilih Type Aksesoris---</option>
                                                                 <option value="Mouse">Mouse</option>
@@ -101,7 +101,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Foto Printer: </label>
-                                                            <input type="file" name="foto_printer" id="foto_printer" class="form-control form-control-sm" accept="images-printer/*" onchange="readURL(this);" />
+                                                            <input type="file" name="foto_aksesoris" id="foto_aksesoris" class="form-control form-control-sm" accept="images-aksesoris/*" onchange="readURL(this);" />
                                                             <input type="hidden" name="hidden_image" id="hidden_image">
                                                         </div>
                                                         <div class="form-floating mb-3" name="tampilgambar" id="tampilgambar">
