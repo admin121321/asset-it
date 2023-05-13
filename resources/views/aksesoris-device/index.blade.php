@@ -256,13 +256,13 @@ $(document).ready(function() {
             {
                 console.log('success: '+data);
                 // tinyMCE.activeEditor.setContent(data.result.deskripsi);
-                $('#serial_number').val(data.result.sn_aksesoris);
-                $('#brand_printer').val(data.result.brand_aksesoris);
-                $('#model_printer').val(data.result.model_aksesoris);
-                $('#type_printer').val(data.result.type_aksesoris);
-                $('#type_printer').val(data.result.garansi_aksesoris);
+                $('#sn_aksesoris').val(data.result.sn_aksesoris);
+                $('#brand_aksesoris').val(data.result.brand_aksesoris);
+                $('#model_aksesoris').val(data.result.model_aksesoris);
+                $('#type_aksesoris').val(data.result.type_aksesoris);
+                $('#garansi_aksesoris').val(data.result.garansi_aksesoris);
                 $('#tahun_anggaran').val(data.result.tahun_anggaran);
-                $('#harga_printer').val(data.result.harga_aksesoris);
+                $('#harga_aksesoris').val(data.result.harga_aksesoris);
                 $('#stok').val(data.result.stok);
                 $('#tampilgambar').html(
                 `<img src="/images-aksesoris/${data.result.foto_aksesoris}" width="100" class="img-fluid img-thumbnail">`);
@@ -300,6 +300,7 @@ $(document).ready(function() {
                 $('#printerdevice_datatable').DataTable().ajax.reload();
                 alert('Data Deleted');
                 }, 2000);
+                window.location.reload();
             }
         })
     });
