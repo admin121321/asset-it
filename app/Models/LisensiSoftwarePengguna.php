@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class LisensiSoftwarePengguna extends Model
 {
     use HasFactory;
+    protected $table = 'lisensi_pengguna';
+    protected $fillable = [
+        'device_id',
+        'lisensi_id',
+        'qty',
+    ];
 }
