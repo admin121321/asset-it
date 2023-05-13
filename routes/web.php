@@ -29,6 +29,7 @@ Route::get('/aksesoris-device/destroy/{id}', [App\Http\Controllers\AksesorisDevi
 // aksesoris Pengguna
 Route::get('/aksesoris-pengguna', [App\Http\Controllers\AksesorisPenggunaController::class, 'index'])->name('aksesoris-pengguna.index');
 Route::post('/aksesoris-pengguna/store', [App\Http\Controllers\AksesorisPenggunaController::class, 'store'])->name('aksesoris-pengguna.store');
+Route::get('/aksesoris-pengguna/detail/{id}', [App\Http\Controllers\AksesorisPenggunaController::class, 'detail'])->name('aksesoris-pengguna.detail');
 Route::get('/aksesoris-pengguna/edit/{id}', [App\Http\Controllers\AksesorisPenggunaController::class, 'edit'])->name('aksesoris-pengguna.edit');
 Route::post('/aksesoris-pengguna/update', [App\Http\Controllers\AksesorisPenggunaController::class, 'update'])->name('aksesoris-pengguna.update');
 Route::get('/aksesoris-pengguna/destroy/{id}', [App\Http\Controllers\AksesorisPenggunaController::class, 'destroy'])->name('aksesoris-pengguna.destroy');

@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('desktop_device', function (Blueprint $table) {
+        Schema::create('aksesoris_device', function (Blueprint $table) {
             $table->id();
-            $table->string('sn_desktop');
-            $table->string('brand_desktop');
-            $table->string('model_desktop');
-            $table->string('type_desktop');
+            $table->string('sn_aksesoris');
+            $table->string('brand_aksesoris');
+            $table->string('model_aksesoris');
+            $table->string('type_aksesoris');
+            $table->string('garansi_aksesoris');
             $table->string('tahun_anggaran');
-            $table->string('garansi_desktop');
-            $table->string('harga_desktop');
+            $table->string('harga_aksesoris');
             $table->string('stok');
-            $table->string('foto_desktop');
+            $table->string('foto_aksesoris');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('desktop_device');
+        Schema::dropIfExists('aksesoris_device');
     }
 };

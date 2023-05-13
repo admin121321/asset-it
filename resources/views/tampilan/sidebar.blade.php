@@ -61,7 +61,7 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-wifi menu-icon"></i> <span class="nav-text">Aksesoris</span>
+                            <i class="fa fa-mouse-pointer menu-icon"></i> <span class="nav-text">Aksesoris</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('aksesoris-device.index') }}">Device</a></li>
