@@ -53,6 +53,7 @@ Route::get('/lisensi-software/destroy/{id}', [App\Http\Controllers\LisensiSoftwa
 // Lisensi Software Pengguna
 Route::get('/lisensi-software-pengguna', [App\Http\Controllers\LisensiSoftwarePenggunaController::class, 'index'])->name('lisensi-software-pengguna.index');
 Route::post('/lisensi-software-pengguna/store', [App\Http\Controllers\LisensiSoftwarePenggunaController::class, 'store'])->name('lisensi-software-pengguna.store');
+Route::get('/lisensi-software-pengguna/detail/{id}', [App\Http\Controllers\LisensiSoftwarePenggunaController::class, 'detail'])->name('lisensi-software-pengguna.detail');
 Route::get('/lisensi-software-pengguna/edit/{id}', [App\Http\Controllers\LisensiSoftwarePenggunaController::class, 'edit'])->name('lisensi-software-pengguna.edit');
 Route::post('/lisensi-software-pengguna/update', [App\Http\Controllers\LisensiSoftwarePenggunaController::class, 'update'])->name('lisensi-software-pengguna.update');
 Route::get('/lisensi-software-pengguna/destroy/{id}', [App\Http\Controllers\LisensiSoftwarePenggunaController::class, 'destroy'])->name('lisensi-software-pengguna.destroy');

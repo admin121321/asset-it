@@ -31,9 +31,9 @@
                                             <table class="table table-striped table-bordered zero-configuration printerpengguna_datatable"> 
                                                 <thead>
                                                     <tr>
-                                                        <th>Brand Printer</th>
-                                                        <th>Model Printer</th>
-                                                        <th>Pengguna</th>
+                                                        <th>Brand Device</th>
+                                                        <th>Type Device</th>
+                                                        <th>Model Lisensi</th>
                                                         <th>Qty</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
@@ -57,21 +57,21 @@
                                                         <span id="form_result"></span>
                                                         <div class="form-group">
                                                             <label>ID Pengguna: </label>
-                                                            <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
+                                                            <select class="form-control" id="desktop_id" name="desktop_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Pengguna--</option>
-                                                                @foreach(App\Models\User::all() as $user)
-                                                                <option value="{{ $user->id}}" id="user_id">{{ $user->card_id }} - {{ $user->name}}</option>
+                                                                @foreach(App\Models\DesktopDevice::all() as $desktop)
+                                                                <option value="{{ $desktop->id}}" id="desktop_id">{{ $desktop->sn_desktop }} - {{ $desktop->model_desktop}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Printer: </label>
-                                                            <select class="form-control" id="printer_id" name="printer_id" aria-label="Floating label select example">
-                                                                <option>--Pilih Printer--</option>
-                                                                @foreach(App\Models\PrinterDevice::all() as $printer)
-                                                                    @if ($printer->stok=='0')
+                                                            <select class="form-control" id="lisensi_id" name="lisensi_id" aria-label="Floating label select example">
+                                                                <option>--Pilih Lisensi--</option>
+                                                                @foreach(App\Models\LisensiSoftware::all() as $lisensi)
+                                                                    @if ($lisensi->stok=='0')
                                                                     @else
-                                                                    <option value="{{ $printer->id}}" id="printer_id">{{ $printer->model_printer }} - {{ $printer->serial_number }}</option>
+                                                                    <option value="{{ $lisensi->id}}" id="lisensi_id">{{ $lisensi->model_lisensi }} - {{ $lisensi->sn_lisensi }}</option>
                                                                     @endif
                                                                 @endforeach
                                                             </select>
@@ -132,13 +132,13 @@
             <div class="modal-content">
             <span id="detail_result"></span>
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Lisensi Pengguna</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p><strong>ID:</strong><span id="user-id"></span></p>
-                <p><strong>Name:</strong> <span id="printer-id"></span></p>
-                <p><strong>Qty:</strong> <span id="qty"></span></p>
+                <p><strong>ID Desktop:</strong><span id="desktop-id"></span></p>
+                <p><strong>Lisensi ID:</strong> <span id="lisensi-id"></span></p>
+                <p><strong>Qty:</strong> <span id="qtY"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -156,6 +156,7 @@ $(document).ready(function() {
         ajax: "{{ route('lisensi-software-pengguna.index') }}",
         columns: [
             {data: 'brand_desktop', name: 'brand_dektop'},
+            {data: 'type_desktop', name: 'type_dektop'},
             {data: 'model_lisensi', name: 'model_lisensi'},
             {data: 'qty', name: 'qty'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -177,12 +178,12 @@ $(document).ready(function() {
  
         if($('#action').val() == 'Add')
         {
-            action_url = "{{ route('printer-pengguna.store') }}";
+            action_url = "{{ route('lisensi-software-pengguna.store') }}";
         }
  
         if($('#action').val() == 'Edit')
         {
-            action_url = "{{ route('printer-pengguna.update') }}";
+            action_url = "{{ route('lisensi-software-pengguna.update') }}";
         }
  
         $.ajax({
@@ -229,7 +230,7 @@ $(document).ready(function() {
         $('#form_result').html('');
 
         $.ajax({
-            url :"/printer-pengguna/edit/"+id+"/",
+            url :"/lisensi-software-pengguna/edit/"+id+"/",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType:"json",
             processData: false,  
@@ -239,8 +240,8 @@ $(document).ready(function() {
             {
                 console.log('success: '+data);
                 // tinyMCE.activeEditor.setContent(data.result.deskripsi);
-                $('#user_id').val(data.result.user_id);
-                // $('#printer_id').val(data.result.printer_id);
+                $('#desktop_id').val(data.result.desktop_id);
+                $('#lisensi_id').val(data.result.lisensi_id);
                 $('#qty').val(data.result.qty);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Edit Record');
@@ -270,7 +271,7 @@ $(document).ready(function() {
  
     $('#ok_button').click(function(){
         $.ajax({
-            url:"printer-pengguna/destroy/"+id,
+            url:"lisensi-software-pengguna/destroy/"+id,
             beforeSend:function(){
                 $('#ok_button').text('Deleting...');
             },
@@ -293,7 +294,7 @@ $(document).ready(function() {
         $('#detail_result').html('');
 
         $.ajax({
-            url :"/printer-pengguna/detail/"+id+"/",
+            url :"/lisensi-software-pengguna/detail/"+id+"/",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType:"json",
             processData: false,  
@@ -302,18 +303,18 @@ $(document).ready(function() {
             success:function(data)
             {
                 
-                $('#user-id').text(data.user_id);
-                $('#printer-id').text(data.printer_id);
-                $('#qty').text(data.qty);
-                $('#hidden_id').val(id);
+                $('#desktop-id').text(data.desktop_id);
+                $('#lisensi-id').text(data.lisensi_id);
+                $('#qtY').text(data.qty);
                 $('.modal-title').text('Detail');
                 $('#fModal').modal('show');
 
-                console.log(
-                    'id user: '+data.user_id,
-                    'id printer:'+ data.printer_id,
-                     $('#user-id')
-                    );
+                // console.log(
+                //     'desktop-id: '+data.desktop_id,
+                //     'lisensi-id:'+ data.lisensi_id,
+                //     'qtY:'+ data.qty,
+                //      $('#user-id')
+                //     );
                 
             },
         })

@@ -11,6 +11,7 @@ use Auth;
 use File;
 use DB;
 use App\Models\LisensiSoftwarePengguna;
+use App\Models\LisensiSoftware;
 
 class LisensiSoftwarePenggunaController extends Controller
 {
@@ -19,7 +20,7 @@ class LisensiSoftwarePenggunaController extends Controller
         if ($request->ajax()) {
             $data = LisensiSoftwarePengguna::join('desktop_device', 'desktop_device.id', '=', 'lisensi_pengguna.desktop_id')
                                     ->join('lisensi_software', 'lisensi_software.id', '=', 'lisensi_pengguna.lisensi_id')
-                                    ->select('lisensi_pengguna.*', 'lisensi_software.brand_lisensi', 'lisensi_software.model_lisensi') 
+                                    ->select('lisensi_pengguna.*', 'lisensi_software.brand_lisensi',  'desktop_device.brand_desktop', 'lisensi_software.model_lisensi', 'desktop_device.sn_desktop', 'desktop_device.type_desktop') 
                                     ->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('desktop_id', function($data){
@@ -38,10 +39,104 @@ class LisensiSoftwarePenggunaController extends Controller
         }
         // $data = LisensiSoftwarePengguna::get();
         // dd ($data);
-        // $data = LisensiSoftwarePengguna::join('desktop_device', 'desktop_device.id', '=', 'lisensi_pengguna.desktop_id')
-        //                             ->join('lisensi_software', 'lisensi_software.id', '=', 'lisensi_pengguna.lisensi_id')
-        //                             ->select('lisensi_pengguna.*', 'lisensi_software.brand_lisensi', 'lisensi_software.model_lisensi') 
-        //                             ->get();
+        $data = LisensiSoftwarePengguna::join('desktop_device', 'desktop_device.id', '=', 'lisensi_pengguna.desktop_id')
+                                    ->join('lisensi_software', 'lisensi_software.id', '=', 'lisensi_pengguna.lisensi_id')
+                                    ->select('lisensi_pengguna.*', 'lisensi_software.brand_lisensi', 'lisensi_software.model_lisensi', 'desktop_device.sn_desktop', 'desktop_device.type_desktop') 
+                                    ->get();
         return view('lisensi-software-pengguna.index');
      }
+
+     public function store(Request $request)
+    {
+        $rules = array(
+            // 'id'            =>  'required',
+            'desktop_id'   =>  'required',
+            'lisensi_id'=>  'required',
+            'qty'       =>  'required',
+        );
+ 
+        $error = Validator::make($request->all(), $rules);
+ 
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }else{
+
+            LisensiSoftwarePengguna::create($request->all());
+            $form_data = LisensiSoftware::findOrFail($request->lisensi_id);
+            $form_data->stok -= $request->qty;
+            $form_data->save();
+           
+
+            return response()->json(['success' => 'Data Added successfully.']);
+        }
+    }
+
+    public function edit($id)
+    {
+        if(request()->ajax())
+        {
+            $data = LisensiSoftwarePengguna::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
+    }
+
+    public function update(Request $request, LisensiSoftwarePengguna $lisensi_software_pengguna)
+    {
+        $rules = array(
+            'desktop_id'   =>  'required',
+            // 'lisensi_id'=>  'required',
+            // 'qty'       =>  'required',
+        );
+ 
+        $error = Validator::make($request->all(), $rules);
+ 
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        $lisensi_software_pengguna = LisensiSoftwarePengguna::find($request->hidden_id);
+            if($lisensi_software_pengguna->qty='1'){
+                $lisensi_software_pengguna->update([
+                    'desktop_id'   =>  $request->desktop_id,
+                    // 'printer_id'=>  $request->printer_id,
+                ]);
+            }
+            else{    
+                $lisensi_software_pengguna->update($request->all());
+                $form_data = LisensiSoftware::findOrFail($request->lisensi_id);
+                $form_data->stok -= $request->qty;
+            }
+
+        // $form_data = PrinterPengguna::find($request->hidden_id);
+        // $form_data = [
+        //     'user_id'   =>  $request->user_id,
+        //     'printer_id'=>  $request->printer_id,
+        //     'qty'       =>  $request->qty,
+        //     ];
+ 
+        // PrinterPengguna::whereId($request->hidden_id)->update($form_data);
+ 
+        return response()->json([
+            'success' => 'Data Berhasil di Update',
+            
+        ]);
+    }
+
+    public function detail($id)
+    {
+        if(request()->ajax())
+        {
+            $data = LisensiSoftwarePengguna::findOrFail($id);
+            return response()->json($data);
+        }
+    }
+
+    public function destroy($id)
+    {
+        // hapus file
+        LisensiSoftwarePengguna::where('id',$id)->delete();
+		return redirect()->back();
+        
+    }
 }

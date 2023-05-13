@@ -10,7 +10,7 @@ class LisensiSoftwarePengguna extends Model
     use HasFactory;
     protected $table = 'lisensi_pengguna';
     protected $fillable = [
-        'device_id',
+        'desktop_id',
         'lisensi_id',
         'qty',
     ];
