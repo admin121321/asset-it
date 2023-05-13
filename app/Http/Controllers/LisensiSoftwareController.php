@@ -31,4 +31,143 @@ class LisensiSoftwareController extends Controller
         // dd ($data);
         return view('lisensi-software.index');
      }
+
+     public function store(Request $request)
+     {
+         $rules = array(
+             // 'id'            =>  'required',
+             'sn_lisensi'    =>  'required',
+             'brand_lisensi' =>  'required',
+             'model_lisensi' =>  'required',
+             'type_lisensi'  =>  'required',
+             'tahun_anggaran'=>  'required',
+             'harga_lisensi' =>  'required',
+             'core_os'       =>  'required',
+             'stok'          =>  'required',
+             'key_lisensi'   =>  'required',
+             'foto_lisensi'  =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+         );
+  
+         $error = Validator::make($request->all(), $rules);
+  
+         if($error->fails())
+         {
+             return response()->json(['errors' => $error->errors()->all()]);
+         }else{
+ 
+             // $form_data = $request->all();
+             $form_data = [
+                 'id'            =>  $request->sn_lisensi,
+                 'sn_lisensi'    =>  $request->sn_lisensi,
+                 'brand_lisensi' =>  $request->brand_lisensi,
+                 'model_lisensi' =>  $request->model_lisensi,
+                 'type_lisensi'  =>  $request->type_lisensi,
+                 'tahun_anggaran'=>  $request->tahun_anggaran,
+                 'core_os'       =>  $request->core_os,
+                 'harga_lisensi' =>  $request->harga_lisensi,
+                 'key_lisensi'   =>  $request->key_lisensi,
+                 'stok'          =>  $request->stok,
+                 ];
+             $form_data['foto_lisensi'] = date('YmdHis').'.'.$request->foto_lisensi->getClientOriginalExtension();
+             $request->foto_lisensi->move(public_path('images-lisensi'), $form_data['foto_lisensi']);
+ 
+             LisensiSoftware::create($form_data);
+             return response()->json(['success' => 'Data Berhasil Ditambah.']);
+         }
+     }
+ 
+     public function edit($id)
+     {
+         if(request()->ajax())
+         {
+             $data = LisensiSoftware::findOrFail($id);
+             return response()->json(['result' => $data]);
+         }
+     }
+ 
+     public function update(Request $request, LisensiSoftware $lisensisoftware)
+     {
+         $rules = array(
+            'sn_lisensi'    =>  'required',
+            'brand_lisensi' =>  'required',
+            'model_lisensi' =>  'required',
+            'type_lisensi'  =>  'required',
+            'tahun_anggaran'=>  'required',
+            'harga_lisensi' =>  'required',
+            'core_os'       =>  'required',
+            'stok'          =>  'required',
+            'key_lisensi'   =>  'required',
+            // 'foto_lisensi'  =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+         );
+  
+         $error = Validator::make($request->all(), $rules);
+  
+         if($error->fails())
+         {
+             return response()->json(['errors' => $error->errors()->all()]);
+         }
+         $form_data = LisensiSoftware::find($request->hidden_id);
+         $fileName  = public_path('images-lisensi/').$form_data->foto_lisensi;
+         $currentImage =  $lisensisoftware->foto_lisensi;
+         
+         if ($request->foto_lisensi != $currentImage) {
+             $file = $request->file('foto_lisensi');
+             $fileName_new = date('YmdHis') . '.' . $file->getClientOriginalExtension();
+             $file->move(public_path('images-lisensi/'), $fileName_new);
+             $lisensiImage = public_path('images-lisensi/').$currentImage;
+             $form_data = [
+                 'id'            =>  $request->sn_lisensi,
+                 'sn_lisensi'    =>  $request->sn_lisensi,
+                 'brand_lisensi' =>  $request->brand_lisensi,
+                 'model_lisensi' =>  $request->model_lisensi,
+                 'type_lisensi'  =>  $request->type_lisensi,
+                 'tahun_anggaran'=>  $request->tahun_anggaran,
+                 'core_os'       =>  $request->core_os,
+                 'harga_lisensi' =>  $request->harga_lisensi,
+                 'key_lisensi'   =>  $request->key_lisensi,
+                 'stok'          =>  $request->stok,
+                 'foto_lisensi'  =>  $fileName_new
+             ];
+             File::delete($fileName);
+ 
+             if(file_exists($lisensiImage)){
+                 
+                 // File::delete($fileName);
+                 @unlink($lisensiImage);
+                 
+             }
+ 
+         } else {
+             $form_data = [
+                'id'            =>  $request->sn_lisensi,
+                'sn_lisensi'    =>  $request->sn_lisensi,
+                'brand_lisensi' =>  $request->brand_lisensi,
+                'model_lisensi' =>  $request->model_lisensi,
+                'type_lisensi'  =>  $request->type_lisensi,
+                'tahun_anggaran'=>  $request->tahun_anggaran,
+                'core_os'       =>  $request->core_os,
+                'harga_lisensi' =>  $request->harga_lisensi,
+                'key_lisensi'   =>  $request->key_lisensi,
+                'stok'          =>  $request->stok,
+             ];
+         }
+  
+         LisensiSoftware::whereId($request->hidden_id)->update($form_data);
+  
+         return response()->json([
+             'success' => 'Data is successfully updated',
+             
+         ]);
+     }
+ 
+     public function destroy($id)
+     {
+         // hapus file
+         $data = LisensiSoftware::where('id',$id)->first();
+         File::delete('images-lisensi/'.$data->foto_lisensi);
+ 
+         LisensiSoftware::where('id',$id)->delete();
+         return redirect()->back();
+         
+     }
 }

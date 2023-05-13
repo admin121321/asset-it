@@ -79,9 +79,9 @@
                                                             <label>Type Software: </label>
                                                             <select name="type_lisensi" class="form-control" required>
                                                                 <option>---Pilih Type Software---</option>
-                                                                <option value="OS Desktop">Scaner</option>
-                                                                <option value="Applikasi">Printer</option>
-                                                                <option value="OS Server">Scan & Printer</option>
+                                                                <option value="OS Desktop">OS Desktop</option>
+                                                                <option value="OS Server">OS Server</option>
+                                                                <option value="Aplikasi">Aplikasi</option>
                                                             </select>             
                                                         </div>
                                                         <div class="form-group">
@@ -98,7 +98,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Core CPU : </label>
-                                                            <input type="number" name="core" id="core" class="form-control" />
+                                                            <input type="number" name="core_os" id="core_os" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Stok : </label>
@@ -298,6 +298,7 @@ $(document).ready(function() {
                 $('#printerdevice_datatable').DataTable().ajax.reload();
                 alert('Data Deleted');
                 }, 2000);
+                window.location.reload();
             }
         })
     });
