@@ -44,23 +44,6 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-sitemap menu-icon"></i> <span class="nav-text">Network</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ route('network-device.index') }}">Device</a></li>
-                            <li><a href="{{ route('network-lokasi.index') }}">Lokasi</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-wifi menu-icon"></i> <span class="nav-text">Wifi</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ route('ssid-wifi.index') }}">SSID</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="fa fa-mouse-pointer menu-icon"></i> <span class="nav-text">Aksesoris</span>
                         </a>
                         <ul aria-expanded="false">
@@ -84,6 +67,23 @@
                         <ul aria-expanded="false">
                             <li><a href="{{ route('printer-device.index') }}">Data Printer</a></li>
                             <li><a href="{{ route('printer-pengguna.index') }}">Penggunaan</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="fa fa-sitemap menu-icon"></i> <span class="nav-text">Network</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('network-device.index') }}">Device</a></li>
+                            <li><a href="{{ route('network-lokasi.index') }}">Lokasi</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="fa fa-wifi menu-icon"></i> <span class="nav-text">Wifi</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('ssid-wifi.index') }}">SSID</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Settings</li>
