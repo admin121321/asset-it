@@ -73,6 +73,7 @@ Route::get('/network-device/destroy/{id}', [App\Http\Controllers\NetworkDeviceCo
 // Network Device
 Route::get('/network-akses', [App\Http\Controllers\NetworkAksesController::class, 'index'])->name('network-akses.index');
 Route::post('/network-akses/store', [App\Http\Controllers\NetworkAksesController::class, 'store'])->name('network-akses.store');
+Route::get('/network-akses/detail/{id}', [App\Http\Controllers\NetworkAksesController::class, 'edit'])->name('network-akses.detail');
 Route::get('/network-akses/edit/{id}', [App\Http\Controllers\NetworkAksesController::class, 'edit'])->name('network-akses.edit');
 Route::post('/network-akses/update', [App\Http\Controllers\NetworkAksesController::class, 'update'])->name('network-akses.update');
 Route::get('/network-akses/destroy/{id}', [App\Http\Controllers\NetworkAksesController::class, 'destroy'])->name('network-akses.destroy');

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('network_akses', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('network_id');
-            $table->string('akses');
-            $table->string('akun_network');
-            $table->string('pasword_network');
+            $table->string('ip_akses');
+            $table->string('akun_akses');
+            $table->string('password_akses');
             $table->timestamps();
         });
     }
