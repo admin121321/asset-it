@@ -44,29 +44,41 @@ class SsidWifiController extends Controller
             'password_lama'    =>  'required',
             'password_baru'    =>  'required',
         );
- 
+
         $error = Validator::make($request->all(), $rules);
- 
+
         if($error->fails())
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
+            $cek = SsidWifi::select('ssid_wifi.*') 
+                        ->where('ssid_wifi.id')
+                        ->exists();
+            // $cek = SsidWifi::where('id', $id)->exists();
+            if (!$cek) {
+                
+                $form_data = [
+                    'id'            =>  $request->ssid_name,
+                    'ssid_name'     =>  $request->ssid_name,
+                    'ip_segment'    =>  $request->ip_segment,
+                    'provider'      =>  $request->provider,
+                    'lokasi_ssid'   =>  $request->lokasi_ssid,
+                    'user_ssid'     =>  $request->user_ssid,
+                    'password_lama' =>  $request->password_lama,
+                    'password_baru' =>  $request->password_baru,
+                    ];
 
-            // $form_data = $request->all();
-            $form_data = [
-                'id'            =>  $request->ssid_name,
-                'ssid_name'     =>  $request->ssid_name,
-                'ip_segment'    =>  $request->ip_segment,
-                'provider'      =>  $request->provider,
-                'lokasi_ssid'   =>  $request->lokasi_ssid,
-                'user_ssid'     =>  $request->user_ssid,
-                'password_lama' =>  $request->password_lama,
-                'password_baru' =>  $request->password_baru,
-                ];
-
-            SsidWifi::create($form_data);
-            return response()->json(['success' => 'Data Added successfully.']);
+                SsidWifi::create($form_data);
+                return response()->json(['success' => 'Data Added successfully.']);
+            }else {
+                throw ValidationException::withMessages([
+                    'ssid_name' => 'SSID sudah Di Input',
+                ]);
+            }
+                // $form_data = $request->all();
+        
         }
+           
     }
 
     public function edit($id)
