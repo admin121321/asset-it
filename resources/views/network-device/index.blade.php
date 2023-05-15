@@ -254,14 +254,14 @@ $(document).ready(function() {
             {
                 console.log('success: '+data);
                 // tinyMCE.activeEditor.setContent(data.result.deskripsi);
-                $('#sn_lisensi').val(data.result.sn_network);
-                $('#brand_lisensi').val(data.result.brand_network);
-                $('#model_lisensi').val(data.result.model_network);
-                $('#type_lisensi').val(data.result.type_network);
+                $('#sn_network').val(data.result.sn_network);
+                $('#brand_network').val(data.result.brand_network);
+                $('#model_network').val(data.result.model_network);
+                $('#type_network').val(data.result.type_network);
                 $('#tahun_anggaran').val(data.result.tahun_anggaran);
-                $('#harga_lisensi').val(data.result.harga_network);
-                $('#key_lisensi').val(data.result.port_network);
-                $('#core_os').val(data.result.garansi_network);
+                $('#harga_network').val(data.result.harga_network);
+                $('#port_network').val(data.result.port_network);
+                $('#garansi_network').val(data.result.garansi_network);
                 $('#stok').val(data.result.stok);
                 $('#tampilgambar').html(
                 `<img src="/images-network/${data.result.foto_network}" width="100" class="img-fluid img-thumbnail">`);
