@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use DataTables;
 use Validator;
 use Auth;
@@ -51,14 +52,21 @@ class SsidWifiController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
-            $cek = SsidWifi::select('ssid_wifi.*') 
-                        ->where('ssid_wifi.id')
-                        ->exists();
-            // $cek = SsidWifi::where('id', $id)->exists();
-            if (!$cek) {
+            // $cek = SsidWifi::select('ssid_wifi.*') 
+            //             ->where('ssid_wifi.ssid_name');
+                        // ->exists();
+            // $cek = SsidWifi::select('ssid_wifi'cek WHERE ssid_name');
+            if (SsidWifi::where('ssid_name', $request->ssid_name)->count() > 0) {
                 
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'ssid_name' => ['sudah ada'],
+                 ]);
+                 throw $error;
+
+                
+            }else {
+                  
                 $form_data = [
-                    'id'            =>  $request->ssid_name,
                     'ssid_name'     =>  $request->ssid_name,
                     'ip_segment'    =>  $request->ip_segment,
                     'provider'      =>  $request->provider,
@@ -70,10 +78,6 @@ class SsidWifiController extends Controller
 
                 SsidWifi::create($form_data);
                 return response()->json(['success' => 'Data Added successfully.']);
-            }else {
-                throw ValidationException::withMessages([
-                    'ssid_name' => 'SSID sudah Di Input',
-                ]);
             }
                 // $form_data = $request->all();
         
@@ -110,7 +114,6 @@ class SsidWifiController extends Controller
         }
         $form_data = SsidWifi::find($request->hidden_id);
         $form_data = [
-            'id'            =>  $request->ssid_name,
             'ssid_name'     =>  $request->ssid_name,
             'ip_segment'    =>  $request->ip_segment,
             'provider'      =>  $request->provider,
