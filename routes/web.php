@@ -70,6 +70,12 @@ Route::post('/network-device/store', [App\Http\Controllers\NetworkDeviceControll
 Route::get('/network-device/edit/{id}', [App\Http\Controllers\NetworkDeviceController::class, 'edit'])->name('network-device.edit');
 Route::post('/network-device/update', [App\Http\Controllers\NetworkDeviceController::class, 'update'])->name('network-device.update');
 Route::get('/network-device/destroy/{id}', [App\Http\Controllers\NetworkDeviceController::class, 'destroy'])->name('network-device.destroy');
+// Network Device
+Route::get('/network-akses', [App\Http\Controllers\NetworkAksesController::class, 'index'])->name('network-akses.index');
+Route::post('/network-akses/store', [App\Http\Controllers\NetworkAksesController::class, 'store'])->name('network-akses.store');
+Route::get('/network-akses/edit/{id}', [App\Http\Controllers\NetworkAksesController::class, 'edit'])->name('network-akses.edit');
+Route::post('/network-akses/update', [App\Http\Controllers\NetworkAksesController::class, 'update'])->name('network-akses.update');
+Route::get('/network-akses/destroy/{id}', [App\Http\Controllers\NetworkAksesController::class, 'destroy'])->name('network-akses.destroy');
 // Network lokasi
 Route::get('/network-lokasi', [App\Http\Controllers\NetworkLokasiController::class, 'index'])->name('network-lokasi.index');
 Route::post('/network-lokasi/store', [App\Http\Controllers\NetworkLokasiController::class, 'store'])->name('network-lokasi.store');

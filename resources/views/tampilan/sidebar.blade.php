@@ -75,6 +75,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('network-device.index') }}">Device</a></li>
+                            <li><a href="{{ route('network-akses.index') }}">Akses</a></li>
                             <li><a href="{{ route('network-lokasi.index') }}">Lokasi</a></li>
                         </ul>
                     </li>
