@@ -11,6 +11,7 @@ use File;
 use DB;
 use App\Models\NetworkAkses;
 use App\Models\NetworkDevice;
+use App\Models\PrinterPengguna;
 
 class NetworkAksesController extends Controller
 {
@@ -67,6 +68,20 @@ class NetworkAksesController extends Controller
         }
     }
 
+    public function detail($id)
+    {
+
+        if (request()->ajax()) 
+        {
+            // $data = NetworkAkses::findOrFail($id);
+            $data = NetworkAkses::join('network_device', 'network_device.id', '=', 'network_akses.network_id')
+                                ->select('network_akses.*', 'network_device.brand_network',  'network_device.model_network', 'network_device.sn_network', 'network_device.type_network') 
+                                ->get();
+            return response()->json(['result' => $data]);
+        }
+
+    }
+
     public function edit($id)
     {
         if(request()->ajax())
@@ -110,15 +125,6 @@ class NetworkAksesController extends Controller
         NetworkAkses::where('id',$id)->delete();
 		return redirect()->back();
         
-    }
-
-    public function detail($id)
-    {
-        if (request()->ajax()) 
-        {
-            $data = NetworkAkses::findOrFail($id);
-            return response()->json($data);
-        }
     }
 
 }

@@ -128,12 +128,13 @@
             <div class="modal-content">
             <span id="detail_result"></span>
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Lisensi Pengguna</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Network Akses</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- <p><strong>Network Brand:</strong><span id="network-brand"></span></p> -->
-                <p><strong>Network id:</strong><span id="network-id"></span></p>
+                <p><strong>SN Device:</strong><span id="network-sn"></span></p>
+                <p><strong>Brand Device:</strong><span id="brand-network"></span></p>
+                <p><strong>Type Device:</strong><span id="type-network"></span></p>
                 <p><strong>IP Akses:</strong> <span id="ip-akses"></span></p>
                 <p><strong>Akun Akses:</strong> <span id="akun-akses"></span></p>
                 <p><strong>Password Akses:</strong> <span id="password-akses"></span></p>
@@ -285,7 +286,7 @@ $(document).ready(function() {
             }
         })
     });
-    
+
     // detail
     $(document).on('click', '.detailButton', function(event){
         event.preventDefault(); 
@@ -302,19 +303,23 @@ $(document).ready(function() {
             success:function(data)
             {
                 
-                $('#network-id').text(data.network_id);
-                $('#ip-akses').text(data.ip_akses);
-                $('#akun-akses').text(data.akun_akses);
-                $('#password-akses').text(data.password_akses);
+                // $('#network-id').text(data.result.network_id);
+                $('#sn-network').text(data.result.sn_network);
+                $('#type-network').text(data.result.type_network);
+                $('#brand-network').text(data.result.brand_network);
+                $('#ip-akses').text(data.result.ip_akses);
+                $('#akun-akses').text(data.result.akun_akses);
+                $('#password-akses').text(data.result.password_akses);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Detail');
                 $('#fModal').modal('show');
 
-                console.log(
-                    'Id Network: '+data.network_id,
-                    'IP Akses:'+ data.ip_akses,
-                     $('#user-id')
-                    );
+                // console.log(
+                //     'id network: '+data.result.network_id,
+                //     'akun akses:'+ data.result.akun_akses,
+                //      $('#network-id'),
+                //     );
+                
             },
         })
     });
