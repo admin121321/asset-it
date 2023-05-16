@@ -36,6 +36,7 @@ Route::get('/aksesoris-pengguna/destroy/{id}', [App\Http\Controllers\AksesorisPe
 // Desktop Device
 Route::get('/desktop-device', [App\Http\Controllers\DesktopDeviceController::class, 'index'])->name('desktop-device.index');
 Route::post('/desktop-device/store', [App\Http\Controllers\DesktopDeviceController::class, 'store'])->name('desktop-device.store');
+Route::get('/desktop-device/detail/{id}', [App\Http\Controllers\DesktopDeviceController::class, 'detail'])->name('desktop-device.detail');
 Route::get('/desktop-device/edit/{id}', [App\Http\Controllers\DesktopDeviceController::class, 'edit'])->name('desktop-device.edit');
 Route::post('/desktop-device/update', [App\Http\Controllers\DesktopDeviceController::class, 'update'])->name('desktop-device.update');
 Route::get('/desktop-device/destroy/{id}', [App\Http\Controllers\DesktopDeviceController::class, 'destroy'])->name('desktop-device.destroy');
