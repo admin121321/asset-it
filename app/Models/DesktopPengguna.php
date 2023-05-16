@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class DesktopPengguna extends Model
 {
     use HasFactory;
+    protected $table = 'desktop_pengguna';
+    protected $fillable = [
+        'user_id',
+        'desktop_id',
+        'qty',
+    ];
 }

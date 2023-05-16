@@ -351,7 +351,7 @@ $(document).ready(function() {
                 $('#garansi-desktop').text(data.garansi_desktop);
                 $('#tahun-anggaran').text(data.tahun_anggaran);
                 $('#harga-desktop').text(data.harga_desktop);
-                $('#stok').text(data.stok);
+                $('#stok-desktop').text(data.stok);
                 $('#tampil-gambar').html(
                 `<img src="/images-desktop/${data.foto_desktop}" width="100" class="img-fluid img-thumbnail">`);
                 $('#qty').text(data.qty);

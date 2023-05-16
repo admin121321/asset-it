@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 13, 2023 at 02:59 PM
+-- Generation Time: May 16, 2023 at 07:50 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -20,6 +20,63 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_asset_it`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aksesoris_device`
+--
+
+CREATE TABLE `aksesoris_device` (
+  `id` bigint NOT NULL,
+  `sn_aksesoris` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brand_aksesoris` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_aksesoris` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type_aksesoris` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `garansi_aksesoris` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun_anggaran` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `harga_aksesoris` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stok` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto_aksesoris` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `aksesoris_device`
+--
+
+INSERT INTO `aksesoris_device` (`id`, `sn_aksesoris`, `brand_aksesoris`, `model_aksesoris`, `type_aksesoris`, `garansi_aksesoris`, `tahun_anggaran`, `harga_aksesoris`, `stok`, `foto_aksesoris`, `created_at`, `updated_at`) VALUES
+(1232, '1232', 'Logitech', 'FAs22', 'Keyboard', '2023-05-14', '2023-05-14', '1', '1', '20230513173819.jpg', '2023-05-13 10:38:19', '2023-05-14 00:42:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aksesoris_pengguna`
+--
+
+CREATE TABLE `aksesoris_pengguna` (
+  `id` bigint UNSIGNED NOT NULL,
+  `desktop_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `aksesoris_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Triggers `aksesoris_pengguna`
+--
+DELIMITER $$
+CREATE TRIGGER `aksesoris_keluar` AFTER DELETE ON `aksesoris_pengguna` FOR EACH ROW BEGIN
+
+   UPDATE aksesoris_device SET stok = stok + OLD.qty
+
+   WHERE id = OLD.aksesoris_id;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -47,8 +104,8 @@ CREATE TABLE `desktop_device` (
 --
 
 INSERT INTO `desktop_device` (`id`, `sn_desktop`, `brand_desktop`, `model_desktop`, `type_desktop`, `garansi_desktop`, `tahun_anggaran`, `harga_desktop`, `stok`, `foto_desktop`, `created_at`, `updated_at`) VALUES
-(123, '123', 'HP', 'Pavilon', 'Laptop', '1', '2009', '1222', '1', '1', '2023-05-13 14:32:26', '2023-05-13 14:32:26'),
-(1234, '1234', 'Dell', 'Latidude', 'Laptop', '1', '2009', '1', '1', '1', '2023-05-13 14:43:56', '2023-05-13 14:43:56');
+(123123123, '123123123', 'HP', 'Pavilon 277', 'PC', '2019', '2023-05-09', '20000000', '0', '20230516042131.jpg', '2023-05-15 21:21:31', '2023-05-16 00:50:36'),
+(21345523213, '21345523213', 'Dell', 'Latitude 534700', 'LAPTOP', '2019', '2023-05-15', '20000000', '1', '20230516042014.jpg', '2023-05-15 21:18:38', '2023-05-15 21:20:46');
 
 -- --------------------------------------------------------
 
@@ -64,6 +121,27 @@ CREATE TABLE `desktop_pengguna` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `desktop_pengguna`
+--
+
+INSERT INTO `desktop_pengguna` (`id`, `user_id`, `desktop_id`, `qty`, `created_at`, `updated_at`) VALUES
+(4, '2', '123123123', '1', '2023-05-16 00:50:36', '2023-05-16 00:50:36');
+
+--
+-- Triggers `desktop_pengguna`
+--
+DELIMITER $$
+CREATE TRIGGER `desktop_keluar` AFTER DELETE ON `desktop_pengguna` FOR EACH ROW BEGIN
+
+   UPDATE desktop_device SET stok = stok + OLD.qty
+
+   WHERE id = OLD.desktop_id;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -101,7 +179,7 @@ CREATE TABLE `lisensi_pengguna` (
 --
 
 INSERT INTO `lisensi_pengguna` (`id`, `desktop_id`, `lisensi_id`, `qty`, `created_at`, `updated_at`) VALUES
-(5, '1234', '12321', '1', '2023-05-13 07:59:07', '2023-05-13 07:59:07');
+(6, '1234', '12321', '1', '2023-05-13 18:53:37', '2023-05-13 18:53:37');
 
 --
 -- Triggers `lisensi_pengguna`
@@ -144,7 +222,7 @@ CREATE TABLE `lisensi_software` (
 --
 
 INSERT INTO `lisensi_software` (`id`, `sn_lisensi`, `brand_lisensi`, `model_lisensi`, `type_lisensi`, `tahun_anggaran`, `harga_lisensi`, `key_lisensi`, `core_os`, `stok`, `foto_lisensi`, `created_at`, `updated_at`) VALUES
-(12321, '12321', 'Adobe', 'Reader', '---Pilih Type Software---', '2023-05-13', '20000000', '3Frde32e32qe', '2', '0', '20230513010310.jpg', '2023-05-12 18:03:10', '2023-05-13 07:59:07');
+(12321, '12321', 'Adobe', 'Reader', 'Aplikasi', '2023-05-13', '20000000', '3Frde32e32qe', '2', '0', '20230513010310.jpg', '2023-05-12 18:03:10', '2023-05-13 18:53:38');
 
 -- --------------------------------------------------------
 
@@ -187,7 +265,103 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2023_05_12_144259_create_lisensi_software_table', 2),
 (18, '2023_05_12_144314_create_lisensi_pengguna_table', 2),
 (19, '2023_05_13_015601_create_desktop_device_table', 3),
-(20, '2023_05_13_015612_create_desktop_pengguna_table', 3);
+(20, '2023_05_13_015612_create_desktop_pengguna_table', 3),
+(21, '2023_05_13_165441_create_aksesoris_device_table', 4),
+(22, '2023_05_13_165449_create_aksesoris_pengguna_table', 4),
+(23, '2023_05_14_024750_create_ssid_wifi_table', 5),
+(24, '2023_05_15_034722_create_network_device_table', 6),
+(25, '2023_05_15_034728_create_network_pengguna_table', 6),
+(26, '2023_05_15_035419_create_network_akses_table', 6),
+(27, '2023_05_15_034728_create_network_lokasi_table', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `network_akses`
+--
+
+CREATE TABLE `network_akses` (
+  `id` bigint UNSIGNED NOT NULL,
+  `network_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_akses` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `akun_akses` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_akses` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `network_akses`
+--
+
+INSERT INTO `network_akses` (`id`, `network_id`, `ip_akses`, `akun_akses`, `password_akses`, `created_at`, `updated_at`) VALUES
+(3, '123', '192.168.1.1', 'admin', 'admin', '2023-05-14 23:40:55', '2023-05-15 00:18:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `network_device`
+--
+
+CREATE TABLE `network_device` (
+  `id` bigint NOT NULL,
+  `sn_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brand_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `port_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `garansi_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun_anggaran` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `harga_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stok` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto_network` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `network_device`
+--
+
+INSERT INTO `network_device` (`id`, `sn_network`, `brand_network`, `model_network`, `type_network`, `port_network`, `garansi_network`, `tahun_anggaran`, `harga_network`, `stok`, `foto_network`, `created_at`, `updated_at`) VALUES
+(123, '123', 'Cisco', 'CR31', 'Router Managed', '24', '213', '2023-05-15', '123', '0', '20230515044130.jpg', '2023-05-14 21:41:30', '2023-05-15 19:19:05'),
+(1234, '1234', 'Mikrotik', 'M4325', 'Router Managed', '24', '12', '2023-05-15', '123213', '1', '20230515044320.png', '2023-05-14 21:40:45', '2023-05-15 18:58:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `network_lokasi`
+--
+
+CREATE TABLE `network_lokasi` (
+  `id` bigint UNSIGNED NOT NULL,
+  `network_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lokasi` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `network_lokasi`
+--
+
+INSERT INTO `network_lokasi` (`id`, `network_id`, `lokasi`, `qty`, `created_at`, `updated_at`) VALUES
+(5, '123', 'Lantai 1', '1', '2023-05-15 19:19:05', '2023-05-15 19:19:05');
+
+--
+-- Triggers `network_lokasi`
+--
+DELIMITER $$
+CREATE TRIGGER `network_keluar` AFTER DELETE ON `network_lokasi` FOR EACH ROW BEGIN
+
+   UPDATE network_device SET stok = stok + OLD.qty
+
+   WHERE id = OLD.network_id;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -300,6 +474,33 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ssid_wifi`
+--
+
+CREATE TABLE `ssid_wifi` (
+  `id` bigint UNSIGNED NOT NULL,
+  `ssid_name` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_segment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `provider` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_ssid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lokasi_ssid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_lama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_baru` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ssid_wifi`
+--
+
+INSERT INTO `ssid_wifi` (`id`, `ssid_name`, `ip_segment`, `provider`, `user_ssid`, `lokasi_ssid`, `password_lama`, `password_baru`, `created_at`, `updated_at`) VALUES
+(5, 'Wifi_Ku', '213dasda', '123', '123', '123', '123', '123', '2023-05-14 20:19:53', '2023-05-14 20:40:50'),
+(11, 'Wifi_Ku_j', '2131', '123', '213', '123', '213', '123', '2023-05-14 20:39:51', '2023-05-14 20:39:51');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -328,6 +529,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `le
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `aksesoris_device`
+--
+ALTER TABLE `aksesoris_device`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `aksesoris_pengguna`
+--
+ALTER TABLE `aksesoris_pengguna`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `desktop_device`
@@ -373,6 +586,24 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `network_akses`
+--
+ALTER TABLE `network_akses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `network_device`
+--
+ALTER TABLE `network_device`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `network_lokasi`
+--
+ALTER TABLE `network_lokasi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -405,6 +636,12 @@ ALTER TABLE `printer_pengguna`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ssid_wifi`
+--
+ALTER TABLE `ssid_wifi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -416,10 +653,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `aksesoris_pengguna`
+--
+ALTER TABLE `aksesoris_pengguna`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `desktop_pengguna`
 --
 ALTER TABLE `desktop_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -431,7 +674,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `lisensi_pengguna`
 --
 ALTER TABLE `lisensi_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `logos`
@@ -443,7 +686,19 @@ ALTER TABLE `logos`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `network_akses`
+--
+ALTER TABLE `network_akses`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `network_lokasi`
+--
+ALTER TABLE `network_lokasi`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -462,6 +717,12 @@ ALTER TABLE `printer_devices`
 --
 ALTER TABLE `printer_pengguna`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `ssid_wifi`
+--
+ALTER TABLE `ssid_wifi`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
