@@ -80,6 +80,7 @@ Route::get('/network-akses/destroy/{id}', [App\Http\Controllers\NetworkAksesCont
 // Network lokasi
 Route::get('/network-lokasi', [App\Http\Controllers\NetworkLokasiController::class, 'index'])->name('network-lokasi.index');
 Route::post('/network-lokasi/store', [App\Http\Controllers\NetworkLokasiController::class, 'store'])->name('network-lokasi.store');
+Route::get('/network-lokasi/detail/{id}', [App\Http\Controllers\NetworkLokasiController::class, 'detail'])->name('network-lokasi.detail');
 Route::get('/network-lokasi/edit/{id}', [App\Http\Controllers\NetworkLokasiController::class, 'edit'])->name('network-lokasi.edit');
 Route::post('/network-lokasi/update', [App\Http\Controllers\NetworkLokasiController::class, 'update'])->name('network-lokasi.update');
 Route::get('/network-lokasi/destroy/{id}', [App\Http\Controllers\NetworkLokasiController::class, 'destroy'])->name('network-lokasi.destroy');

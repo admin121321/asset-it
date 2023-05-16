@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('network_pengguna', function (Blueprint $table) {
+        Schema::create('network_lokasi', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('network_id');
             $table->foreignUuid('lokasi');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('network_pengguna');
+        Schema::dropIfExists('network_lokasi');
     }
 };
