@@ -21,6 +21,11 @@ return new class extends Migration
             $table->string('garansi_desktop');
             $table->string('harga_desktop');
             $table->string('stok');
+            $table->string('deskripsi_desktop');
+            $table->string('ram_desktop');
+            $table->string('hardisk_desktop');
+            $table->string('processor_desktop');
+            $table->string('core_desktop');
             $table->string('foto_desktop');
             $table->timestamps();
         });

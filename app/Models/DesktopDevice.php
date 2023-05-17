@@ -20,6 +20,9 @@ class DesktopDevice extends Model
         'harga_desktop',
         'stok',
         'foto_desktop',
-        'deskripsi_desktop',
+        'ram_desktop',
+        'hardisk_desktop',
+        'processor_desktop',
+        'core_desktop',
     ];
 }

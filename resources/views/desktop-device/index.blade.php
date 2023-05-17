@@ -90,6 +90,22 @@
                                                             <label>Harga Desktop: </label>
                                                             <input type="number" name="harga_desktop" id="harga_desktop" class="form-control" />
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label>Processor: </label>
+                                                            <input type="text" name="processor_desktop" id="processor_desktop" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>core: </label>
+                                                            <input type="text" name="core_desktop" id="core_desktop" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>RAM: </label>
+                                                            <input type="text" name="ram_desktop" id="ram_desktop" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Hardisk: </label>
+                                                            <input type="text" name="hardisk_desktop" id="hardisk_desktop" class="form-control" />
+                                                        </div>
                                                         <div class="form-group" hidden>
                                                             <label>Stok: </label>
                                                             <input type="number" name="stok" id="stok" value="1" class="form-control" />
@@ -97,7 +113,6 @@
                                                         <div class="form-group">
                                                             <label>Deskrpsi: </label>
                                                             <textarea type="text" name="deskripsi_desktop" id="deskripsi_desktop" class="form-control" ></textarea>
-                                                            <!-- <input type="text" name="deskripsi_desktop" id="deskripsi_desktop" class="form-control" /> -->
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Foto Printer: </label>
@@ -164,13 +179,17 @@
             </div>
             <div class="modal-body">
                 <!-- <p><strong>ID Netwok:</strong><span id="network-id"></span></p> -->
-                <p><strong>Brand Desktop:</strong><span id="brand-desktop"></span></p>
-                <p><strong>Model Desktop:</strong><span id="model-desktop"></span></p>
-                <p><strong>Type Desktop:</strong><span id="type-desktop"></span></p>
-                <p><strong>SN Desktop:</strong><span id="sn-desktop"></span></p>
-                <p><strong>Harga Desktop:</strong><span id="harga-desktop"></span></p>
-                <p><strong>Garansi Desktop:</strong><span id="garansi-desktop"></span></p>
-                <p><strong>Stok Desktop:</strong><span id="stok-desktop"></span></p>
+                <p><strong>Brand:</strong><span id="brand-desktop"></span></p>
+                <p><strong>Model:</strong><span id="model-desktop"></span></p>
+                <p><strong>SN:</strong><span id="sn-desktop"></span></p>
+                <p><strong>Type:</strong><span id="type-desktop"></span></p>
+                <p><strong>Harga:</strong><span id="harga-desktop"></span></p>
+                <p><strong>Garansi:</strong><span id="garansi-desktop"></span></p>
+                <p><strong>RAM:</strong><span id="ram-desktop"></span></p>
+                <p><strong>COre:</strong><span id="core-desktop"></span></p>
+                <p><strong>Processor:</strong><span id="processor-desktop"></span></p>
+                <p><strong>Hardisk:</strong><span id="hardisk-desktop"></span></p>
+                <p><strong>Stok:</strong><span id="stok-desktop"></span></p>
                 <p><strong>Tahun Anggaran:</strong><span id="tahun-desktop"></span></p>
                 <p><strong>Deskripsi:</strong><span id="deskripsi-desktop"></span></p>
                 <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
@@ -284,9 +303,13 @@ $(document).ready(function() {
                 $('#model_desktop').val(data.result.model_desktop);
                 $('#type_desktop').val(data.result.type_desktop);
                 $('#garansi_desktop').val(data.result.garansi_desktop);
-                $('#tahun_anggaran').val(data.result.tahun_anggaran);
+                $('#tahun_desktop').val(data.result.tahun_anggaran);
                 $('#harga_desktop').val(data.result.harga_desktop);
                 $('#deskripsi_desktop').val(data.result.deskripsi_desktop);
+                $('#ram_desktop').val(data.result.ram_desktop);
+                $('#hardisk_desktop').val(data.result.hardisk_desktop);
+                $('#processor_desktop').val(data.result.processor_desktop);
+                $('#core_desktop').val(data.result.core_desktop);
                 $('#stok').val(data.result.stok);
                 $('#tampilgambar').html(
                 `<img src="/images-desktop/${data.result.foto_desktop}" width="100" class="img-fluid img-thumbnail">`);
@@ -356,10 +379,14 @@ $(document).ready(function() {
                 $('#model-desktop').text(data.model_desktop);
                 $('#type-desktop').text(data.type_desktop);
                 $('#garansi-desktop').text(data.garansi_desktop);
-                $('#tahun-anggaran').text(data.tahun_anggaran);
+                $('#tahun-desktop').text(data.tahun_anggaran);
                 $('#harga-desktop').text(data.harga_desktop);
                 $('#stok-desktop').text(data.stok);
                 $('#deskripsi-desktop').text(data.deskripsi_desktop);
+                $('#ram-desktop').text(data.ram_desktop);
+                $('#hardisk-desktop').text(data.hardisk_desktop);
+                $('#processor-desktop').text(data.processor_desktop);
+                $('#core-desktop').text(data.core_desktop);
                 $('#tampil-gambar').html(
                 `<img src="/images-desktop/${data.foto_desktop}" width="100" class="img-fluid img-thumbnail">`);
                 $('#qty').text(data.qty);

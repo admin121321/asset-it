@@ -46,6 +46,10 @@ class DesktopDeviceController extends Controller
             'stok'              =>  'required',
             'foto_desktop'      =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'deskripsi_desktop' =>  'required',
+            'ram_desktop'       =>  'required',
+            'hardisk_desktop'   =>  'required',
+            'processor_desktop' =>  'required',
+            'core_desktop'      =>  'required',
         );
  
         $error = Validator::make($request->all(), $rules);
@@ -67,6 +71,10 @@ class DesktopDeviceController extends Controller
                 'harga_desktop'    =>  $request->harga_desktop,
                 'stok'             =>  $request->stok,
                 'deskripsi_desktop'=>  $request->deskripsi_desktop,
+                'ram_desktop'      =>  $request->ram_desktop,
+                'hardisk_desktop'  =>  $request->hardisk_desktop,
+                'processor_desktop'=>  $request->processor_desktop,
+                'core_desktop'     =>  $request->core_desktop,
                 ];
             $form_data['foto_desktop'] = date('YmdHis').'.'.$request->foto_desktop->getClientOriginalExtension();
             $request->foto_desktop->move(public_path('images-desktop'), $form_data['foto_desktop']);
@@ -125,7 +133,11 @@ class DesktopDeviceController extends Controller
                 'tahun_anggaran'   =>  $request->tahun_anggaran,
                 'harga_desktop'    =>  $request->harga_desktop,
                 'stok'             =>  $request->stok,
-                'deskripsi_desktop'=>  $request->deskripsi_desktop, 
+                'deskripsi_desktop'=>  $request->deskripsi_desktop,
+                'ram_desktop'      =>  $request->ram_desktop,
+                'hardisk_desktop'  =>  $request->hardisk_desktop,
+                'processor_desktop'=>  $request->processor_desktop,
+                'core_desktop'     =>  $request->core_desktop,
                 'foto_desktop'     =>  $fileName_new
             ];
             File::delete($fileName);
@@ -147,8 +159,12 @@ class DesktopDeviceController extends Controller
                 'garansi_desktop'  =>  $request->garansi_desktop,
                 'tahun_anggaran'   =>  $request->tahun_anggaran,
                 'harga_desktop'    =>  $request->harga_desktop,
-                'deskripsi_desktop'=>  $request->deskripsi_desktop,
                 'stok'             =>  $request->stok,
+                'deskripsi_desktop'=>  $request->deskripsi_desktop,
+                'ram_desktop'      =>  $request->ram_desktop,
+                'hardisk_desktop'  =>  $request->hardisk_desktop,
+                'processor_desktop'=>  $request->processor_desktop,
+                'core_desktop'     =>  $request->core_desktop,
             ];
         }
  
