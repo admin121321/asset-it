@@ -47,7 +47,7 @@
                                     <!-- card-body -->
                                     <!-- Modal -->
                                     <!-- input and Update -->
-                                    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                    <div class="modal fade bd-example-modal-lg" id="formModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                 <form method="post" id="sample_form" enctype="multipart/form-data" class="form-horizontal">
@@ -57,70 +57,91 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <span id="form_result"></span>
+                                                        <h5><b>Data</b></h5>
                                                         <div class="form-group">
-                                                            <label>Brand Desktop: </label>
-                                                            <input type="text" name="brand_desktop" id="brand_desktop" class="form-control" />
+                                                            <label>Brand Server: </label>
+                                                            <input type="text" name="brand_server" id="brand_server" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Model Desktop: </label>
-                                                            <input type="text" name="model_desktop" id="model_desktop" class="form-control" />
+                                                            <label>Model Server: </label>
+                                                            <input type="text" name="model_server" id="model_server" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>SN Desktop: </label>
-                                                            <input type="text" name="sn_desktop" id="sn_desktop" class="form-control" />
+                                                            <label>SN Server: </label>
+                                                            <input type="text" name="sn_server" id="sn_server" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Type Desktop: </label>
-                                                            <select name="type_desktop" class="form-control" required>
-                                                                <option>---Pilih Type Desktop---</option>
-                                                                <option value="PC">PC</option>
-                                                                <option value="LAPTOP">LAPTOP</option>
-                                                                <option value="KOMPUTER">KOMPUTER</option>
+                                                            <label>Type Server: </label>
+                                                            <select id="type_server" class="form-control" required>
+                                                                <option value="FISIK">FISIK</option>
+                                                                <option value="STORAGE">STORAGE</option>
+                                                                <option value="VM">Virtual Mechine</option>
                                                             </select>             
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Garansi Desktop: </label>
-                                                            <input type="text" name="garansi_desktop" id="garansi_desktop" class="form-control" />
+                                                            <label>Garansi Server: </label>
+                                                            <input type="date" name="garansi_server" id="garansi_server" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Tahun Anggaran Desktop: </label>
+                                                            <label>Support Server: </label>
+                                                            <input type="date" name="support_server" id="support_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Tahun Anggaran Server: </label>
                                                             <input type="date" name="tahun_anggaran" id="tahun_anggaran" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Harga Desktop: </label>
-                                                            <input type="number" name="harga_desktop" id="harga_desktop" class="form-control" />
+                                                            <label>Harga Server: </label>
+                                                            Rp.<input type="number" name="harga_server" id="harga_server" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Processor: </label>
-                                                            <input type="text" name="processor_desktop" id="processor_desktop" class="form-control" />
+                                                            <label>Foto Server: </label>
+                                                            <input type="file" name="foto_server" id="foto_server" class="form-control form-control-sm" accept="images-desktop/*" onchange="readURL(this);" />
+                                                            <input type="hidden" name="hidden_image" id="hidden_image">
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label>core: </label>
-                                                            <input type="text" name="core_desktop" id="core_desktop" class="form-control" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>RAM: </label>
-                                                            <input type="text" name="ram_desktop" id="ram_desktop" class="form-control" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Hardisk: </label>
-                                                            <input type="text" name="hardisk_desktop" id="hardisk_desktop" class="form-control" />
+                                                        <div class="form-floating mb-3" name="tampilgambar" id="tampilgambar">
+                                                            <img name="tampilgambar" id="tampilgambar">
                                                         </div>
                                                         <div class="form-group" hidden>
                                                             <label>Stok: </label>
                                                             <input type="number" name="stok" id="stok" value="1" class="form-control" />
                                                         </div>
+                                                        <h5><b>Spesifikasi</b></h5>
+                                                        <div class="form-group">
+                                                            <label>Processor : </label>
+                                                            <input type="text" name="processor_server" id="processor_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Core: </label>
+                                                            <input type="text" name="core_server" id="core_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>RAM: </label>
+                                                            <input type="text" name="ram_server" id="ram_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Hardisk: </label>
+                                                            <input type="text" name="hardisk_server" id="hardisk_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>IP Address: </label>
+                                                            <input type="text" name="ip_address_server" id="ip_address_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>IP Management: </label>
+                                                            <input type="text" name="ip_management_server" id="ip_management_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Subdomain: </label>
+                                                            <input type="text" name="subdomain_server" id="subdomain_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Port Akses: </label>
+                                                            <input type="text" name="port_akses_server" id="port_akses_server" class="form-control" />
+                                                        </div>
                                                         <div class="form-group">
                                                             <label>Deskrpsi: </label>
-                                                            <textarea type="text" name="deskripsi_desktop" id="deskripsi_desktop" class="form-control" ></textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Foto Printer: </label>
-                                                            <input type="file" name="foto_desktop" id="foto_desktop" class="form-control form-control-sm" accept="images-desktop/*" onchange="readURL(this);" />
-                                                            <input type="hidden" name="hidden_image" id="hidden_image">
-                                                        </div>
-                                                        <div class="form-floating mb-3" name="tampilgambar" id="tampilgambar">
-                                                            <img name="tampilgambar" id="tampilgambar">
+                                                            <textarea type="text" name="deskripsi_server" id="deskripsi_server" class="form-control" ></textarea>
                                                         </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
@@ -305,7 +326,8 @@ $(document).ready(function() {
                 $('#sn_server').val(data.result.sn_server);
                 $('#brand_server').val(data.result.brand_server);
                 $('#model_server').val(data.result.model_server);
-                $('#type_server').val(data.result.type_server);
+                // $('#type_server').val(data.result.type_server);
+                $("#type_server").val(data.result.type_server).change();
                 $('#garansi_server').val(data.result.garansi_server);
                 $('#support_server').val(data.result.support_server);
                 $('#tahun_desktop').val(data.result.tahun_anggaran);

@@ -73,7 +73,13 @@ class ServerDeviceController extends Controller
     {
         if(request()->ajax())
         {
-            $data = ServerDevice::findOrFail($id);
+            $data = ServerDevice::leftjoin('server_spek', 'server_device.id', '=' ,'server_spek.server_id',)
+                                ->select('server_device.*', 'server_spek.server_id',  'server_spek.ram_server',
+                                'server_spek.hardisk_server','server_spek.processor_server','server_spek.core_server',
+                                'server_spek.subdomain_server','server_spek.port_akses_server','server_spek.ip_address_server',
+                                'server_spek.ip_management_server','server_spek.deskripsi_server',)
+                                ->findOrFail($id);
+            // $data = ServerDevice::findOrFail($id);
             return response()->json(['result' => $data]);
         }
     }
