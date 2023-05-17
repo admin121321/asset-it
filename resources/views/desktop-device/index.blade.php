@@ -95,6 +95,11 @@
                                                             <input type="number" name="stok" id="stok" value="1" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
+                                                            <label>Deskrpsi: </label>
+                                                            <textarea type="text" name="deskripsi_desktop" id="deskripsi_desktop" class="form-control" ></textarea>
+                                                            <!-- <input type="text" name="deskripsi_desktop" id="deskripsi_desktop" class="form-control" /> -->
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label>Foto Printer: </label>
                                                             <input type="file" name="foto_desktop" id="foto_desktop" class="form-control form-control-sm" accept="images-desktop/*" onchange="readURL(this);" />
                                                             <input type="hidden" name="hidden_image" id="hidden_image">
@@ -167,6 +172,7 @@
                 <p><strong>Garansi Desktop:</strong><span id="garansi-desktop"></span></p>
                 <p><strong>Stok Desktop:</strong><span id="stok-desktop"></span></p>
                 <p><strong>Tahun Anggaran:</strong><span id="tahun-desktop"></span></p>
+                <p><strong>Deskripsi:</strong><span id="deskripsi-desktop"></span></p>
                 <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
                     <img name="tampil-gambar" id="tampilgambar">
                 </div>
@@ -280,6 +286,7 @@ $(document).ready(function() {
                 $('#garansi_desktop').val(data.result.garansi_desktop);
                 $('#tahun_anggaran').val(data.result.tahun_anggaran);
                 $('#harga_desktop').val(data.result.harga_desktop);
+                $('#deskripsi_desktop').val(data.result.deskripsi_desktop);
                 $('#stok').val(data.result.stok);
                 $('#tampilgambar').html(
                 `<img src="/images-desktop/${data.result.foto_desktop}" width="100" class="img-fluid img-thumbnail">`);
@@ -352,6 +359,7 @@ $(document).ready(function() {
                 $('#tahun-anggaran').text(data.tahun_anggaran);
                 $('#harga-desktop').text(data.harga_desktop);
                 $('#stok-desktop').text(data.stok);
+                $('#deskripsi-desktop').text(data.deskripsi_desktop);
                 $('#tampil-gambar').html(
                 `<img src="/images-desktop/${data.foto_desktop}" width="100" class="img-fluid img-thumbnail">`);
                 $('#qty').text(data.qty);
