@@ -120,6 +120,7 @@ Route::get('/rak-server-pengguna/destroy/{id}', [App\Http\Controllers\RakServerP
 // Server Device
 Route::get('/server-device', [App\Http\Controllers\ServerDeviceController::class, 'index'])->name('server-device.index');
 Route::post('/server-device/store', [App\Http\Controllers\ServerDeviceController::class, 'store'])->name('server-device.store');
+Route::get('/server-device/detail/{id}', [App\Http\Controllers\ServerDeviceController::class, 'detail'])->name('server-device.detail');
 Route::get('/server-device/edit/{id}', [App\Http\Controllers\ServerDeviceController::class, 'edit'])->name('server-device.edit');
 Route::post('/server-device/update', [App\Http\Controllers\ServerDeviceController::class, 'update'])->name('server-device.update');
 Route::get('/server-device/destroy/{id}', [App\Http\Controllers\ServerDeviceController::class, 'destroy'])->name('server-device.destroy');
