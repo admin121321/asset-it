@@ -47,9 +47,9 @@ class ServerDeviceController extends Controller
     {
         $rules = array(
             // 'id'            =>  'required',
-            'user_id'   =>  'required',
-            'printer_id'=>  'required',
-            'qty'       =>  'required',
+            // 'user_id'   =>  'required',
+            // 'printer_id'=>  'required',
+            // 'qty'       =>  'required',
         );
  
         $error = Validator::make($request->all(), $rules);
@@ -59,10 +59,37 @@ class ServerDeviceController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
 
-            ServerDevice::create($request->all());
-            // $form_data = PrinterDevice::findOrFail($request->printer_id);
-            // $form_data->stok -= $request->qty;
-            // $form_data->save();
+            $form_data = [
+                'sn_server'      =>  $request->sn_server,
+                'brand_server'   =>  $request->brand_server,
+                'model_server'   =>  $request->model_server,
+                'type_server'    =>  $request->type_server,
+                'garansi_server' =>  $request->garansi_server,
+                'support_server' =>  $request->support_server,
+                'tahun_anggaran' =>  $request->tahun_anggaran,
+                'harga_server'   =>  $request->harga_server,
+                'stok'           =>  $request->stok,
+                ];
+            $form_data['foto_server'] = date('YmdHis').'.'.$request->foto_server->getClientOriginalExtension();
+            $request->foto_server->move(public_path('images-server'), $form_data['foto_server']);
+
+            // ServerDevice::create($form_data);
+
+            // ServerSpek::create($request->all());
+            // $server_device=ServerDevice::findOrFail(request('server_device'));
+            $spek_data = [
+                'server_id'           =>  ServerDevice::create($form_data)->id,
+                'ram_server'          =>  $request->ram_server,
+                'hardisk_server'      =>  $request->hardisk_server,
+                'processor_server'    =>  $request->processor_server,
+                'core_server'         =>  $request->core_server,
+                'subdomain_server'    =>  $request->subdomain_server,
+                'port_akses_server'   =>  $request->port_akses_server,
+                'ip_address_server'   =>  $request->ip_address_server,
+                'ip_management_server'=>  $request->ip_management_server,
+                'deskripsi_server'    =>  $request->deskripsi_server,
+                ];
+            ServerSpek::create($spek_data);
            
 
             return response()->json(['success' => 'Data Added successfully.']);
@@ -146,7 +173,14 @@ class ServerDeviceController extends Controller
     public function destroy($id)
     {
         // hapus file
-        PrinterPengguna::where('id',$id)->delete();
+        // hapus file
+		$data = ServerDevice::where('id',$id)->first();
+		File::delete('images-server/'.$data->foto_server);
+
+        ServerDevice::where('id',$id)->delete();
+		return redirect()->back();
+
+        ServerSpek::where('id',$id)->delete();
 		return redirect()->back();
         
     }

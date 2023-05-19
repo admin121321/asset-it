@@ -72,7 +72,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Type Server: </label>
-                                                            <select id="type_server" class="form-control" required>
+                                                            <select id="type_server" name="type_server" class="form-control">
                                                                 <option value="FISIK">FISIK</option>
                                                                 <option value="STORAGE">STORAGE</option>
                                                                 <option value="VM">Virtual Mechine</option>
