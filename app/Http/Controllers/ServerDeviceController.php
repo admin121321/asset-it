@@ -58,7 +58,7 @@ class ServerDeviceController extends Controller
             'stok'           =>  'required',
             'foto_server'    =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // Server Spek
-            'server_id'            =>  'required',
+            // 'server_id'            =>  'required',
             'ram_server'           =>  'required',
             'hardisk_server'       =>  'required',
             'processor_server'     =>  'required',
@@ -96,6 +96,7 @@ class ServerDeviceController extends Controller
             // ServerSpek::create($request->all());
             // $server_device=ServerDevice::findOrFail(request('server_device'));
             $spek_data = [
+                // 'id'                  =>  ServerDevice::create($form_data)->id,
                 'server_id'           =>  ServerDevice::create($form_data)->id,
                 'ram_server'          =>  $request->ram_server,
                 'hardisk_server'      =>  $request->hardisk_server,
@@ -129,7 +130,7 @@ class ServerDeviceController extends Controller
         }
     }
 
-    public function update(Request $request, ServerDevice $server_device)
+    public function update(Request $request, ServerDevice $server_device, ServerSpek $server_spek)
     {
         $rules = array(
             'sn_server'      =>  'required',
@@ -161,6 +162,21 @@ class ServerDeviceController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }
+          // Update Server Spek
+        $spek_data = ServerSpek::find($request->hidden_id);
+        $spek_data = [
+            // 'server_id'           =>  $request->server_id,
+            'ram_server'          =>  $request->ram_server,
+            'hardisk_server'      =>  $request->hardisk_server,
+            'processor_server'    =>  $request->processor_server,
+            'core_server'         =>  $request->core_server,
+            'subdomain_server'    =>  $request->subdomain_server,
+            'port_akses_server'   =>  $request->port_akses_server,
+            'ip_address_server'   =>  $request->ip_address_server,
+            'ip_management_server'=>  $request->ip_management_server,
+            'deskripsi_server'    =>  $request->deskripsi_server, 
+        ];
+        
         // Update Server Device
         $form_data = ServerDevice::find($request->hidden_id);
         $fileName  = public_path('images-server/').$form_data->foto_server;
@@ -207,20 +223,7 @@ class ServerDeviceController extends Controller
         }
 
         ServerDevice::whereId($request->hidden_id)->update($form_data);
-        // Update Server Spek
-        $spek_data = ServerSpek::find($request->hidden_id);
-        $spek_data = [
-            'server_id'           =>  $request->server_id,
-            'ram_server'          =>  $request->ram_server,
-            'hardisk_server'      =>  $request->hardisk_server,
-            'processor_server'    =>  $request->processor_server,
-            'core_server'         =>  $request->core_server,
-            'subdomain_server'    =>  $request->subdomain_server,
-            'port_akses_server'   =>  $request->port_akses_server,
-            'ip_address_server'   =>  $request->ip_address_server,
-            'ip_management_server'=>  $request->ip_management_server,
-            'deskripsi_server'    =>  $request->deskripsi_server,
-            ];
+     
         ServerSpek::whereId($request->hidden_id)->update($spek_data);
  
         return response()->json([

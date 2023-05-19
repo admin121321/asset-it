@@ -10,6 +10,7 @@ class ServerSpek extends Model
     use HasFactory;
     protected $table = 'server_spek';
     protected $fillable = [
+        // 'id',
         'server_id',
         'ram_server',
         'hardisk_server',
