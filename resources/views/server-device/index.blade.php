@@ -200,26 +200,27 @@
             </div>
             <div class="modal-body">
                 <!-- <p><strong>ID Netwok:</strong><span id="network-id"></span></p> -->
-                <p><strong>Brand:</strong><span id="brand-server"></span></p>
-                <p><strong>Model:</strong><span id="model-server"></span></p>
-                <p><strong>SN:</strong><span id="sn-server"></span></p>
-                <p><strong>Type:</strong><span id="type-server"></span></p>
-                <p><strong>Harga:</strong><span id="harga-server"></span></p>
-                <p><strong>Garansi:</strong><span id="garansi-server"></span></p>
-                <p><strong>Stok:</strong><span id="stok-server"></span></p>
-                <p><strong>Tahun Anggaran:</strong><span id="tahun-server"></span></p>
-                <p><strong>Deskripsi:</strong><span id="deskripsi-server"></span></p>
-                <p><strong>Processor:</strong><span id="processor-server"></span></p>
-                <p><strong>Core:</strong><span id="core-server"></span></p>
-                <p><strong>RAM:</strong><span id="ram-server"></span></p>
-                <p><strong>Hardisk:</strong><span id="hardisk-server"></span></p>
-                <p><strong>Port Akses:</strong><span id="port-akses-server"></span></p>
-                <p><strong>IP Address:</strong><span id="ip-address-server"></span></p>
-                <p><strong>IP Management:</strong><span id="ip-management-server"></span></p>
-                <p><strong>Deskripsi:</strong><span id="deskripsi-server-a"></span></p>
-                <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
-                    <img name="tampil-gambar" id="tampilgambar">
-                </div>
+                <label><h3>Data</h3></label>
+                    <p><strong>Brand:</strong><span id="brand-server"></span></p>
+                    <p><strong>Model:</strong><span id="model-server"></span></p>
+                    <p><strong>SN:</strong><span id="sn-server"></span></p>
+                    <p><strong>Type:</strong><span id="type-server"></span></p>
+                    <p><strong>Harga:</strong><span id="harga-server"></span></p>
+                    <p><strong>Garansi:</strong><span id="garansi-server"></span></p>
+                    <p><strong>Stok:</strong><span id="stok-server"></span></p>
+                    <p><strong>Tahun Anggaran:</strong><span id="tahun-server"></span></p>
+                    <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
+                        <img name="tampil-gambar" id="tampilgambar">
+                    </div>
+                <label><h3>Spesifikasi</h3></label>
+                    <p><strong>Processor:</strong><span id="processor-server"></span></p>
+                    <p><strong>Core:</strong><span id="core-server"></span></p>
+                    <p><strong>RAM:</strong><span id="ram-server"></span></p>
+                    <p><strong>Hardisk:</strong><span id="hardisk-server"></span></p>
+                    <p><strong>Port Akses:</strong><span id="port-akses-server"></span></p>
+                    <p><strong>IP Address:</strong><span id="ip-address-server"></span></p>
+                    <p><strong>IP Management:</strong><span id="ip-management-server"></span></p>
+                    <p><strong>Deskripsi:</strong><span id="deskripsi-server-a"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -330,7 +331,7 @@ $(document).ready(function() {
                 $("#type_server").val(data.result.type_server).change();
                 $('#garansi_server').val(data.result.garansi_server);
                 $('#support_server').val(data.result.support_server);
-                $('#tahun_desktop').val(data.result.tahun_anggaran);
+                $('#tahun_anggaran').val(data.result.tahun_anggaran);
                 $('#harga_server').val(data.result.harga_server);
                 $('#stok').val(data.result.stok);
                 $('#tampilgambar').html(
