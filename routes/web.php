@@ -127,6 +127,7 @@ Route::get('/server-device/destroy/{id}', [App\Http\Controllers\ServerDeviceCont
 // Server Akun
 Route::get('/server-akun', [App\Http\Controllers\ServerAkunController::class, 'index'])->name('server-akun.index');
 Route::post('/server-akun/store', [App\Http\Controllers\ServerAkunController::class, 'store'])->name('server-akun.store');
+Route::get('/server-akun/detail/{id}', [App\Http\Controllers\ServerAkunController::class, 'detail'])->name('server-akun.detail');
 Route::get('/server-akun/edit/{id}', [App\Http\Controllers\ServerAkunController::class, 'edit'])->name('server-akun.edit');
 Route::post('/server-akun/update', [App\Http\Controllers\ServerAkunController::class, 'update'])->name('server-akun.update');
 Route::get('/server-akun/destroy/{id}', [App\Http\Controllers\ServerAkunController::class, 'destroy'])->name('server-akun.destroy');
