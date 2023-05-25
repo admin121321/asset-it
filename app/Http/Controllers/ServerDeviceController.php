@@ -257,8 +257,6 @@ class ServerDeviceController extends Controller
 		File::delete('images-server/'.$data->foto_server);
 
         ServerDevice::where('id',$id)->delete();
-		return redirect()->back();
-
         ServerSpek::where('id',$id)->delete();
 		return redirect()->back();
         
