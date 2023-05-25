@@ -18,11 +18,6 @@ return new class extends Migration
             $table->string('hardisk_server');
             $table->string('processor_server');
             $table->string('core_server');
-            $table->string('subdomain_server');
-            $table->string('port_akses_server');
-            $table->string('ip_address_server');
-            $table->string('ip_management_server');
-            $table->string('deskripsi_server');
             $table->timestamps();
         });
     }

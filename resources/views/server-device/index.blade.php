@@ -123,6 +123,11 @@
                                                             <label>Hardisk: </label>
                                                             <input type="text" name="hardisk_server" id="hardisk_server" class="form-control" />
                                                         </div>
+                                                        <h5><b>Penggunaan</b></h5>
+                                                        <div class="form-group">
+                                                            <label>Hostname: </label>
+                                                            <input type="text" name="hostname_server" id="hostname_server" class="form-control" />
+                                                        </div>
                                                         <div class="form-group">
                                                             <label>IP Address: </label>
                                                             <input type="text" name="ip_address_server" id="ip_address_server" class="form-control" />
@@ -132,12 +137,28 @@
                                                             <input type="text" name="ip_management_server" id="ip_management_server" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Subdomain: </label>
-                                                            <input type="text" name="subdomain_server" id="subdomain_server" class="form-control" />
-                                                        </div>
-                                                        <div class="form-group">
                                                             <label>Port Akses: </label>
                                                             <input type="text" name="port_akses_server" id="port_akses_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nama Aplikasi : </label>
+                                                            <input type="text" name="application_server" id="application_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nama Web Server dan Versi : </label>
+                                                            <input type="text" name="web_server" id="web_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>PHP Versi : </label>
+                                                            <input type="text" name="php_server" id="php_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>DB Versi : </label>
+                                                            <input type="text" name="db_server" id="db_server" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>URL : </label>
+                                                            <input type="text" name="url_server" id="url_server" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Deskrpsi: </label>
@@ -212,14 +233,22 @@
                     <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
                         <img name="tampil-gambar" id="tampilgambar">
                     </div>
+                    <br>
                 <label><h3>Spesifikasi</h3></label>
                     <p><strong>Processor:</strong><span id="processor-server"></span></p>
                     <p><strong>Core:</strong><span id="core-server"></span></p>
                     <p><strong>RAM:</strong><span id="ram-server"></span></p>
                     <p><strong>Hardisk:</strong><span id="hardisk-server"></span></p>
-                    <p><strong>Port Akses:</strong><span id="port-akses-server"></span></p>
+                    <br>
+                <label><h3>Penggunaan</h3></label>
+                    <p><strong>Hostname:</strong><span id="hostname-server"></span></p>
                     <p><strong>IP Address:</strong><span id="ip-address-server"></span></p>
                     <p><strong>IP Management:</strong><span id="ip-management-server"></span></p>
+                    <p><strong>Port Akses:</strong><span id="port-akses-server"></span></p>
+                    <p><strong>Nama Aplikasi:</strong><span id="application-server"></span></p>
+                    <p><strong>Web Server dan Versi:</strong><span id="web-server"></span></p>
+                    <p><strong>PHP Versi:</strong><span id="php-server"></span></p>
+                    <p><strong>DB  Versi:</strong><span id="db-server"></span></p>
                     <p><strong>Deskripsi:</strong><span id="deskripsi-server-a"></span></p>
             </div>
             <div class="modal-footer">
@@ -340,10 +369,15 @@ $(document).ready(function() {
                 $('#hardisk_server').val(data.result.hardisk_server);
                 $('#processor_server').val(data.result.processor_server);
                 $('#core_server').val(data.result.core_server);
-                $('#subdomain_server').val(data.result.subdomain_server);
+                $('#url_server').val(data.result.url_server);
                 $('#port_akses_server').val(data.result.port_akses_server);
                 $('#ip_address_server').val(data.result.ip_address_server);
                 $('#ip_management_server').val(data.result.ip_management_server);
+                $('#hostname_server').val(data.result.hostname_server);
+                $('#web_server').val(data.result.web_server);
+                $('#php_server').val(data.result.php_server);
+                $('#db_server').val(data.result.db_server);
+                $('#application_server').val(data.result.application_server);
                 $('#deskripsi_server').val(data.result.deskripsi_server);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Edit Record');
@@ -421,10 +455,15 @@ $(document).ready(function() {
                 $('#hardisk-server').text(data.hardisk_server);
                 $('#processor-server').text(data.processor_server);
                 $('#core-server').text(data.core_server);
-                $('#subdomain-server').text(data.subdomain_server);
+                $('#url-server').text(data.url_server);
                 $('#port-akses-server').text(data.port_akses_server);
                 $('#ip-address-server').text(data.ip_address_server);
                 $('#ip-management-server').text(data.ip_management_server);
+                $('#hostname_server').val(data.result.hostname_server);
+                $('#web-server').val(data.result.web_server);
+                $('#php-server').val(data.result.php_server);
+                $('#db-server').val(data.result.db_server);
+                $('#application-server').val(data.result.application_server);
                 $('#deskripsi-server-a').text(data.deskripsi_server);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Detail');

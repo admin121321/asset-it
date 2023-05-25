@@ -12,6 +12,7 @@ use File;
 use DB;
 use App\Models\ServerDevice;
 use App\Models\ServerSpek;
+use App\Models\ServerPenggunaan;
 
 class ServerDeviceController extends Controller
 {
@@ -19,17 +20,19 @@ class ServerDeviceController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = ServerDevice::leftjoin('server_spek', 'server_device.id', '=' ,'server_spek.server_id',)
-                                ->select('server_device.*', 'server_spek.server_id',  'server_spek.ram_server',
-                                'server_spek.hardisk_server','server_spek.processor_server','server_spek.core_server',
-                                'server_spek.subdomain_server','server_spek.port_akses_server','server_spek.ip_address_server',
-                                'server_spek.ip_management_server','server_spek.deskripsi_server',) 
+            $data = ServerDevice::leftjoin('server_spek', 'server_device.id', '=' ,'server_spek.id',)
+                                ->leftjoin('server_penggunaan', 'server_device.id', '=' ,'server_penggunaan.id',)
+                                ->select('server_device.*', 'server_spek.ram_server','server_spek.hardisk_server',
+                                'server_spek.processor_server','server_spek.core_server','server_penggunaan.url_server',
+                                'server_penggunaan.port_akses_server','server_penggunaan.ip_address_server','server_penggunaan.ip_management_server',
+                                'server_penggunaan.hostname_server','server_penggunaan.web_server','server_penggunaan.php_server', 
+                                'server_penggunaan.db_server', 'server_penggunaan.application_server','server_penggunaan.deskripsi_server') 
                                 ->get();
             return Datatables::of($data)->addIndexColumn()
-                ->addColumn('server_spek.server_id', function($data){
+                ->addColumn('server_penggunaan.server_id', function($data){
                     return $data->ip_management_server;
                 })
-                ->addColumn('server_spek.server_id', function($data){
+                ->addColumn('server_penggunaan.server_id', function($data){
                     return $data->ip_address_server;
                 })
                 ->addColumn('action', function($data){
@@ -47,26 +50,31 @@ class ServerDeviceController extends Controller
     {
         $rules = array(
             // Server Data
-            'sn_server'      =>  'required',
-            'brand_server'   =>  'required',
-            'model_server'   =>  'required',
-            'type_server'    =>  'required',
-            'garansi_server' =>  'required',
-            'support_server' =>  'required',
-            'tahun_anggaran' =>  'required',
-            'harga_server'   =>  'required',
-            'stok'           =>  'required',
-            'foto_server'    =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'sn_server'            =>  'required',
+            'brand_server'         =>  'required',
+            'model_server'         =>  'required',
+            'type_server'          =>  'required',
+            'garansi_server'       =>  'required',
+            'support_server'       =>  'required',
+            'tahun_anggaran'       =>  'required',
+            'harga_server'         =>  'required',
+            'stok'                 =>  'required',
+            'foto_server'          =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // Server Spek
-            // 'server_id'            =>  'required',
             'ram_server'           =>  'required',
             'hardisk_server'       =>  'required',
             'processor_server'     =>  'required',
             'core_server'          =>  'required',
-            'subdomain_server'     =>  'required',
+            // Server Pengguaan
+            'hostname_server'      =>  'required',
+            'url_server'           =>  'required',
             'port_akses_server'    =>  'required',
             'ip_address_server'    =>  'required',
             'ip_management_server' =>  'required',
+            'web_server'           =>  'required',
+            'php_server'           =>  'required',
+            'db_server'            =>  'required',
+            'application_server'   =>  'required',
             'deskripsi_server'     =>  'required',
         );
  
@@ -76,7 +84,7 @@ class ServerDeviceController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
-
+            // Proses Input Server Device
             $form_data = [
                 'sn_server'      =>  $request->sn_server,
                 'brand_server'   =>  $request->brand_server,
@@ -95,20 +103,33 @@ class ServerDeviceController extends Controller
 
             // ServerSpek::create($request->all());
             // $server_device=ServerDevice::findOrFail(request('server_device'));
+            
+            // Proses Input Server Spek
             $spek_data = [
-                // 'id'                  =>  ServerDevice::create($form_data)->id,
-                'server_id'           =>  ServerDevice::create($form_data)->id,
+                'id'                  =>  ServerDevice::create($form_data)->id,
+                // 'server_id'           =>  ServerDevice::create($form_data)->id,
                 'ram_server'          =>  $request->ram_server,
                 'hardisk_server'      =>  $request->hardisk_server,
                 'processor_server'    =>  $request->processor_server,
                 'core_server'         =>  $request->core_server,
-                'subdomain_server'    =>  $request->subdomain_server,
-                'port_akses_server'   =>  $request->port_akses_server,
-                'ip_address_server'   =>  $request->ip_address_server,
-                'ip_management_server'=>  $request->ip_management_server,
-                'deskripsi_server'    =>  $request->deskripsi_server,
                 ];
-            ServerSpek::create($spek_data);
+            // Proses Input Server Penggunaan
+            $penggunaan_data = [
+                'id'                  =>  ServerSpek::create($spek_data)->id,
+                // 'server_id'            =>  ServerSpek::create($spek_data)->server_id,
+                'hostname_server'      =>  $request->hostname_server,
+                'url_server'           =>  $request->url_server,
+                'port_akses_server'    =>  $request->port_akses_server,
+                'ip_address_server'    =>  $request->ip_address_server,
+                'ip_management_server' =>  $request->ip_management_server,
+                'web_server'           =>  $request->web_server,
+                'php_server'           =>  $request->php_server,
+                'db_server'            =>  $request->db_server,
+                'application_server'   =>  $request->application_server,
+                'deskripsi_server'     =>  $request->deskripsi_server,
+                ];
+            // ServerSpek::create($spek_data);
+            ServerPenggunaan::create($penggunaan_data)->id;
            
 
             return response()->json(['success' => 'Data Added successfully.']);
@@ -130,29 +151,37 @@ class ServerDeviceController extends Controller
         }
     }
 
-    public function update(Request $request, ServerDevice $server_device, ServerSpek $server_spek)
+    public function update(Request $request, ServerDevice $server_device, ServerSpek $server_spek, ServerPenggunaan $server_penggunaan)
     {
         $rules = array(
-            'sn_server'      =>  'required',
-            'brand_server'   =>  'required',
-            'model_server'   =>  'required',
-            'type_server'    =>  'required',
-            'garansi_server' =>  'required',
-            'support_server' =>  'required',
-            'tahun_anggaran' =>  'required',
-            'harga_server'   =>  'required',
-            'stok'           =>  'required',
+            // Server Device
             // 'foto_server'    =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'sn_server'            =>  'required',
+            'brand_server'         =>  'required',
+            'model_server'         =>  'required',
+            'type_server'          =>  'required',
+            'garansi_server'       =>  'required',
+            'support_server'       =>  'required',
+            'tahun_anggaran'       =>  'required',
+            'harga_server'         =>  'required',
+            'stok'                 =>  'required',
+            
             // Server Spek
-            // 'server_id'            =>  'required',
             'ram_server'           =>  'required',
             'hardisk_server'       =>  'required',
             'processor_server'     =>  'required',
             'core_server'          =>  'required',
-            'subdomain_server'     =>  'required',
+            
+            // Server Pengguaan
+            'hostname_server'      =>  'required',
+            'url_server'           =>  'required',
             'port_akses_server'    =>  'required',
             'ip_address_server'    =>  'required',
             'ip_management_server' =>  'required',
+            'web_server'           =>  'required',
+            'php_server'           =>  'required',
+            'db_server'            =>  'required',
+            'application_server'   =>  'required',
             'deskripsi_server'     =>  'required',
         );
  
@@ -176,6 +205,23 @@ class ServerDeviceController extends Controller
             'ip_management_server'=>  $request->ip_management_server,
             'deskripsi_server'    =>  $request->deskripsi_server, 
         ];
+
+        // Update Server Penggunaan
+        $penggunaan_data = ServerPenggunaan::find($request->hidden_id);
+        $penggunaan_data = [
+            // 'id'                  =>  ServerDevice::create($form_data)->id,
+            'server_id'            =>  ServerDevice::create($form_data)->id,
+            'hostname_server'      =>  $request->hostname_server,
+            'url_server'           =>  $request->url_server,
+            'port_akses_server'    =>  $request->port_akses_server,
+            'ip_address_server'    =>  $request->ip_address_server,
+            'ip_management_server' =>  $request->ip_management_server,
+            'web_server'           =>  $request->web_server,
+            'php_server'           =>  $request->php_server,
+            'db_server'            =>  $request->db_server,
+            'application_server'   =>  $request->application_server,
+            'deskripsi_server'     =>  $request->deskripsi_server,
+            ];
         
         // Update Server Device
         $form_data = ServerDevice::find($request->hidden_id);
@@ -222,9 +268,10 @@ class ServerDeviceController extends Controller
             ];
         }
 
+        // Proses Update
         ServerDevice::whereId($request->hidden_id)->update($form_data);
-     
         ServerSpek::whereId($request->hidden_id)->update($spek_data);
+        ServerPenggunaan::whereId($request->hidden_id)->update($penggunaan_data);
  
         return response()->json([
             'success' => 'Data is successfully updated',
@@ -237,11 +284,13 @@ class ServerDeviceController extends Controller
 
         if (request()->ajax()) 
         {
-            $data = ServerDevice::leftjoin('server_spek', 'server_device.id', '=' ,'server_spek.server_id',)
-                                ->select('server_device.*', 'server_spek.server_id',  'server_spek.ram_server',
-                                'server_spek.hardisk_server','server_spek.processor_server','server_spek.core_server',
-                                'server_spek.subdomain_server','server_spek.port_akses_server','server_spek.ip_address_server',
-                                'server_spek.ip_management_server','server_spek.deskripsi_server',) 
+            $data = ServerDevice::leftjoin('server_spek', 'server_device.id', '=' ,'server_spek.id',)
+                                ->leftjoin('server_penggunaan', 'server_device.id', '=' ,'server_penggunaan.id',)
+                                ->select('server_device.*', 'server_spek.ram_server','server_spek.hardisk_server',
+                                'server_spek.processor_server','server_spek.core_server','server_penggunaan.url_server',
+                                'server_penggunaan.port_akses_server','server_penggunaan.ip_address_server','server_penggunaan.ip_management_server',
+                                'server_penggunaan.hostname_server','server_penggunaan.web_server','server_penggunaan.php_server', 
+                                'server_penggunaan.db_server', 'server_penggunaan.application_server','server_penggunaan.deskripsi_server') 
                                 ->findOrFail($id);
             // $data = PrinterPengguna::findOrFail($id);
             return response()->json($data);
@@ -258,6 +307,7 @@ class ServerDeviceController extends Controller
 
         ServerDevice::where('id',$id)->delete();
         ServerSpek::where('id',$id)->delete();
+        ServerPenggunaan::where('id',$id)->delete();
 		return redirect()->back();
         
     }
