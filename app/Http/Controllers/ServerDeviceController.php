@@ -103,19 +103,10 @@ class ServerDeviceController extends Controller
 
             // ServerSpek::create($request->all());
             // $server_device=ServerDevice::findOrFail(request('server_device'));
-            
-            // Proses Input Server Spek
-            $spek_data = [
-                'id'                  =>  ServerDevice::create($form_data)->id,
-                // 'server_id'           =>  ServerDevice::create($form_data)->id,
-                'ram_server'          =>  $request->ram_server,
-                'hardisk_server'      =>  $request->hardisk_server,
-                'processor_server'    =>  $request->processor_server,
-                'core_server'         =>  $request->core_server,
-                ];
+            $value_id = ServerDevice::create($form_data)->id;
             // Proses Input Server Penggunaan
             $penggunaan_data = [
-                'id'                  =>  ServerSpek::create($spek_data)->id,
+                'id'                   =>  $value_id,
                 // 'server_id'            =>  ServerSpek::create($spek_data)->server_id,
                 'hostname_server'      =>  $request->hostname_server,
                 'url_server'           =>  $request->url_server,
@@ -128,8 +119,20 @@ class ServerDeviceController extends Controller
                 'application_server'   =>  $request->application_server,
                 'deskripsi_server'     =>  $request->deskripsi_server,
                 ];
-            // ServerSpek::create($spek_data);
-            ServerPenggunaan::create($penggunaan_data)->id;
+            
+            // Proses Input Server Spek
+            $spek_data = [
+                'id'                  =>  $value_id,
+                // 'server_id'           =>  ServerPenggunaan::create($penggunaan_data),
+                'ram_server'          =>  $request->ram_server,
+                'hardisk_server'      =>  $request->hardisk_server,
+                'processor_server'    =>  $request->processor_server,
+                'core_server'         =>  $request->core_server,
+                ];
+                
+            // ServerDevice::create($form_data);
+            ServerSpek::create($spek_data);
+            ServerPenggunaan::create($penggunaan_data);
            
 
             return response()->json(['success' => 'Data Added successfully.']);
@@ -140,11 +143,13 @@ class ServerDeviceController extends Controller
     {
         if(request()->ajax())
         {
-            $data = ServerDevice::leftjoin('server_spek', 'server_device.id', '=' ,'server_spek.server_id',)
-                                ->select('server_device.*', 'server_spek.server_id',  'server_spek.ram_server',
-                                'server_spek.hardisk_server','server_spek.processor_server','server_spek.core_server',
-                                'server_spek.subdomain_server','server_spek.port_akses_server','server_spek.ip_address_server',
-                                'server_spek.ip_management_server','server_spek.deskripsi_server',)
+            $data = ServerDevice::join('server_spek', 'server_spek.id', '=' ,'server_device.id',)
+                                ->join('server_penggunaan', 'server_penggunaan.id', '=' ,'server_device.id',)
+                                ->select('server_device.*', 'server_spek.ram_server','server_spek.hardisk_server',
+                                'server_spek.processor_server','server_spek.core_server','server_penggunaan.url_server',
+                                'server_penggunaan.port_akses_server','server_penggunaan.ip_address_server','server_penggunaan.ip_management_server',
+                                'server_penggunaan.hostname_server','server_penggunaan.web_server','server_penggunaan.php_server', 
+                                'server_penggunaan.db_server', 'server_penggunaan.application_server','server_penggunaan.deskripsi_server') 
                                 ->findOrFail($id);
             // $data = ServerDevice::findOrFail($id);
             return response()->json(['result' => $data]);
@@ -284,8 +289,8 @@ class ServerDeviceController extends Controller
 
         if (request()->ajax()) 
         {
-            $data = ServerDevice::leftjoin('server_spek', 'server_device.id', '=' ,'server_spek.id',)
-                                ->leftjoin('server_penggunaan', 'server_device.id', '=' ,'server_penggunaan.id',)
+            $data = ServerDevice::join('server_spek', 'server_spek.id', '=' ,'server_device.id',)
+                                ->join('server_penggunaan', 'server_penggunaan.id', '=' ,'server_device.id',)
                                 ->select('server_device.*', 'server_spek.ram_server','server_spek.hardisk_server',
                                 'server_spek.processor_server','server_spek.core_server','server_penggunaan.url_server',
                                 'server_penggunaan.port_akses_server','server_penggunaan.ip_address_server','server_penggunaan.ip_management_server',

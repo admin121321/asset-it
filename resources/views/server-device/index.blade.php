@@ -393,7 +393,7 @@ $(document).ready(function() {
                 $('#confirmModal').modal('hide');
                 alert('Data Tidak Berhasil Diupdate');
                 }, 2000);
-                window.location.reload();
+                // window.location.reload();
             }
         })
     });
@@ -459,11 +459,11 @@ $(document).ready(function() {
                 $('#port-akses-server').text(data.port_akses_server);
                 $('#ip-address-server').text(data.ip_address_server);
                 $('#ip-management-server').text(data.ip_management_server);
-                $('#hostname_server').val(data.result.hostname_server);
-                $('#web-server').val(data.result.web_server);
-                $('#php-server').val(data.result.php_server);
-                $('#db-server').val(data.result.db_server);
-                $('#application-server').val(data.result.application_server);
+                $('#hostname-server').text(data.hostname_server);
+                $('#web-server').text(data.web_server);
+                $('#php-server').text(data.php_server);
+                $('#db-server').text(data.db_server);
+                $('#application-server').text(data.application_server);
                 $('#deskripsi-server-a').text(data.deskripsi_server);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Detail');
