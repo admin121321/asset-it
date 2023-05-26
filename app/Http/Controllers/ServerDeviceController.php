@@ -98,12 +98,9 @@ class ServerDeviceController extends Controller
                 ];
             $form_data['foto_server'] = date('YmdHis').'.'.$request->foto_server->getClientOriginalExtension();
             $request->foto_server->move(public_path('images-server'), $form_data['foto_server']);
-
-            // ServerDevice::create($form_data);
-
-            // ServerSpek::create($request->all());
-            // $server_device=ServerDevice::findOrFail(request('server_device'));
+            // Variable Untuk Proses Server Device dan input ID ke Server spek dan Penggunaan
             $value_id = ServerDevice::create($form_data)->id;
+            
             // Proses Input Server Penggunaan
             $penggunaan_data = [
                 'id'                   =>  $value_id,
@@ -204,18 +201,12 @@ class ServerDeviceController extends Controller
             'hardisk_server'      =>  $request->hardisk_server,
             'processor_server'    =>  $request->processor_server,
             'core_server'         =>  $request->core_server,
-            'subdomain_server'    =>  $request->subdomain_server,
-            'port_akses_server'   =>  $request->port_akses_server,
-            'ip_address_server'   =>  $request->ip_address_server,
-            'ip_management_server'=>  $request->ip_management_server,
-            'deskripsi_server'    =>  $request->deskripsi_server, 
         ];
 
         // Update Server Penggunaan
         $penggunaan_data = ServerPenggunaan::find($request->hidden_id);
         $penggunaan_data = [
             // 'id'                  =>  ServerDevice::create($form_data)->id,
-            'server_id'            =>  ServerDevice::create($form_data)->id,
             'hostname_server'      =>  $request->hostname_server,
             'url_server'           =>  $request->url_server,
             'port_akses_server'    =>  $request->port_akses_server,
