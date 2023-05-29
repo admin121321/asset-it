@@ -261,6 +261,7 @@
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    
     var table = $('.printerpengguna_datatable').DataTable({
         processing: true,
         serverSide: true,
@@ -277,16 +278,18 @@ $(document).ready(function() {
     });
  
     $('#create_record').click(function(){
+        $('#sample_form')[0].reset();
+        // $('#action'.val() == 'Add').reset();
         $('.modal-title').text('Add New Record');
         $('#action_button').val('Add');
         $('#action').val('Add');
         $('#form_result').html('');
         $('#formModal').modal('show');
     });
- 
+
     $('#sample_form').on('submit', function(event){
         event.preventDefault();
-        var formData = new FormData($(this)[0]); 
+        var formData = new FormData($(this)[0]);
         var action_url = '';
  
         if($('#action').val() == 'Add')
