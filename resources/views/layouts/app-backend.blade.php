@@ -40,7 +40,7 @@
 </body>
 </html>
 
-<script>
+<!-- <script>
     document.onkeydown = function(e) {
     if(event.keyCode == 123) {
     return false;
@@ -73,9 +73,9 @@
     return false;
     }
     }
-</script>
+</script> -->
     
-<script type="text/javascript">
+<!-- <script type="text/javascript">
         //Script for disabling right click on mouse
         var message="Function Disabled!";
         function clickdsb(){
@@ -101,4 +101,4 @@
         }
         
         document.oncontextmenu=new Function("alert(message);return false")
- </script>
+ </script> -->

@@ -108,6 +108,7 @@ Route::get('/rak-server-lokasi/destroy/{id}', [App\Http\Controllers\RakServerLok
 // Rak Server
 Route::get('/rak-server', [App\Http\Controllers\RakServerController::class, 'index'])->name('rak-server.index');
 Route::post('/rak-server/store', [App\Http\Controllers\RakServerController::class, 'store'])->name('rak-server.store');
+Route::get('/rak-server/detail/{id}', [App\Http\Controllers\RakServerController::class, 'detail'])->name('rak-server.detail');
 Route::get('/rak-server/edit/{id}', [App\Http\Controllers\RakServerController::class, 'edit'])->name('rak-server.edit');
 Route::post('/rak-server/update', [App\Http\Controllers\RakServerController::class, 'update'])->name('rak-server.update');
 Route::get('/rak-server/destroy/{id}', [App\Http\Controllers\RakServerController::class, 'destroy'])->name('rak-server.destroy');

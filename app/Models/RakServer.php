@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class RakServer extends Model
 {
     use HasFactory;
+    protected $table='rak_server';
+    protected $fillable = [
+        'brand_rak',
+        'type_rak',
+        'kode_rak',
+        'dimensi_rak',
+        'ukuran_u_rak',
+        'tahun_anggaran',
+        'harga_rak',
+        'deskripsi',
+        'foto_rak',
+        
+    ];
 }
