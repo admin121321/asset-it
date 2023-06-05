@@ -138,7 +138,7 @@
                     <p><strong>Model:</strong><span id="model-server"></span></p>
                     <p><strong>SN:</strong><span id="sn-server"></span></p>
                     <p><strong>Type:</strong><span id="type-server"></span></p>
-                <label><h3>Spesifikasi</h3></label>
+                <label><h3>Akses Login</h3></label>
                     <p><strong>Nama Akun:</strong><span id="akun-server"></span></p>
                     <p><strong>Password Akun:</strong><span id="password-server"></span></p>
                     <p><strong>Tujuan Akun:</strong><span id="tujuan-akses-server"></span></p>

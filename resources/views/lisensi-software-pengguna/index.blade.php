@@ -56,16 +56,16 @@
                                                     <div class="modal-body">
                                                         <span id="form_result"></span>
                                                         <div class="form-group">
-                                                            <label>ID Pengguna: </label>
+                                                            <label>Desktop (Komputer / Laptop): </label>
                                                             <select class="form-control" id="desktop_id" name="desktop_id" aria-label="Floating label select example">
-                                                                <option>--Pilih Pengguna--</option>
+                                                                <option>--Pilih Device--</option>
                                                                 @foreach(App\Models\DesktopDevice::all() as $desktop)
                                                                 <option value="{{ $desktop->id}}" id="desktop_id">{{ $desktop->sn_desktop }} - {{ $desktop->model_desktop}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Printer: </label>
+                                                            <label>Lisensi: </label>
                                                             <select class="form-control" id="lisensi_id" name="lisensi_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Lisensi--</option>
                                                                 @foreach(App\Models\LisensiSoftware::all() as $lisensi)

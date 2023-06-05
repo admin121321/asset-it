@@ -56,7 +56,7 @@
                                                     <div class="modal-body">
                                                         <span id="form_result"></span>
                                                         <div class="form-group">
-                                                            <label>Desktop Device: </label>
+                                                            <label>Desktop (Komputer / Laptop): </label>
                                                             <select class="form-control" id="desktop_id" name="desktop_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Desktop--</option>
                                                                 @foreach(App\Models\DesktopDevice::all() as $desktop)
@@ -65,7 +65,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>ID Pengguna: </label>
+                                                            <label>Pengguna: </label>
                                                             <select class="form-control" id="user_id" name="user_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Pengguna--</option>
                                                                 @foreach(App\Models\User::all() as $user)
