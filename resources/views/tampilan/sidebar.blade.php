@@ -28,8 +28,8 @@
                             <i class="fa fa-reorder menu-icon"></i> <span class="nav-text">Rak Server</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('rak-server-lokasi.index') }}">Lokasi</a></li>
                             <li><a href="{{ route('rak-server.index') }}">Data Rak</a></li>
+                            <li><a href="{{ route('rak-server-lokasi.index') }}">Lokasi</a></li>
                             <li><a href="{{ route('rak-server-pengguna.index') }}">Penggunaan</a></li>
                         </ul>
                     </li>
