@@ -65,6 +65,7 @@ class ServerDeviceController extends Controller
             'hardisk_server'       =>  'required',
             'processor_server'     =>  'required',
             'core_server'          =>  'required',
+            'os_server'          =>  'required',
             // Server Pengguaan
             'hostname_server'      =>  'required',
             'url_server'           =>  'required',
@@ -125,6 +126,7 @@ class ServerDeviceController extends Controller
                 'hardisk_server'      =>  $request->hardisk_server,
                 'processor_server'    =>  $request->processor_server,
                 'core_server'         =>  $request->core_server,
+                'os_server'           =>  $request->os_server,
                 ];
                 
             // ServerDevice::create($form_data);
@@ -143,7 +145,7 @@ class ServerDeviceController extends Controller
             $data = ServerDevice::join('server_spek', 'server_spek.id', '=' ,'server_device.id',)
                                 ->join('server_penggunaan', 'server_penggunaan.id', '=' ,'server_device.id',)
                                 ->select('server_device.*', 'server_spek.ram_server','server_spek.hardisk_server',
-                                'server_spek.processor_server','server_spek.core_server','server_penggunaan.url_server',
+                                'server_spek.processor_server','server_spek.core_server','server_spek.os_server','server_penggunaan.url_server',
                                 'server_penggunaan.port_akses_server','server_penggunaan.ip_address_server','server_penggunaan.ip_management_server',
                                 'server_penggunaan.hostname_server','server_penggunaan.web_server','server_penggunaan.php_server', 
                                 'server_penggunaan.db_server', 'server_penggunaan.application_server','server_penggunaan.deskripsi_server') 
@@ -201,6 +203,7 @@ class ServerDeviceController extends Controller
             'hardisk_server'      =>  $request->hardisk_server,
             'processor_server'    =>  $request->processor_server,
             'core_server'         =>  $request->core_server,
+            'os_server'           =>  $request->os_server,
         ];
 
         // Update Server Penggunaan
@@ -283,7 +286,7 @@ class ServerDeviceController extends Controller
             $data = ServerDevice::join('server_spek', 'server_spek.id', '=' ,'server_device.id',)
                                 ->join('server_penggunaan', 'server_penggunaan.id', '=' ,'server_device.id',)
                                 ->select('server_device.*', 'server_spek.ram_server','server_spek.hardisk_server',
-                                'server_spek.processor_server','server_spek.core_server','server_penggunaan.url_server',
+                                'server_spek.processor_server','server_spek.core_server','server_spek.os_server','server_penggunaan.url_server',
                                 'server_penggunaan.port_akses_server','server_penggunaan.ip_address_server','server_penggunaan.ip_management_server',
                                 'server_penggunaan.hostname_server','server_penggunaan.web_server','server_penggunaan.php_server', 
                                 'server_penggunaan.db_server', 'server_penggunaan.application_server','server_penggunaan.deskripsi_server') 

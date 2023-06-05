@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('hardisk_server');
             $table->string('processor_server');
             $table->string('core_server');
+            $table->string('os_server');
             $table->timestamps();
         });
     }

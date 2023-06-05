@@ -123,6 +123,10 @@
                                                             <label>Hardisk: </label>
                                                             <input type="text" name="hardisk_server" id="hardisk_server" class="form-control" />
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label>OS: </label>
+                                                            <input type="text" name="os_server" id="os_server" class="form-control" />
+                                                        </div>
                                                         <h5><b>Penggunaan</b></h5>
                                                         <div class="form-group">
                                                             <label>Hostname: </label>
@@ -239,6 +243,7 @@
                     <p><strong>Core:</strong><span id="core-server"></span></p>
                     <p><strong>RAM:</strong><span id="ram-server"></span></p>
                     <p><strong>Hardisk:</strong><span id="hardisk-server"></span></p>
+                    <p><strong>OS:</strong><span id="os-server"></span></p>
                     <br>
                 <label><h3>Penggunaan</h3></label>
                     <p><strong>Hostname:</strong><span id="hostname-server"></span></p>
@@ -372,6 +377,7 @@ $(document).ready(function() {
                 $('#hardisk_server').val(data.result.hardisk_server);
                 $('#processor_server').val(data.result.processor_server);
                 $('#core_server').val(data.result.core_server);
+                $('#os_server').val(data.result.os_server);
                 $('#url_server').val(data.result.url_server);
                 $('#port_akses_server').val(data.result.port_akses_server);
                 $('#ip_address_server').val(data.result.ip_address_server);
@@ -458,6 +464,7 @@ $(document).ready(function() {
                 $('#hardisk-server').text(data.hardisk_server);
                 $('#processor-server').text(data.processor_server);
                 $('#core-server').text(data.core_server);
+                $('#os-server').text(data.os_server);
                 $('#url-server').text(data.url_server);
                 $('#port-akses-server').text(data.port_akses_server);
                 $('#ip-address-server').text(data.ip_address_server);

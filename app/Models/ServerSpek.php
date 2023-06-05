@@ -16,5 +16,6 @@ class ServerSpek extends Model
         'hardisk_server',
         'processor_server',
         'core_server',
+        'os_server',
     ];
 }
