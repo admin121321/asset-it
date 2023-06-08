@@ -115,6 +115,7 @@ Route::get('/rak-server/destroy/{id}', [App\Http\Controllers\RakServerController
 // Rak Server Pengguna
 Route::get('/rak-server-pengguna', [App\Http\Controllers\RakServerPenggunaController::class, 'index'])->name('rak-server-pengguna.index');
 Route::post('/rak-server-pengguna/store', [App\Http\Controllers\RakServerPenggunaController::class, 'store'])->name('rak-server-pengguna.store');
+Route::get('/rak-server-pengguna/detail/{id}', [App\Http\Controllers\RakServerPenggunaController::class, 'detail'])->name('rak-server-pengguna.detail');
 Route::get('/rak-server-pengguna/edit/{id}', [App\Http\Controllers\RakServerPenggunaController::class, 'edit'])->name('rak-server-pengguna.edit');
 Route::post('/rak-server-pengguna/update', [App\Http\Controllers\RakServerPenggunaController::class, 'update'])->name('rak-server-pengguna.update');
 Route::get('/rak-server-pengguna/destroy/{id}', [App\Http\Controllers\RakServerPenggunaController::class, 'destroy'])->name('rak-server-pengguna.destroy');
