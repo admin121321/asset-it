@@ -67,7 +67,7 @@ class DesktopPenggunaController extends Controller
 
             DesktopPengguna::create($request->all());
             $form_data = DesktopDevice::findOrFail($request->desktop_id);
-            $form_data->stok -= $request->qty;
+            $form_data->sisa_stok -= $request->qty;
             $form_data->save();
             return response()->json(['success' => 'Data Added successfully.']);
         }
@@ -106,7 +106,7 @@ class DesktopPenggunaController extends Controller
             else{    
                 $desktop_pengguna->update($request->all());
                 $form_data = DesktopDevice::findOrFail($request->desktop_id);
-                $form_data->stok -= $request->qty;
+                $form_data->sisa_stok -= $request->qty;
             }
  
         return response()->json([

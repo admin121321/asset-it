@@ -23,6 +23,7 @@ class DesktopDevice extends Model
         'tahun_anggaran',
         'harga_desktop',
         'stok',
+        'sisa_stok',
         'foto_desktop',
         'deskripsi_desktop',
     ];

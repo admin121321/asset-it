@@ -57,11 +57,21 @@ class SsidWifiController extends Controller
                         // ->exists();
             // $cek = SsidWifi::select('ssid_wifi'cek WHERE ssid_name');
             if (SsidWifi::where('ssid_name', $request->ssid_name)->count() > 0) {
-                
-                $error = \Illuminate\Validation\ValidationException::withMessages([
-                    'ssid_name' => ['sudah ada'],
+                 // view tampilan
+                 $rules = array([
+                    'ssid_name' => 'required',
                  ]);
-                 throw $error;
+                
+                $customMessages = [
+                    'required' => 'SSID Sudah Ada',
+                ];
+                $error = Validator::make($request->all(), $rules, $customMessages);
+                return response()->json(['errors' => $error->errors()->all()]);
+                
+                // $error = \Illuminate\Validation\ValidationException::withMessages([
+                //     'ssid_name' => ['sudah ada'],
+                //  ]);
+                //  throw $error;
 
                 
             }else {

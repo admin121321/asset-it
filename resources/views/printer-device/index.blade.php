@@ -171,6 +171,8 @@ $(document).ready(function() {
     });
  
     $('#create_record').click(function(){
+        $('#sample_form').get(0).reset();
+        $('#tampilgambar').html('');
         $('.modal-title').text('Add New Record');
         $('#action_button').val('Add');
         $('#action').val('Add');

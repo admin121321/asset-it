@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use DataTables;
 use Validator;
 use Auth;
@@ -43,7 +44,7 @@ class DesktopDeviceController extends Controller
             'garansi_desktop'   =>  'required',
             'tahun_anggaran'    =>  'required',
             'harga_desktop'     =>  'required',
-            'stok'              =>  'required',
+            // 'stok'              =>  'required',
             'foto_desktop'      =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'deskripsi_desktop' =>  'required',
             'ram_desktop'       =>  'required',
@@ -58,29 +59,53 @@ class DesktopDeviceController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
-
-            // $form_data = $request->all();
-            $form_data = [
-                'id'               =>  $request->sn_desktop,
-                'sn_desktop'       =>  $request->sn_desktop,
-                'brand_desktop'    =>  $request->brand_desktop,
-                'model_desktop'    =>  $request->model_desktop,
-                'type_desktop'     =>  $request->type_desktop,
-                'garansi_desktop'  =>  $request->garansi_desktop,
-                'tahun_anggaran'   =>  $request->tahun_anggaran,
-                'harga_desktop'    =>  $request->harga_desktop,
-                'stok'             =>  $request->stok,
-                'deskripsi_desktop'=>  $request->deskripsi_desktop,
-                'ram_desktop'      =>  $request->ram_desktop,
-                'hardisk_desktop'  =>  $request->hardisk_desktop,
-                'processor_desktop'=>  $request->processor_desktop,
-                'core_desktop'     =>  $request->core_desktop,
+            if (DesktopDevice::where('sn_desktop', $request->sn_desktop)->count() > 0) {
+                // view tampilan
+                $rules = array([
+                    'sn_desktop' => 'required',
+                 ]);
+                
+                $customMessages = [
+                    'required' => 'Serial Number Sudah Ada',
                 ];
-            $form_data['foto_desktop'] = date('YmdHis').'.'.$request->foto_desktop->getClientOriginalExtension();
-            $request->foto_desktop->move(public_path('images-desktop'), $form_data['foto_desktop']);
+            
+                // $error = $this->validate($request, $rules, $customMessages);
+                $error = Validator::make($request->all(), $rules, $customMessages);
+                return response()->json(['errors' => $error->errors()->all()]);
+                
+                // view inspect
+                // $error = \Illuminate\Validation\ValidationException::withMessages([
+                //     'sn_desktop' => 'sudah ada',
+                //  ]);
+                //  throw $error;
+                
+            }else {
+                 // $form_data = $request->all();
+                $form_data = [
+                    'sn_desktop'       =>  $request->sn_desktop,
+                    'brand_desktop'    =>  $request->brand_desktop,
+                    'model_desktop'    =>  $request->model_desktop,
+                    'type_desktop'     =>  $request->type_desktop,
+                    'garansi_desktop'  =>  $request->garansi_desktop,
+                    'tahun_anggaran'   =>  $request->tahun_anggaran,
+                    'harga_desktop'    =>  $request->harga_desktop,
+                    'stok'             =>  $request->stok,
+                    'sisa_stok'        =>  $request->stok,
+                    'deskripsi_desktop'=>  $request->deskripsi_desktop,
+                    'ram_desktop'      =>  $request->ram_desktop,
+                    'hardisk_desktop'  =>  $request->hardisk_desktop,
+                    'processor_desktop'=>  $request->processor_desktop,
+                    'core_desktop'     =>  $request->core_desktop,
+                    ];
+                $form_data['foto_desktop'] = date('YmdHis').'.'.$request->foto_desktop->getClientOriginalExtension();
+                $request->foto_desktop->move(public_path('images-desktop'), $form_data['foto_desktop']);
 
-            DesktopDevice::create($form_data);
-            return response()->json(['success' => 'Data Added successfully.']);
+                DesktopDevice::create($form_data);
+                return response()->json(['success' => 'Data Added successfully.']);
+
+            }
+
+           
         }
     }
 
@@ -133,6 +158,7 @@ class DesktopDeviceController extends Controller
                 'tahun_anggaran'   =>  $request->tahun_anggaran,
                 'harga_desktop'    =>  $request->harga_desktop,
                 'stok'             =>  $request->stok,
+                'sisa_stok'        =>  $request->sisa_stok,
                 'deskripsi_desktop'=>  $request->deskripsi_desktop,
                 'ram_desktop'      =>  $request->ram_desktop,
                 'hardisk_desktop'  =>  $request->hardisk_desktop,
@@ -160,6 +186,7 @@ class DesktopDeviceController extends Controller
                 'tahun_anggaran'   =>  $request->tahun_anggaran,
                 'harga_desktop'    =>  $request->harga_desktop,
                 'stok'             =>  $request->stok,
+                'sisa_stok'        =>  $request->sisa_stok,
                 'deskripsi_desktop'=>  $request->deskripsi_desktop,
                 'ram_desktop'      =>  $request->ram_desktop,
                 'hardisk_desktop'  =>  $request->hardisk_desktop,

@@ -37,6 +37,7 @@
                                                         <th>SN Device</th>
                                                         <th>Tahun Anggaran</th>
                                                         <th>Stok</th>
+                                                        <th>Stok Tersisa</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
                                                 </thead>
@@ -217,11 +218,14 @@ $(document).ready(function() {
             {data: 'sn_desktop', name: 'sn_desktop'},
             {data: 'tahun_anggaran', name: 'tahun_anggaran'},
             {data: 'stok', name: 'stok'},
+            {data: 'sisa_stok', name: 'sisa_stok'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
  
     $('#create_record').click(function(){
+        $('#sample_form').get(0).reset();
+        $('#tampilgambar').html('');
         $('.modal-title').text('Add New Record');
         $('#action_button').val('Add');
         $('#action').val('Add');

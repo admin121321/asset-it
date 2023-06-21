@@ -283,7 +283,8 @@ $(document).ready(function() {
     });
  
     $('#create_record').click(function(){
-        $('#sample_form')[0].reset();
+        $('#sample_form').get(0).reset();
+        $('#tampilgambar').html('');
         // $('#action'.val() == 'Add').reset();
         $('.modal-title').text('Add New Record');
         $('#action_button').val('Add');

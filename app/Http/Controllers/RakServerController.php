@@ -133,6 +133,7 @@ class RakServerController extends Controller
                 'kode_rak'      =>  $request->kode_rak,
                 'dimensi_rak'   =>  $request->dimensi_rak,
                 'ukuran_u_rak'  =>  $request->ukuran_u_rak,
+                'sisa_u'        =>  $request->sisa_u,
                 'tahun_anggaran'=>  $request->tahun_anggaran,
                 'harga_rak'     =>  $request->harga_rak,
                 'deskripsi'     =>  $request->deskripsi,
