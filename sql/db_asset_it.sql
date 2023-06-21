@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 08, 2023 at 03:37 AM
+-- Generation Time: Jun 21, 2023 at 02:14 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -501,6 +501,7 @@ CREATE TABLE `rak_server` (
   `kode_rak` varchar(50) NOT NULL,
   `dimensi_rak` varchar(50) NOT NULL,
   `ukuran_u_rak` varchar(50) NOT NULL,
+  `sisa_u` int NOT NULL,
   `tahun_anggaran` date NOT NULL,
   `harga_rak` varchar(255) NOT NULL,
   `deskripsi` text NOT NULL,
@@ -513,8 +514,8 @@ CREATE TABLE `rak_server` (
 -- Dumping data for table `rak_server`
 --
 
-INSERT INTO `rak_server` (`id`, `brand_rak`, `type_rak`, `kode_rak`, `dimensi_rak`, `ukuran_u_rak`, `tahun_anggaran`, `harga_rak`, `deskripsi`, `foto_rak`, `created_at`, `updated_at`) VALUES
-(2, 'INDORACK', 'Standing Close', 'IRP11542P - 42U', '1150 x 800 x 2070 mm', '40', '2023-06-05', '22222222222222222222222', 'OK', '20230605050129.jpg', '2023-06-04 22:01:29', '2023-06-07 20:37:15');
+INSERT INTO `rak_server` (`id`, `brand_rak`, `type_rak`, `kode_rak`, `dimensi_rak`, `ukuran_u_rak`, `sisa_u`, `tahun_anggaran`, `harga_rak`, `deskripsi`, `foto_rak`, `created_at`, `updated_at`) VALUES
+(3, 'RAKCOM', 'MOUNTED', 'F4451DEED', '324234234', '42', 38, '2023-06-21', '21111111111', 'Ok', '20230621021047.png', '2023-06-20 19:10:47', '2023-06-20 19:13:41');
 
 -- --------------------------------------------------------
 
@@ -535,7 +536,8 @@ CREATE TABLE `rak_server_lokasi` (
 --
 
 INSERT INTO `rak_server_lokasi` (`id`, `rak_id`, `nama_lokasi_rak`, `created_at`, `updated_at`) VALUES
-(2, 2, 'DC Depok', '2023-06-05 00:29:59', '2023-06-05 00:29:59');
+(2, 2, 'DC Depok', '2023-06-05 00:29:59', '2023-06-05 00:29:59'),
+(3, 3, 'DC Depok', '2023-06-20 19:13:27', '2023-06-20 19:13:27');
 
 -- --------------------------------------------------------
 
@@ -557,7 +559,7 @@ CREATE TABLE `rak_server_pengguna` (
 --
 
 INSERT INTO `rak_server_pengguna` (`id`, `server_id`, `rak_id`, `penggunaan_u`, `created_at`, `updated_at`) VALUES
-(2, 21, 2, 2, '2023-06-07 20:37:15', '2023-06-07 20:37:15');
+(3, 21, 3, 4, '2023-06-20 19:13:41', '2023-06-20 19:13:41');
 
 --
 -- Triggers `rak_server_pengguna`
@@ -565,7 +567,7 @@ INSERT INTO `rak_server_pengguna` (`id`, `server_id`, `rak_id`, `penggunaan_u`, 
 DELIMITER $$
 CREATE TRIGGER `rak_keluar` AFTER DELETE ON `rak_server_pengguna` FOR EACH ROW BEGIN
 
-   UPDATE rak_server SET ukuran_u_rak = ukuran_u_rak + OLD.penggunaan_u
+   UPDATE rak_server SET sisa_u = sisa_u + OLD.penggunaan_u
 
    WHERE id = OLD.rak_id;
 
@@ -971,19 +973,19 @@ ALTER TABLE `printer_pengguna`
 -- AUTO_INCREMENT for table `rak_server`
 --
 ALTER TABLE `rak_server`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rak_server_lokasi`
 --
 ALTER TABLE `rak_server_lokasi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rak_server_pengguna`
 --
 ALTER TABLE `rak_server_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `server_akun`

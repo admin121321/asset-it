@@ -15,6 +15,7 @@ class RakServer extends Model
         'kode_rak',
         'dimensi_rak',
         'ukuran_u_rak',
+        'sisa_u',
         'tahun_anggaran',
         'harga_rak',
         'deskripsi',

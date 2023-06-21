@@ -38,6 +38,7 @@
                                                         <th>Type Rak</th>
                                                         <th>Tahun Anggaran</th>
                                                         <th>Ukuran U</th>
+                                                        <th>Jumlah U Belum Terpakai</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
                                                 </thead>
@@ -182,6 +183,7 @@ $(document).ready(function() {
             {data: 'type_rak', name: 'type_rak'},
             {data: 'tahun_anggaran', name: 'tahun_anggaran'},
             {data: 'ukuran_u_rak', name: 'ukuran_u_rak'},
+            {data: 'sisa_u', name: 'sisa_u'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

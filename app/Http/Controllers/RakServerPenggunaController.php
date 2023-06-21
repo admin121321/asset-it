@@ -73,7 +73,7 @@ class RakServerPenggunaController extends Controller
 
             RakServerPengguna::create($request->all());
             $form_data = RakServer::findOrFail($request->rak_id);
-            $form_data->ukuran_u_rak -= $request->penggunaan_u;
+            $form_data->sisa_u -= $request->penggunaan_u;
             $form_data->save();
 
             return response()->json(['success' => 'Data Added successfully.']);
