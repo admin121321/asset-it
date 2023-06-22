@@ -33,6 +33,8 @@
                                                     <tr>
                                                         <th>Brand Device</th>
                                                         <th>Model Device</th>
+                                                        <th>Type Device</th>
+                                                        <th>SN Device</th>
                                                         <th>Pengguna</th>
                                                         <th>Qty</th>
                                                         <th width="180px">Action</th>
@@ -60,7 +62,10 @@
                                                             <select class="form-control" id="desktop_id" name="desktop_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Desktop--</option>
                                                                 @foreach(App\Models\DesktopDevice::all() as $desktop)
-                                                                <option value="{{ $desktop->id}}" id="desktop_id">{{ $desktop->sn_desktop }} - {{ $desktop->model_desktop}}</option>
+                                                                    @if ($desktop->sisa_stok=='0')
+                                                                    @else
+                                                                    <option value="{{ $desktop->id}}" id="desktop_id">{{ $desktop->sn_desktop }} - {{ $desktop->model_desktop}}</option>
+                                                                    @endif
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -160,6 +165,8 @@ $(document).ready(function() {
         columns: [
             {data: 'brand_desktop', name: 'brand_desktop'},
             {data: 'model_desktop', name: 'model_desktop'},
+            {data: 'type_desktop', name: 'type_desktop'},
+            {data: 'sn_desktop', name: 'sn_desktop'},
             {data: 'name', name: 'name'},
             {data: 'qty', name: 'qty'},
             {data: 'action', name: 'action', orderable: false, searchable: false},

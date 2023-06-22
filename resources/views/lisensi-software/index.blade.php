@@ -40,6 +40,7 @@
                                                         <th>Tahun Anggaran</th>
                                                         <th>Type Lisensi</th>
                                                         <th>Stok</th>
+                                                        <th>Sisa Stok</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
                                                 </thead>
@@ -208,6 +209,7 @@ $(document).ready(function() {
             {data: 'tahun_anggaran', name: 'tahun_anggaran'},
             {data: 'type_lisensi', name: 'type_lisensi'},
             {data: 'stok', name: 'stok'},
+            {data: 'sisa_stok', name: 'sisa_stok'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

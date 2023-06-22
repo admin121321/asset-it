@@ -52,7 +52,7 @@ class LisensiSoftwarePenggunaController extends Controller
             // 'id'            =>  'required',
             'desktop_id'   =>  'required',
             'lisensi_id'=>  'required',
-            'qty'       =>  'required',
+            // 'qty'       =>  'required',
         );
  
         $error = Validator::make($request->all(), $rules);
@@ -64,14 +64,14 @@ class LisensiSoftwarePenggunaController extends Controller
 
             LisensiSoftwarePengguna::create($request->all());
             $form_data = LisensiSoftware::findOrFail($request->lisensi_id);
-            $form_data->stok -= $request->qty;
+            $form_data->sisa_stok -= $request->qty;
             $form_data->save();
            
 
             return response()->json(['success' => 'Data Added successfully.']);
         }
     }
-
+    
     public function edit($id)
     {
         if(request()->ajax())
@@ -127,7 +127,12 @@ class LisensiSoftwarePenggunaController extends Controller
     {
         if(request()->ajax())
         {
-            $data = LisensiSoftwarePengguna::findOrFail($id);
+            // $data = LisensiSoftwarePengguna::findOrFail($id);
+            $data = LisensiSoftwarePengguna::join('desktop_device', 'desktop_device.id', '=', 'lisensi_pengguna.desktop_id')
+                                            ->join('lisensi_software', 'lisensi_software.id', '=', 'lisensi_pengguna.lisensi_id')
+                                            ->select('lisensi_pengguna.*', 'lisensi_software.brand_lisensi', 'lisensi_software.type_lisensi', 'lisensi_software.sn_lisensi',
+                                                     'desktop_device.brand_desktop', 'desktop_device.sn_desktop', 'desktop_device.type_desktop') 
+                                            ->findOrFail($id);
             return response()->json($data);
         }
     }

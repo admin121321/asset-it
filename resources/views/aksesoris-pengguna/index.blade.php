@@ -69,17 +69,19 @@
                                                             <select class="form-control" id="aksesoris_id" name="aksesoris_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Aksesoris--</option>
                                                                 @foreach(App\Models\AksesorisDevice::all() as $aksesoris)
-                                                                    @if ($aksesoris->stok=='0')
+                                                                    @if ($aksesoris->sisa_stok=='0')
                                                                     @else
                                                                     <option value="{{ $aksesoris->id}}" id="aksesoris_id">{{ $aksesoris->model_aksesoris }} - {{ $aksesoris->sn_aksesoris }}</option>
                                                                     @endif
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                        <!-- <div class="form-group" hidden>
+                                                        <div class="form-group" hidden>
                                                             <label>Qty: </label>
-                                                            <input type="text" name="qty" id="qty" value="1" class="form-control" />
-                                                        </div> -->
+                                                            <select class="form-control" id="qty" name="qty" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
+                                                        </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
                                                     </div>
@@ -126,29 +128,29 @@
          <!-- detail -->
 
 
-        <!-- Modal -->
+        <!-- Modal Detail-->
         <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <span id="detail_result"></span>
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Lisensi Pengguna</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <span id="detail_result"></span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Lisensi Pengguna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Brand Desktop   :</strong><span id="brand-desktop"></span></p>
+                    <p><strong>Type Desktop    :</strong><span id="type-desktop"></span></p>
+                    <p><strong>SN Desktop      :</strong><span id="sn-desktop"></span></p>
+                    <p><strong>Brand Aksesoris :</strong> <span id="brand-aksesoris"></span></p>
+                    <p><strong>Type  Aksesoris :</strong> <span id="type-aksesoris"></span></p>
+                    <p><strong>SN  Aksesoris   :</strong> <span id="sn-aksesoris"></span></p>
+                    <p><strong>Qty             :</strong> <span id="qtY"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p><strong>Brand Desktop   :</strong><span id="brand-desktop"></span></p>
-                <p><strong>Type Desktop    :</strong><span id="type-desktop"></span></p>
-                <p><strong>SN Desktop      :</strong><span id="sn-desktop"></span></p>
-                <p><strong>Brand Aksesoris :</strong> <span id="brand-aksesoris"></span></p>
-                <p><strong>Type  Aksesoris :</strong> <span id="type-aksesoris"></span></p>
-                <p><strong>SN  Aksesoris   :</strong> <span id="sn-aksesoris"></span></p>
-                <p><strong>Qty             :</strong> <span id="qtY"></span></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
         </div>
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>

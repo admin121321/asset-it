@@ -62,17 +62,10 @@ class AksesorisPenggunaController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
 
-            // AksesorisPengguna::create($request->all());
-            $form_data = [
-                'desktop_id'   =>  $request->desktop_id,
-                'aksesoris_id' =>  $request->aksesoris_id,
-                'qty'          =>  '1',
-                ];
-            AksesorisPengguna::create($form_data);
+            AksesorisPengguna::create($request->all());
             $form_data = AksesorisDevice::findOrFail($request->aksesoris_id);
             $form_data->sisa_stok -= $request->qty;
             $form_data->save();
-            // AksesorisPengguna::create($form_data);
            
 
             return response()->json(['success' => 'Data Added successfully.']);

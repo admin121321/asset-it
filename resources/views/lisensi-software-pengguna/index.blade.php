@@ -69,7 +69,7 @@
                                                             <select class="form-control" id="lisensi_id" name="lisensi_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Lisensi--</option>
                                                                 @foreach(App\Models\LisensiSoftware::all() as $lisensi)
-                                                                    @if ($lisensi->stok=='0')
+                                                                    @if ($lisensi->sisa_stok=='0')
                                                                     @else
                                                                     <option value="{{ $lisensi->id}}" id="lisensi_id">{{ $lisensi->model_lisensi }} - {{ $lisensi->sn_lisensi }}</option>
                                                                     @endif
@@ -78,7 +78,9 @@
                                                         </div>
                                                         <div class="form-group" hidden>
                                                             <label>Qty: </label>
-                                                            <input type="text" name="qty" id="qty" value="1" class="form-control" />
+                                                            <select class="form-control" id="qty" name="qty" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
                                                         </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
@@ -136,8 +138,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p><strong>ID Desktop:</strong><span id="desktop-id"></span></p>
-                <p><strong>Lisensi ID:</strong> <span id="lisensi-id"></span></p>
+                <p><strong>Brand Desktop:</strong> <span id="brand-desktop"></span></p>
+                <p><strong>SN Desktop:</strong><span id="sn-desktop"></span></p>
+                <p><strong>Type Desktop:</strong> <span id="type-desktop"></span></p>
+                <p><strong>Brand Lisensi:</strong> <span id="brand-lisensi"></span></p>
+                <p><strong>SN Lisensi:</strong> <span id="sn-lisensi"></span></p>
+                <p><strong>Type Lisensi:</strong> <span id="type-lisensi"></span></p>
                 <p><strong>Qty:</strong> <span id="qtY"></span></p>
             </div>
             <div class="modal-footer">
@@ -304,8 +310,12 @@ $(document).ready(function() {
             success:function(data)
             {
                 
-                $('#desktop-id').text(data.desktop_id);
-                $('#lisensi-id').text(data.lisensi_id);
+                $('#brand-desktop').text(data.brand_desktop);
+                $('#type-desktop').text(data.type_desktop);
+                $('#sn-desktop').text(data.sn_desktop);
+                $('#brand-lisensi').text(data.brand_lisensi);
+                $('#type-lisensi').text(data.type_lisensi);
+                $('#sn-lisensi').text(data.sn_lisensi);
                 $('#qtY').text(data.qty);
                 $('.modal-title').text('Detail');
                 $('#fModal').modal('show');
