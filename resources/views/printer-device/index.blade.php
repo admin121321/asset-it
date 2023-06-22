@@ -76,7 +76,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Type printer: </label>
-                                                            <select name="type_printer" class="form-control" required>
+                                                            <select name="type_printer" id="type_printer" class="form-control" required>
                                                                 <option>---Pilih Type Printer---</option>
                                                                 <option value="SCANNER">Scaner</option>
                                                                 <option value="PRINTER">Printer</option>
@@ -275,7 +275,7 @@ $(document).ready(function() {
                 $('#serial_number').val(data.result.serial_number);
                 $('#brand_printer').val(data.result.brand_printer);
                 $('#model_printer').val(data.result.model_printer);
-                $('#type_printer').val(data.result.type_printer);
+                $('#type_printer').val(data.result.type_printer).change();
                 $('#tahun_anggaran').val(data.result.tahun_anggaran);
                 $('#harga_printer').val(data.result.harga_printer);
                 $('#stok').val(data.result.stok);

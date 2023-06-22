@@ -77,7 +77,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Type Aksesoris: </label>
-                                                            <select name="type_aksesoris" class="form-control" required>
+                                                            <select name="type_aksesoris" id="type_aksesoris" class="form-control" required>
                                                                 <option>---Pilih Type Aksesoris---</option>
                                                                 <option value="Mouse">Mouse</option>
                                                                 <option value="WebCam">WebCam</option>
@@ -263,7 +263,7 @@ $(document).ready(function() {
                 $('#sn_aksesoris').val(data.result.sn_aksesoris);
                 $('#brand_aksesoris').val(data.result.brand_aksesoris);
                 $('#model_aksesoris').val(data.result.model_aksesoris);
-                $('#type_aksesoris').val(data.result.type_aksesoris);
+                $('#type_aksesoris').val(data.result.type_aksesoris).change();
                 $('#garansi_aksesoris').val(data.result.garansi_aksesoris);
                 $('#tahun_anggaran').val(data.result.tahun_anggaran);
                 $('#harga_aksesoris').val(data.result.harga_aksesoris);

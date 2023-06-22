@@ -85,7 +85,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Tahun Anggaran Desktop: </label>
-                                                            <input type="date" name="tahun_anggaran" id="tahun_anggaran" class="form-control" />
+                                                            <input type="Date" name="tahun_anggaran" id="tahun_anggaran" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Harga Desktop: </label>
@@ -309,7 +309,7 @@ $(document).ready(function() {
                 $('#model_desktop').val(data.result.model_desktop);
                 $('#type_desktop').val(data.result.type_desktop).change();
                 $('#garansi_desktop').val(data.result.garansi_desktop);
-                $('#tahun_desktop').val(data.result.tahun_anggaran);
+                $('#tahun_anggaran').val(data.result.tahun_anggaran);
                 $('#harga_desktop').val(data.result.harga_desktop);
                 $('#deskripsi_desktop').val(data.result.deskripsi_desktop);
                 $('#ram_desktop').val(data.result.ram_desktop);

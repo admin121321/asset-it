@@ -78,7 +78,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Type Software: </label>
-                                                            <select name="type_lisensi" class="form-control" required>
+                                                            <select name="type_lisensi" id="type_lisensi" class="form-control" required>
                                                                 <option>---Pilih Type Software---</option>
                                                                 <option value="OS Desktop">OS Desktop</option>
                                                                 <option value="OS Server">OS Server</option>
@@ -103,7 +103,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>32 bit / 64 Bit: </label>
-                                                            <select name="bit_os" class="form-control" required>
+                                                            <select name="bit_os" id="bit_os" class="form-control" required>
                                                                 <option>---Pilih Type BIT---</option>
                                                                 <option value="32 bit">32 bit</option>
                                                                 <option value="64 bit">64 bit</option>
@@ -298,12 +298,12 @@ $(document).ready(function() {
                 $('#sn_lisensi').val(data.result.sn_lisensi);
                 $('#brand_lisensi').val(data.result.brand_lisensi);
                 $('#model_lisensi').val(data.result.model_lisensi);
-                $('#type_lisensi').val(data.result.type_lisensi);
+                $('#type_lisensi').val(data.result.type_lisensi).change();
                 $('#tahun_anggaran').val(data.result.tahun_anggaran);
                 $('#masa_aktif').val(data.result.masa_aktif);
                 $('#harga_lisensi').val(data.result.harga_lisensi);
                 $('#key_lisensi').val(data.result.key_lisensi);
-                $('#bit_os').val(data.result.bit_os);
+                $('#bit_os').val(data.result.bit_os).change();
                 $('#stok').val(data.result.stok);
                 $('#tampilgambar').html(
                 `<img src="/images-lisensi/${data.result.foto_lisensi}" width="100" class="img-fluid img-thumbnail">`);
