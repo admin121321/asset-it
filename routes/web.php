@@ -50,6 +50,7 @@ Route::get('/desktop-pengguna/destroy/{id}', [App\Http\Controllers\DesktopPenggu
 // Lisensi Software
 Route::get('/lisensi-software', [App\Http\Controllers\LisensiSoftwareController::class, 'index'])->name('lisensi-software.index');
 Route::post('/lisensi-software/store', [App\Http\Controllers\LisensiSoftwareController::class, 'store'])->name('lisensi-software.store');
+Route::get('/lisensi-software/detail/{id}', [App\Http\Controllers\LisensiSoftwareController::class, 'detail'])->name('lisensi-software.detail');
 Route::get('/lisensi-software/edit/{id}', [App\Http\Controllers\LisensiSoftwareController::class, 'edit'])->name('lisensi-software.edit');
 Route::post('/lisensi-software/update', [App\Http\Controllers\LisensiSoftwareController::class, 'update'])->name('lisensi-software.update');
 Route::get('/lisensi-software/destroy/{id}', [App\Http\Controllers\LisensiSoftwareController::class, 'destroy'])->name('lisensi-software.destroy');

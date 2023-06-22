@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kode_rak');
             $table->string('dimensi_rak');
             $table->string('ukuran_u_rak');
+            $table->string('sisa_u');
             $table->string('tahun_anggaran');
             $table->string('harga_rak');
             $table->string('deskripsi');

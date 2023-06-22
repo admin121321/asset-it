@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tahun_anggaran');
             $table->string('harga_printer');
             $table->string('stok');
+            $table->string('sisa_stok');
             $table->string('foto_printer');
             $table->timestamps();
         });

@@ -18,10 +18,12 @@ return new class extends Migration
             $table->string('model_lisensi');
             $table->string('type_lisensi');
             $table->string('tahun_anggaran');
+            $table->string('masa_aktif');
             $table->string('harga_lisensi');
             $table->string('key_lisensi');
-            $table->string('core_os');
+            $table->string('bit_os');
             $table->string('stok');
+            $table->string('sisa_stok');
             $table->string('foto_lisensi');
             $table->timestamps();
         });

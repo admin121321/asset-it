@@ -21,7 +21,8 @@ class LisensiSoftwareController extends Controller
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($data){
                     $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Edit</button>';
-                    $button .= '   <button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Delete</button>';
+                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Delete</button>';
+                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="detailButton btn btn-success btn-sm"> <i class="bi bi-pencil-square"></i>Detail</button>';
                     return $button;
                 })
                 ->make(true);
@@ -42,7 +43,7 @@ class LisensiSoftwareController extends Controller
              'type_lisensi'  =>  'required',
              'tahun_anggaran'=>  'required',
              'harga_lisensi' =>  'required',
-             'core_os'       =>  'required',
+             'bit_os'       =>  'required',
              'stok'          =>  'required',
              'key_lisensi'   =>  'required',
              'foto_lisensi'  =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -75,10 +76,12 @@ class LisensiSoftwareController extends Controller
                     'model_lisensi' =>  $request->model_lisensi,
                     'type_lisensi'  =>  $request->type_lisensi,
                     'tahun_anggaran'=>  $request->tahun_anggaran,
-                    'core_os'       =>  $request->core_os,
+                    'masa_aktif'    =>  $request->masa_aktif,
+                    'bit_os'        =>  $request->bit_os,
                     'harga_lisensi' =>  $request->harga_lisensi,
                     'key_lisensi'   =>  $request->key_lisensi,
                     'stok'          =>  $request->stok,
+                    'sisa_stok'     =>  $request->stok,
                     ];
                 $form_data['foto_lisensi'] = date('YmdHis').'.'.$request->foto_lisensi->getClientOriginalExtension();
                 $request->foto_lisensi->move(public_path('images-lisensi'), $form_data['foto_lisensi']);
@@ -107,7 +110,7 @@ class LisensiSoftwareController extends Controller
             'type_lisensi'  =>  'required',
             'tahun_anggaran'=>  'required',
             'harga_lisensi' =>  'required',
-            'core_os'       =>  'required',
+            'bit_os'       =>  'required',
             'stok'          =>  'required',
             'key_lisensi'   =>  'required',
             // 'foto_lisensi'  =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -134,10 +137,12 @@ class LisensiSoftwareController extends Controller
                  'model_lisensi' =>  $request->model_lisensi,
                  'type_lisensi'  =>  $request->type_lisensi,
                  'tahun_anggaran'=>  $request->tahun_anggaran,
-                 'core_os'       =>  $request->core_os,
+                 'masa_aktif'    =>  $request->masa_aktif,
+                 'bit_os'        =>  $request->bit_os,
                  'harga_lisensi' =>  $request->harga_lisensi,
                  'key_lisensi'   =>  $request->key_lisensi,
                  'stok'          =>  $request->stok,
+                 'sisa_stok'     =>  $request->sisa_stok,
                  'foto_lisensi'  =>  $fileName_new
              ];
              File::delete($fileName);
@@ -156,10 +161,12 @@ class LisensiSoftwareController extends Controller
                 'model_lisensi' =>  $request->model_lisensi,
                 'type_lisensi'  =>  $request->type_lisensi,
                 'tahun_anggaran'=>  $request->tahun_anggaran,
-                'core_os'       =>  $request->core_os,
+                'masa_aktif'    =>  $request->masa_aktif,
+                'bit_os'        =>  $request->bit_os,
                 'harga_lisensi' =>  $request->harga_lisensi,
                 'key_lisensi'   =>  $request->key_lisensi,
                 'stok'          =>  $request->stok,
+                'sisa_stok'     =>  $request->sisa_stok,
              ];
          }
   
@@ -170,6 +177,17 @@ class LisensiSoftwareController extends Controller
              
          ]);
      }
+
+     public function detail($id)
+    {
+
+        if (request()->ajax()) 
+        {
+            $data = LisensiSoftware::findOrFail($id);
+            return response()->json($data);
+        }
+
+    }
  
      public function destroy($id)
      {

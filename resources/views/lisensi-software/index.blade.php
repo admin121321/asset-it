@@ -89,6 +89,10 @@
                                                             <input type="Date" name="tahun_anggaran" id="tahun_anggaran" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
+                                                            <label>Masa Aktif: </label>
+                                                            <input type="Date" name="masa_aktif" id="masa_aktif" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label>Harga Lisensi : </label>
                                                             <input type="number" name="harga_lisensi" id="harga_lisensi" class="form-control" />
                                                         </div>
@@ -97,11 +101,15 @@
                                                             <input type="text" name="key_lisensi" id="key_lisensi" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Core CPU : </label>
-                                                            <input type="number" name="core_os" id="core_os" class="form-control" />
+                                                            <label>32 bit / 64 Bit: </label>
+                                                            <select name="bit_os" class="form-control" required>
+                                                                <option>---Pilih Type BIT---</option>
+                                                                <option value="32 bit">32 bit</option>
+                                                                <option value="64 bit">64 bit</option>
+                                                            </select> 
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Stok : </label>
+                                                            <label>Stok (Jumlah Device yang bisa digunakan): </label>
                                                             <input type="number" name="stok" id="stok" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
@@ -151,6 +159,37 @@
                 </div>
             </div>
             <!-- #/ container -->
+        </div>
+          <!-- Modal Detail -->
+        <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <span id="detail_result"></span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Lisensi Software</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- <p><strong>ID Netwok:</strong><span id="network-id"></span></p> -->
+                    <p><strong>Brand:</strong><span id="brand-lisensi"></span></p>
+                    <p><strong>Model:</strong><span id="model-lisensi"></span></p>
+                    <p><strong>SN:</strong><span id="sn-lisensi"></span></p>
+                    <p><strong>Type:</strong><span id="type-lisensi"></span></p>
+                    <p><strong>Harga:</strong><span id="harga-lisensi"></span></p>
+                    <p><strong>Masa Aktif:</strong><span id="masa-aktif"></span></p>
+                    <p><strong>Key Lisence:</strong><span id="key-lisensi"></span></p>
+                    <p><strong>Bit OS:</strong><span id="bit-os"></span></p>
+                    <p><strong>Stok (Jumlah Device yang bisa digunakan):</strong><span id="stok-lisensi"></span></p>
+                    <p><strong>Sisa Stok (Sisa Device yang bisa gunakan):</strong><span id="sisa-stok"></span></p>
+                    <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
+                        <img name="tampil-gambar" id="tampilgambar">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
         </div>
         <!--**********************************
             Content body end
@@ -259,9 +298,10 @@ $(document).ready(function() {
                 $('#model_lisensi').val(data.result.model_lisensi);
                 $('#type_lisensi').val(data.result.type_lisensi);
                 $('#tahun_anggaran').val(data.result.tahun_anggaran);
+                $('#masa_aktif').val(data.result.masa_aktif);
                 $('#harga_lisensi').val(data.result.harga_lisensi);
                 $('#key_lisensi').val(data.result.key_lisensi);
-                $('#core_os').val(data.result.core_os);
+                $('#bit_os').val(data.result.bit_os);
                 $('#stok').val(data.result.stok);
                 $('#tampilgambar').html(
                 `<img src="/images-lisensi/${data.result.foto_lisensi}" width="100" class="img-fluid img-thumbnail">`);
@@ -301,6 +341,49 @@ $(document).ready(function() {
                 }, 2000);
                 window.location.reload();
             }
+        })
+    });
+
+     // detail
+     $(document).on('click', '.detailButton', function(event){
+        event.preventDefault(); 
+        var id = $(this).attr('id'); alert(id);
+        $('#detail_result').html('');
+
+        $.ajax({
+            url :"/lisensi-software/detail/"+id+"/",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType:"json",
+            processData: false,  
+            contentType: false,
+            cache: false,
+            success:function(data)
+            {
+                
+                // $('#network-id').text(data.network_id);
+                $('#sn-lisensi').text(data.sn_lisensi);
+                $('#brand-lisensi').text(data.brand_lisensi);
+                $('#model-lisensi').text(data.model_lisensi);
+                $('#type-lisensi').text(data.type_lisensi);
+                $('#tahun-anggaran').text(data.tahun_anggaran);
+                $('#masa-aktif').text(data.masa_aktif);
+                $('#harga-lisensi').text(data.harga_lisensi);
+                $('#key-lisensi').text(data.key_lisensi);
+                $('#bit-os').text(data.bit_os);
+                $('#stok-lisensi').text(data.stok);
+                $('#sisa-stok').text(data.sisa_stok);
+                $('#tampil-gambar').html(
+                `<img src="/images-lisensi/${data.foto_lisensi}" width="100" class="img-fluid img-thumbnail">`);
+                $('#hidden_id').val(id);
+                $('.modal-title').text('Detail');
+                $('#fModal').modal('show');
+
+                console.log(
+                    'SN Lisensi: '+data.sn_lisensi,
+                     $('#sn-desktop')
+                    );
+                
+            },
         })
     });
 });

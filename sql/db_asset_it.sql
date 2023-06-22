@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 22, 2023 at 04:03 AM
+-- Generation Time: Jun 22, 2023 at 05:43 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -214,16 +214,24 @@ CREATE TABLE `lisensi_software` (
   `brand_lisensi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_lisensi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type_lisensi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tahun_anggaran` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun_anggaran` date NOT NULL,
+  `masa_aktif` date NOT NULL,
   `harga_lisensi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `key_lisensi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `core_os` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bit_os` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `stok` int NOT NULL,
   `sisa_stok` int NOT NULL,
   `foto_lisensi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lisensi_software`
+--
+
+INSERT INTO `lisensi_software` (`id`, `sn_lisensi`, `brand_lisensi`, `model_lisensi`, `type_lisensi`, `tahun_anggaran`, `masa_aktif`, `harga_lisensi`, `key_lisensi`, `bit_os`, `stok`, `sisa_stok`, `foto_lisensi`, `created_at`, `updated_at`) VALUES
+(1, 'AF4332', 'Adobe', 'Reader', 'Aplikasi', '2023-06-22', '2023-06-23', '22', '321dfweqer234e2342', '64 bit', 20, 20, '20230622051729.png', '2023-06-21 22:17:29', '2023-06-21 22:17:29');
 
 -- --------------------------------------------------------
 
@@ -897,7 +905,7 @@ ALTER TABLE `lisensi_pengguna`
 -- AUTO_INCREMENT for table `lisensi_software`
 --
 ALTER TABLE `lisensi_software`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `logos`
