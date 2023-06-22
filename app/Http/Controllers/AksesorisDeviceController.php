@@ -96,6 +96,7 @@ class AksesorisDeviceController extends Controller
             return response()->json(['result' => $data]);
         }
     }
+    
     public function update(Request $request, AksesorisDevice $printerdevice)
     {
         $rules = array(
@@ -133,8 +134,8 @@ class AksesorisDeviceController extends Controller
                 'garansi_aksesoris' =>  $request->garansi_aksesoris,
                 'tahun_anggaran'    =>  $request->tahun_anggaran,
                 'harga_aksesoris'   =>  $request->harga_aksesoris,
-                'stok'              =>  $request->stok,
-                'sisa_stok'         =>  $request->sisa_stok,
+                // 'stok'              =>  $request->stok,
+                // 'sisa_stok'         =>  $request->sisa_stok,
                 'foto_aksesoris'    =>  $fileName_new
             ];
             File::delete($fileName);
@@ -155,8 +156,8 @@ class AksesorisDeviceController extends Controller
                 'garansi_aksesoris' =>  $request->garansi_aksesoris,
                 'tahun_anggaran'    =>  $request->tahun_anggaran,
                 'harga_aksesoris'   =>  $request->harga_aksesoris,
-                'stok'              =>  $request->stok,
-                'sisa_stok'         =>  $request->sisa_stok, 
+                // 'stok'              =>  $request->stok,
+                // 'sisa_stok'         =>  $request->sisa_stok, 
             ];
         }
  

@@ -72,7 +72,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Type Desktop: </label>
-                                                            <select name="type_desktop" class="form-control" required>
+                                                            <select name="type_desktop" id="type_desktop" class="form-control" required>
                                                                 <option>---Pilih Type Desktop---</option>
                                                                 <option value="PC">PC</option>
                                                                 <option value="LAPTOP">LAPTOP</option>
@@ -109,7 +109,9 @@
                                                         </div>
                                                         <div class="form-group" hidden>
                                                             <label>Stok: </label>
-                                                            <input type="number" name="stok" id="stok" value="1" class="form-control" />
+                                                            <select class="form-control" id="stok" name="stok" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Deskrpsi: </label>
@@ -305,7 +307,7 @@ $(document).ready(function() {
                 $('#sn_desktop').val(data.result.sn_desktop);
                 $('#brand_desktop').val(data.result.brand_desktop);
                 $('#model_desktop').val(data.result.model_desktop);
-                $('#type_desktop').val(data.result.type_desktop);
+                $('#type_desktop').val(data.result.type_desktop).change();
                 $('#garansi_desktop').val(data.result.garansi_desktop);
                 $('#tahun_desktop').val(data.result.tahun_anggaran);
                 $('#harga_desktop').val(data.result.harga_desktop);

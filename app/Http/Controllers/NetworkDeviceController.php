@@ -78,6 +78,7 @@ class NetworkDeviceController extends Controller
                     'tahun_anggaran'    =>  $request->tahun_anggaran,
                     'harga_network'     =>  $request->harga_network,
                     'stok'              =>  $request->stok,
+                    'sisa_stok'              =>  $request->stok,
                     ];
                 $form_data['foto_network'] = date('YmdHis').'.'.$request->foto_network->getClientOriginalExtension();
                 $request->foto_network->move(public_path('images-network'), $form_data['foto_network']);
@@ -108,7 +109,7 @@ class NetworkDeviceController extends Controller
             'garansi_network' =>  'required',
             'tahun_anggaran'  =>  'required',
             'harga_network'   =>  'required',
-            'stok'            =>  'required',
+            // 'stok'            =>  'required',
         );
  
         $error = Validator::make($request->all(), $rules);
@@ -135,7 +136,7 @@ class NetworkDeviceController extends Controller
                 'garansi_network'   =>  $request->garansi_network,
                 'tahun_anggaran'    =>  $request->tahun_anggaran,
                 'harga_network'     =>  $request->harga_network,
-                'stok'              =>  $request->stok,
+                // 'stok'              =>  $request->stok,
                 'foto_network'      =>  $fileName_new
             ];
             File::delete($fileName);
@@ -157,7 +158,7 @@ class NetworkDeviceController extends Controller
                 'garansi_network'   =>  $request->garansi_network,
                 'tahun_anggaran'    =>  $request->tahun_anggaran,
                 'harga_network'     =>  $request->harga_network,
-                'stok'              =>  $request->stok,
+                // 'stok'              =>  $request->stok,
             ];
         }
  

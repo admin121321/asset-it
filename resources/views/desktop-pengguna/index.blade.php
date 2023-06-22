@@ -80,7 +80,9 @@
                                                         </div>
                                                         <div class="form-group" hidden>
                                                             <label>Qty: </label>
-                                                            <input type="number" name="qty" id="qty" value="1" class="form-control" />
+                                                            <select class="form-control" id="qty" name="qty" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
                                                         </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />

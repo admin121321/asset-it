@@ -142,7 +142,7 @@ class LisensiSoftwareController extends Controller
                  'harga_lisensi' =>  $request->harga_lisensi,
                  'key_lisensi'   =>  $request->key_lisensi,
                  'stok'          =>  $request->stok,
-                 'sisa_stok'     =>  $request->sisa_stok,
+                //  'sisa_stok'     =>  $request->sisa_stok,
                  'foto_lisensi'  =>  $fileName_new
              ];
              File::delete($fileName);
@@ -166,7 +166,7 @@ class LisensiSoftwareController extends Controller
                 'harga_lisensi' =>  $request->harga_lisensi,
                 'key_lisensi'   =>  $request->key_lisensi,
                 'stok'          =>  $request->stok,
-                'sisa_stok'     =>  $request->sisa_stok,
+                // 'sisa_stok'     =>  $request->sisa_stok,
              ];
          }
   
