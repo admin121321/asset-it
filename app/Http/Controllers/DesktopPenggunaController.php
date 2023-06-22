@@ -22,7 +22,7 @@ class DesktopPenggunaController extends Controller
         if ($request->ajax()) {
             $data = DesktopPengguna::join('users', 'users.id', '=' ,'desktop_pengguna.user_id')
                                     ->join('desktop_device', 'desktop_device.id', '=', 'desktop_pengguna.desktop_id')
-                                    ->select('desktop_pengguna.*', 'users.name', 'desktop_device.brand_desktop', 'desktop_device.model_desktop',
+                                    ->select('desktop_pengguna.*', 'users.name','users.card_id', 'desktop_device.brand_desktop', 'desktop_device.model_desktop',
                                             'desktop_device.sn_desktop','desktop_device.type_desktop') 
                                     ->get();
             return Datatables::of($data)->addIndexColumn()

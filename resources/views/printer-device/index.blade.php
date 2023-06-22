@@ -38,6 +38,7 @@
                                                         <th>Model Printer</th>
                                                         <th>Tahun Anggaran</th>
                                                         <th>Stok</th>
+                                                        <th>Sisa Stok</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
                                                 </thead>
@@ -90,9 +91,11 @@
                                                             <label>Harga : </label>
                                                             <input type="number" name="harga_printer" id="harga_printer" class="form-control" />
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label>Stok : </label>
-                                                            <input type="number" name="stok" id="stok" class="form-control" />
+                                                        <div class="form-group" hidden>
+                                                            <label>Stok: </label>
+                                                            <select class="form-control" id="stok" name="stok" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Foto Printer: </label>
@@ -145,14 +148,30 @@
         <!--**********************************
             Content body end
         ***********************************-->
-<!-- <script>
-    tinymce.init({
-      selector: '#deskripsi',
-      menubar: true,
-      toolbar: true,
-      inline: false,
-    });
-  </script> -->
+        <!-- Modal Detail-->
+        <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <span id="detail_result"></span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Brand Printer:</strong><span id="brand-printer"></span></p>
+                    <p><strong>Model Printer:</strong><span id="model-printer"></span></p>
+                    <p><strong>Type Printer:</strong><span id="type-printer"></span></p>
+                    <p><strong>SN Printer:</strong><span id="sn-printer"></span></p>
+                    <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
+                        <img name="tampil-gambar" id="tampilgambar">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -166,6 +185,7 @@ $(document).ready(function() {
             {data: 'model_printer', name: 'model_printer'},
             {data: 'tahun_anggaran', name: 'tahun_anggaran'},
             {data: 'stok', name: 'stok'},
+            {data: 'sisa_stok', name: 'sisa_stok'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
@@ -297,6 +317,43 @@ $(document).ready(function() {
                 }, 2000);
                 window.location.reload();
             }
+        })
+    });
+
+     // detail
+     $(document).on('click', '.detailButton', function(event){
+        event.preventDefault(); 
+        var id = $(this).attr('id'); alert(id);
+        $('#detail_result').html('');
+
+        $.ajax({
+            url :"/printer-device/detail/"+id+"/",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType:"json",
+            processData: false,  
+            contentType: false,
+            cache: false,
+            success:function(data)
+            {
+                
+                $('#sn-printer').text(data.serial_number);
+                $('#brand-printer').text(data.brand_printer);
+                $('#model-printer').text(data.model_printer);
+                $('#type-printer').text(data.type_printer);
+                $('#tampil-gambar').html(
+                `<img src="/images-printer/${data.foto_printer}" width="100" class="img-fluid img-thumbnail">`);
+                $('#qty').text(data.qty);
+                $('#hidden_id').val(id);
+                $('.modal-title').text('Detail');
+                $('#fModal').modal('show');
+
+                console.log(
+                    'id user: '+data.user_id,
+                    'id printer:'+ data.printer_id,
+                     $('#user-id')
+                    );
+                
+            },
         })
     });
 });

@@ -143,7 +143,8 @@
                 <p><strong>Model Desktop:</strong><span id="model-desktop"></span></p>
                 <p><strong>Type Desktop:</strong><span id="type-desktop"></span></p>
                 <p><strong>SN Desktop:</strong><span id="sn-desktop"></span></p>
-                <p><strong>Pengguna Desktop:</strong><span id="pengguna-desktop"></span></p>
+                <p><strong>Pengguna:</strong><span id="pengguna-desktop"></span></p>
+                <p><strong>ID Card Pengguna:</strong><span id="card-id"></span></p>
                 <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
                     <img name="tampil-gambar" id="tampilgambar">
                 </div>
@@ -322,6 +323,7 @@ $(document).ready(function() {
                 $('#model-desktop').text(data.model_desktop);
                 $('#type-desktop').text(data.type_desktop);
                 $('#pengguna-desktop').text(data.name);
+                $('#card-id').text(data.card_id);
                 $('#tampil-gambar').html(
                 `<img src="/images-desktop/${data.foto_desktop}" width="100" class="img-fluid img-thumbnail">`);
                 $('#qty').text(data.qty);

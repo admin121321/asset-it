@@ -22,7 +22,7 @@ class PrinterPenggunaController extends Controller
         if ($request->ajax()) {
             $data = PrinterPengguna::join('users', 'users.id', '=' ,'printer_pengguna.user_id')
                                     ->join('printer_devices', 'printer_devices.id', '=', 'printer_pengguna.printer_id')
-                                    ->select('printer_pengguna.*', 'users.name', 'printer_devices.brand_printer', 'printer_devices.model_printer') 
+                                    ->select('printer_pengguna.*', 'users.name', 'printer_devices.brand_printer', 'printer_devices.model_printer', 'printer_devices.serial_number', ) 
                                     ->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('user_id', function($data){
@@ -45,9 +45,9 @@ class PrinterPenggunaController extends Controller
         // $data = PrinterDevice::get();
         // dd ($data);
         $data = PrinterPengguna::join('users', 'users.id', '=' ,'printer_pengguna.user_id')
-        ->join('printer_devices', 'printer_devices.id', '=', 'printer_pengguna.printer_id')
-        ->select('printer_pengguna.*', 'users.name', 'printer_devices.brand_printer', 'printer_devices.model_printer') 
-        ->get();
+                                ->join('printer_devices', 'printer_devices.id', '=', 'printer_pengguna.printer_id')
+                                ->select('printer_pengguna.*', 'users.name', 'printer_devices.brand_printer', 'printer_devices.model_printer', 'printer_devices.serial_number') 
+                                ->get();
         return view('printer-pengguna.index', compact('data'));
     }
 
@@ -69,7 +69,7 @@ class PrinterPenggunaController extends Controller
 
             PrinterPengguna::create($request->all());
             $form_data = PrinterDevice::findOrFail($request->printer_id);
-            $form_data->stok -= $request->qty;
+            $form_data->sisa_stok -= $request->qty;
             $form_data->save();
            
 
@@ -133,7 +133,12 @@ class PrinterPenggunaController extends Controller
 
         if (request()->ajax()) 
         {
-            $data = PrinterPengguna::findOrFail($id);
+            // $data = PrinterPengguna::findOrFail($id);
+            $data = PrinterPengguna::join('users', 'users.id', '=' ,'printer_pengguna.user_id')
+                                    ->join('printer_devices', 'printer_devices.id', '=', 'printer_pengguna.printer_id')
+                                    ->select('printer_pengguna.*', 'users.name', 'users.card_id', 'printer_devices.brand_printer', 
+                                            'printer_devices.model_printer', 'printer_devices.foto_printer', 'printer_devices.serial_number', 'printer_devices.type_printer', ) 
+                                    ->findOrFail($id);
             return response()->json($data);
         }
         // $data = PrinterPengguna::find($id);

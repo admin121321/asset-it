@@ -24,6 +24,7 @@ class PrinterDeviceController extends Controller
                 ->addColumn('action', function($data){
                     $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Edit</button>';
                     $button .= '   <button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Delete</button>';
+                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="detailButton btn btn-success btn-sm"> <i class="bi bi-pencil-square"></i>Detail</button>';
                     return $button;
                 })
                 ->make(true);
@@ -76,6 +77,7 @@ class PrinterDeviceController extends Controller
                     'tahun_anggaran'=>  $request->tahun_anggaran,
                     'harga_printer' =>  $request->harga_printer,
                     'stok'          =>  $request->stok,
+                    'sisa_stok'          =>  $request->stok,
                     ];
                 $form_data['foto_printer'] = date('YmdHis').'.'.$request->foto_printer->getClientOriginalExtension();
                 $request->foto_printer->move(public_path('images-printer'), $form_data['foto_printer']);
@@ -131,6 +133,7 @@ class PrinterDeviceController extends Controller
                 'tahun_anggaran'=>  $request->tahun_anggaran,
                 'harga_printer' =>  $request->harga_printer,
                 'stok'          =>  $request->stok, 
+                'sisa_stok'     =>  $request->sisa_stok, 
                 'foto_printer'  =>  $fileName_new
             ];
             File::delete($fileName);
@@ -150,7 +153,8 @@ class PrinterDeviceController extends Controller
                 'type_printer'  =>  $request->type_printer,
                 'tahun_anggaran'=>  $request->tahun_anggaran,
                 'harga_printer' =>  $request->harga_printer,
-                'stok'          =>  $request->stok, 
+                'stok'          =>  $request->stok,
+                'sisa_stok'     =>  $request->sisa_stok,  
             ];
         }
  
@@ -160,6 +164,17 @@ class PrinterDeviceController extends Controller
             'success' => 'Data is successfully updated',
             
         ]);
+    }
+
+    public function detail($id)
+    {
+
+        if (request()->ajax()) 
+        {
+            $data = PrinterDevice::findOrFail($id);
+            return response()->json($data);
+        }
+
     }
 
     public function destroy($id)

@@ -33,6 +33,7 @@
                                                     <tr>
                                                         <th>Brand Printer</th>
                                                         <th>Model Printer</th>
+                                                        <th>SN Printer</th>
                                                         <th>Pengguna</th>
                                                         <th>Qty</th>
                                                         <th width="180px">Action</th>
@@ -69,7 +70,7 @@
                                                             <select class="form-control" id="printer_id" name="printer_id" aria-label="Floating label select example">
                                                                 <option>--Pilih Printer--</option>
                                                                 @foreach(App\Models\PrinterDevice::all() as $printer)
-                                                                    @if ($printer->stok=='0')
+                                                                    @if ($printer->sisa_stok=='0')
                                                                     @else
                                                                     <option value="{{ $printer->id}}" id="printer_id">{{ $printer->model_printer }} - {{ $printer->serial_number }}</option>
                                                                     @endif
@@ -78,7 +79,9 @@
                                                         </div>
                                                         <div class="form-group" hidden>
                                                             <label>Qty: </label>
-                                                            <input type="text" name="qty" id="qty" value="1" class="form-control" />
+                                                            <select class="form-control" id="qty" name="qty" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
                                                         </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
@@ -123,28 +126,31 @@
         <!--**********************************
             Content body end
         ***********************************-->
-         <!-- detail -->
-
-
-        <!-- Modal -->
+        <!-- Modal Detail-->
         <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <span id="detail_result"></span>
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <span id="detail_result"></span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Printer Pengguna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Brand Printer:</strong><span id="brand-printer"></span></p>
+                    <p><strong>Model Printer:</strong><span id="model-printer"></span></p>
+                    <p><strong>Type Printer:</strong><span id="type-printer"></span></p>
+                    <p><strong>SN Printer:</strong><span id="sn-printer"></span></p>
+                    <p><strong>Pengguna:</strong><span id="pengguna-printer"></span></p>
+                    <p><strong>ID Card Pengguna:</strong><span id="card-id"></span></p>
+                    <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
+                        <img name="tampil-gambar" id="tampilgambar">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p><strong>ID:</strong><span id="user-id"></span></p>
-                <p><strong>Name:</strong> <span id="printer-id"></span></p>
-                <p><strong>Qty:</strong> <span id="qty"></span></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
         </div>
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -157,6 +163,7 @@ $(document).ready(function() {
         columns: [
             {data: 'brand_printer', name: 'brand_printer'},
             {data: 'model_printer', name: 'model_printer'},
+            {data: 'serial_number', name: 'serial_number'},
             {data: 'name', name: 'name'},
             {data: 'qty', name: 'qty'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -304,8 +311,14 @@ $(document).ready(function() {
             success:function(data)
             {
                 
-                $('#user-id').text(data.user_id);
-                $('#printer-id').text(data.printer_id);
+                $('#sn-printer').text(data.serial_number);
+                $('#brand-printer').text(data.brand_printer);
+                $('#model-printer').text(data.model_printer);
+                $('#type-printer').text(data.type_printer);
+                $('#pengguna-printer').text(data.name);
+                $('#card-id').text(data.card_id);
+                $('#tampil-gambar').html(
+                `<img src="/images-printer/${data.foto_printer}" width="100" class="img-fluid img-thumbnail">`);
                 $('#qty').text(data.qty);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Detail');
