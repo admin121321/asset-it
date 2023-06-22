@@ -19,6 +19,7 @@ class AksesorisDevice extends Model
         'tahun_anggaran',
         'harga_aksesoris',
         'stok',
+        'sisa_stok',
         'foto_aksesoris',
     ];
 }

@@ -20,6 +20,7 @@ class LisensiSoftware extends Model
         'key_lisensi',
         'core_os',
         'stok',
+        'sisa_stok',
         'foto_lisensi',
     ];
 }

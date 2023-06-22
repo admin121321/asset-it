@@ -53,23 +53,36 @@ class PrinterDeviceController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
-
-            // $form_data = $request->all();
-            $form_data = [
-                'id'            =>  $request->serial_number,
-                'serial_number' =>  $request->serial_number,
-                'brand_printer' =>  $request->brand_printer,
-                'model_printer' =>  $request->model_printer,
-                'type_printer'  =>  $request->type_printer,
-                'tahun_anggaran'=>  $request->tahun_anggaran,
-                'harga_printer' =>  $request->harga_printer,
-                'stok'          =>  $request->stok,
+            if (PrinterDevice::where('serial_number', $request->serial_number)->count() > 0) {
+                // view tampilan
+                $rules = array([
+                    'serial_number' => 'required',
+                ]);
+                
+                $customMessages = [
+                    'required' => 'Serial Number Sudah Ada',
                 ];
-            $form_data['foto_printer'] = date('YmdHis').'.'.$request->foto_printer->getClientOriginalExtension();
-            $request->foto_printer->move(public_path('images-printer'), $form_data['foto_printer']);
+            
+                // $error = $this->validate($request, $rules, $customMessages);
+                $error = Validator::make($request->all(), $rules, $customMessages);
+                return response()->json(['errors' => $error->errors()->all()]);
+            }else{
+                // $form_data = $request->all();
+                $form_data = [
+                    'serial_number' =>  $request->serial_number,
+                    'brand_printer' =>  $request->brand_printer,
+                    'model_printer' =>  $request->model_printer,
+                    'type_printer'  =>  $request->type_printer,
+                    'tahun_anggaran'=>  $request->tahun_anggaran,
+                    'harga_printer' =>  $request->harga_printer,
+                    'stok'          =>  $request->stok,
+                    ];
+                $form_data['foto_printer'] = date('YmdHis').'.'.$request->foto_printer->getClientOriginalExtension();
+                $request->foto_printer->move(public_path('images-printer'), $form_data['foto_printer']);
 
-            PrinterDevice::create($form_data);
-            return response()->json(['success' => 'Data Added successfully.']);
+                PrinterDevice::create($form_data);
+                return response()->json(['success' => 'Data Added successfully.']);
+            }
         }
     }
 
@@ -111,7 +124,6 @@ class PrinterDeviceController extends Controller
             $file->move(public_path('images-printer/'), $fileName_new);
             $printerImage = public_path('images-printer/').$currentImage;
             $form_data = [
-                'id'            =>  $request->serial_number,
                 'serial_number' =>  $request->serial_number,
                 'brand_printer' =>  $request->brand_printer,
                 'model_printer' =>  $request->model_printer,
@@ -132,7 +144,6 @@ class PrinterDeviceController extends Controller
 
         } else {
             $form_data = [
-                'id'            =>  $request->serial_number,
                 'serial_number' =>  $request->serial_number,
                 'brand_printer' =>  $request->brand_printer,
                 'model_printer' =>  $request->model_printer,

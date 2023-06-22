@@ -53,25 +53,38 @@ class NetworkDeviceController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
-
-            // $form_data = $request->all();
-            $form_data = [
-                'id'                =>  $request->sn_network,
-                'sn_network'        =>  $request->sn_network,
-                'brand_network'     =>  $request->brand_network,
-                'model_network'     =>  $request->model_network,
-                'type_network'      =>  $request->type_network,
-                'port_network'      =>  $request->port_network,
-                'garansi_network'   =>  $request->garansi_network,
-                'tahun_anggaran'    =>  $request->tahun_anggaran,
-                'harga_network'     =>  $request->harga_network,
-                'stok'              =>  $request->stok,
+            if (NetworkDevice::where('sn_network', $request->sn_network)->count() > 0) {
+                // view tampilan
+                $rules = array([
+                'sn_network' => 'required',
+                ]);
+                
+                $customMessages = [
+                    'required' => 'Serial Number Sudah Ada',
                 ];
-            $form_data['foto_network'] = date('YmdHis').'.'.$request->foto_network->getClientOriginalExtension();
-            $request->foto_network->move(public_path('images-network'), $form_data['foto_network']);
+            
+                // $error = $this->validate($request, $rules, $customMessages);
+                $error = Validator::make($request->all(), $rules, $customMessages);
+                return response()->json(['errors' => $error->errors()->all()]);
+            }else{
+                // $form_data = $request->all();
+                $form_data = [
+                    'sn_network'        =>  $request->sn_network,
+                    'brand_network'     =>  $request->brand_network,
+                    'model_network'     =>  $request->model_network,
+                    'type_network'      =>  $request->type_network,
+                    'port_network'      =>  $request->port_network,
+                    'garansi_network'   =>  $request->garansi_network,
+                    'tahun_anggaran'    =>  $request->tahun_anggaran,
+                    'harga_network'     =>  $request->harga_network,
+                    'stok'              =>  $request->stok,
+                    ];
+                $form_data['foto_network'] = date('YmdHis').'.'.$request->foto_network->getClientOriginalExtension();
+                $request->foto_network->move(public_path('images-network'), $form_data['foto_network']);
 
-            NetworkDevice::create($form_data);
-            return response()->json(['success' => 'Data Added successfully.']);
+                NetworkDevice::create($form_data);
+                return response()->json(['success' => 'Data Added successfully.']);
+            } 
         }
     }
 
@@ -114,7 +127,6 @@ class NetworkDeviceController extends Controller
             $file->move(public_path('images-network/'), $fileName_new);
             $networkImage = public_path('images-netwrok/').$currentImage;
             $form_data = [
-                'id'                =>  $request->sn_network,
                 'sn_network'        =>  $request->sn_network,
                 'brand_network'     =>  $request->brand_network,
                 'model_network'     =>  $request->model_network,
@@ -137,7 +149,6 @@ class NetworkDeviceController extends Controller
 
         } else {
             $form_data = [
-                'id'                =>  $request->sn_network,
                 'sn_network'        =>  $request->sn_network,
                 'brand_network'     =>  $request->brand_network,
                 'model_network'     =>  $request->model_network,

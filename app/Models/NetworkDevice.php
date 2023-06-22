@@ -20,6 +20,7 @@ class NetworkDevice extends Model
         'tahun_anggaran',
         'harga_network',
         'stok',
+        'sisa_stok',
         'foto_network',
     ];
 }

@@ -64,7 +64,7 @@ class AksesorisPenggunaController extends Controller
 
             AksesorisPengguna::create($request->all());
             $form_data = AksesorisDevice::findOrFail($request->aksesoris_id);
-            $form_data->stok -= $request->qty;
+            $form_data->sisa_stok -= $request->qty;
             $form_data->save();
            
 
@@ -105,7 +105,7 @@ class AksesorisPenggunaController extends Controller
             else{    
                 $aksesoris_pengguna->update($request->all());
                 $form_data = AksesorisDevice::findOrFail($request->aksesoris_id);
-                $form_data->stok -= $request->qty;
+                $form_data->sisa_stok -= $request->qty;
             }
  
         return response()->json([

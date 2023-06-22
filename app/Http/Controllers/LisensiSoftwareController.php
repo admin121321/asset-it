@@ -54,25 +54,38 @@ class LisensiSoftwareController extends Controller
          {
              return response()->json(['errors' => $error->errors()->all()]);
          }else{
- 
-             // $form_data = $request->all();
-             $form_data = [
-                 'id'            =>  $request->sn_lisensi,
-                 'sn_lisensi'    =>  $request->sn_lisensi,
-                 'brand_lisensi' =>  $request->brand_lisensi,
-                 'model_lisensi' =>  $request->model_lisensi,
-                 'type_lisensi'  =>  $request->type_lisensi,
-                 'tahun_anggaran'=>  $request->tahun_anggaran,
-                 'core_os'       =>  $request->core_os,
-                 'harga_lisensi' =>  $request->harga_lisensi,
-                 'key_lisensi'   =>  $request->key_lisensi,
-                 'stok'          =>  $request->stok,
-                 ];
-             $form_data['foto_lisensi'] = date('YmdHis').'.'.$request->foto_lisensi->getClientOriginalExtension();
-             $request->foto_lisensi->move(public_path('images-lisensi'), $form_data['foto_lisensi']);
- 
-             LisensiSoftware::create($form_data);
-             return response()->json(['success' => 'Data Berhasil Ditambah.']);
+            if (LisensiSoftware::where('sn_lisensi', $request->sn_lisensi)->count() > 0) {
+              // view tampilan
+                $rules = array([
+                    'sn_lisensi' => 'required',
+                ]);
+                
+                $customMessages = [
+                    'required' => 'Serial Number Sudah Ada',
+                ];
+           
+                // $error = $this->validate($request, $rules, $customMessages);
+                $error = Validator::make($request->all(), $rules, $customMessages);
+                return response()->json(['errors' => $error->errors()->all()]);
+            }else{
+                // $form_data = $request->all();
+                $form_data = [
+                    'sn_lisensi'    =>  $request->sn_lisensi,
+                    'brand_lisensi' =>  $request->brand_lisensi,
+                    'model_lisensi' =>  $request->model_lisensi,
+                    'type_lisensi'  =>  $request->type_lisensi,
+                    'tahun_anggaran'=>  $request->tahun_anggaran,
+                    'core_os'       =>  $request->core_os,
+                    'harga_lisensi' =>  $request->harga_lisensi,
+                    'key_lisensi'   =>  $request->key_lisensi,
+                    'stok'          =>  $request->stok,
+                    ];
+                $form_data['foto_lisensi'] = date('YmdHis').'.'.$request->foto_lisensi->getClientOriginalExtension();
+                $request->foto_lisensi->move(public_path('images-lisensi'), $form_data['foto_lisensi']);
+    
+                LisensiSoftware::create($form_data);
+                return response()->json(['success' => 'Data Berhasil Ditambah.']);
+            }
          }
      }
  
@@ -116,7 +129,6 @@ class LisensiSoftwareController extends Controller
              $file->move(public_path('images-lisensi/'), $fileName_new);
              $lisensiImage = public_path('images-lisensi/').$currentImage;
              $form_data = [
-                 'id'            =>  $request->sn_lisensi,
                  'sn_lisensi'    =>  $request->sn_lisensi,
                  'brand_lisensi' =>  $request->brand_lisensi,
                  'model_lisensi' =>  $request->model_lisensi,
@@ -139,7 +151,6 @@ class LisensiSoftwareController extends Controller
  
          } else {
              $form_data = [
-                'id'            =>  $request->sn_lisensi,
                 'sn_lisensi'    =>  $request->sn_lisensi,
                 'brand_lisensi' =>  $request->brand_lisensi,
                 'model_lisensi' =>  $request->model_lisensi,

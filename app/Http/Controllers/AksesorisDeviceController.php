@@ -43,7 +43,7 @@ class AksesorisDeviceController extends Controller
             'garansi_aksesoris' =>  'required',
             'tahun_anggaran'    =>  'required',
             'harga_aksesoris'   =>  'required',
-            'stok'              =>  'required',
+            // 'stok'              =>  'required',
             'foto_aksesoris'    =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         );
  
@@ -53,10 +53,22 @@ class AksesorisDeviceController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
-
+            if (AksesorisDevice::where('sn_aksesoris', $request->sn_aksesoris)->count() > 0) {
+             // view tampilan
+             $rules = array([
+                'sn_aksesoris' => 'required',
+             ]);
+            
+            $customMessages = [
+                'required' => 'Serial Number Sudah Ada',
+            ];
+        
+            // $error = $this->validate($request, $rules, $customMessages);
+            $error = Validator::make($request->all(), $rules, $customMessages);
+            return response()->json(['errors' => $error->errors()->all()]);
+        }else {
             // $form_data = $request->all();
             $form_data = [
-                'id'                =>  $request->sn_aksesoris,
                 'sn_aksesoris'      =>  $request->sn_aksesoris,
                 'brand_aksesoris'   =>  $request->brand_aksesoris,
                 'model_aksesoris'   =>  $request->model_aksesoris,
@@ -64,13 +76,15 @@ class AksesorisDeviceController extends Controller
                 'garansi_aksesoris' =>  $request->garansi_aksesoris,
                 'tahun_anggaran'    =>  $request->tahun_anggaran,
                 'harga_aksesoris'   =>  $request->harga_aksesoris,
-                'stok'              =>  $request->stok,
+                'stok'              =>  '1',
+                'sisa_stok'         =>  '1',
                 ];
             $form_data['foto_aksesoris'] = date('YmdHis').'.'.$request->foto_aksesoris->getClientOriginalExtension();
             $request->foto_aksesoris->move(public_path('images-aksesoris'), $form_data['foto_aksesoris']);
 
             AksesorisDevice::create($form_data);
             return response()->json(['success' => 'Data Added successfully.']);
+            }
         }
     }
 
@@ -112,7 +126,6 @@ class AksesorisDeviceController extends Controller
             $file->move(public_path('images-aksesoris/'), $fileName_new);
             $printerImage = public_path('images-aksesoris/').$currentImage;
             $form_data = [
-                'id'                =>  $request->sn_aksesoris,
                 'sn_aksesoris'      =>  $request->sn_aksesoris,
                 'brand_aksesoris'   =>  $request->brand_aksesoris,
                 'model_aksesoris'   =>  $request->model_aksesoris,
@@ -121,6 +134,7 @@ class AksesorisDeviceController extends Controller
                 'tahun_anggaran'    =>  $request->tahun_anggaran,
                 'harga_aksesoris'   =>  $request->harga_aksesoris,
                 'stok'              =>  $request->stok,
+                'sisa_stok'         =>  $request->sisa_stok,
                 'foto_aksesoris'    =>  $fileName_new
             ];
             File::delete($fileName);
@@ -134,7 +148,6 @@ class AksesorisDeviceController extends Controller
 
         } else {
             $form_data = [
-                'id'                =>  $request->sn_aksesoris,
                 'sn_aksesoris'      =>  $request->sn_aksesoris,
                 'brand_aksesoris'   =>  $request->brand_aksesoris,
                 'model_aksesoris'   =>  $request->model_aksesoris,
@@ -142,7 +155,8 @@ class AksesorisDeviceController extends Controller
                 'garansi_aksesoris' =>  $request->garansi_aksesoris,
                 'tahun_anggaran'    =>  $request->tahun_anggaran,
                 'harga_aksesoris'   =>  $request->harga_aksesoris,
-                'stok'              =>  $request->stok, 
+                'stok'              =>  $request->stok,
+                'sisa_stok'         =>  $request->sisa_stok, 
             ];
         }
  

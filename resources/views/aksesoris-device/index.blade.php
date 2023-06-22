@@ -39,6 +39,7 @@
                                                         <th>Type Aksesoris</th>
                                                         <th>Tahun Anggaran</th>
                                                         <th>Stok</th>
+                                                        <th>Sisa Stok</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
                                                 </thead>
@@ -89,18 +90,18 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Garansi: </label>
-                                                            <input type="Date" name="garansi_aksesoris" id="garansi_aksesoris" class="form-control" />
+                                                            <input type="text" name="garansi_aksesoris" id="garansi_aksesoris" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Harga : </label>
                                                             <input type="number" name="harga_aksesoris" id="harga_aksesoris" class="form-control" />
                                                         </div>
+                                                        <!-- <div class="form-group">
+                                                            <label>Stok: </label>
+                                                            <input type="number" name="stok" id="stok" value="1" class="form-control" />
+                                                        </div> -->
                                                         <div class="form-group">
-                                                            <label>Stok : </label>
-                                                            <input type="number" name="stok" id="stok" class="form-control" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Foto Printer: </label>
+                                                            <label>Foto Aksesoris: </label>
                                                             <input type="file" name="foto_aksesoris" id="foto_aksesoris" class="form-control form-control-sm" accept="images-aksesoris/*" onchange="readURL(this);" />
                                                             <input type="hidden" name="hidden_image" id="hidden_image">
                                                         </div>
@@ -172,6 +173,7 @@ $(document).ready(function() {
             {data: 'type_aksesoris',  name: 'type_aksesoris'},
             {data: 'tahun_anggaran',  name: 'tahun_anggaran'},
             {data: 'stok', name: 'stok'},
+            {data: 'sisa_stok', name: 'sisa_stok'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

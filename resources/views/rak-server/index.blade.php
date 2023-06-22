@@ -33,6 +33,7 @@
                                             <table class="table table-striped table-bordered zero-configuration printerdevice_datatable"> 
                                                 <thead>
                                                     <tr>
+                                                        <th>Serial Number</th>
                                                         <th>Kode Rak</th>
                                                         <th>Brand Rak</th>
                                                         <th>Type Rak</th>
@@ -65,6 +66,10 @@
                                                         <div class="form-group">
                                                             <label>Type Rak: </label>
                                                             <input type="text" name="type_rak" id="type_rak" class="form-control" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Serial Number Rak: </label>
+                                                            <input type="text" name="sn_rak" id="sn_rak" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Kode Rak: </label>
@@ -153,6 +158,7 @@
                 <div class="modal-body">
                     <p><strong>Brand Rak:</strong><span id="brand-rak"></span></p>
                     <p><strong>Type Rak:</strong><span id="type-rak"></span></p>
+                    <p><strong>Serial Number Rak:</strong><span id="sn-rak"></span></p>
                     <p><strong>Kode Rak:</strong><span id="kode-rak"></span></p>
                     <p><strong>Dimensi Rak:</strong><span id="dimensi-rak"></span></p>
                     <p><strong>Ukuran Rak:</strong><span id="ukuran-u-rak"></span></p>
@@ -178,6 +184,7 @@ $(document).ready(function() {
         serverSide: true,
         ajax: "{{ route('rak-server.index') }}",
         columns: [
+            {data: 'sn_rak', name: 'sn_rak'},
             {data: 'kode_rak', name: 'kode_rak'},
             {data: 'brand_rak', name: 'brand_rak'},
             {data: 'type_rak', name: 'type_rak'},
@@ -273,6 +280,7 @@ $(document).ready(function() {
                 $('#brand_rak').val(data.result.brand_rak);
                 $('#type_rak').val(data.result.type_rak);
                 $('#kode_rak').val(data.result.kode_rak);
+                $('#sn_rak').val(data.result.sn_rak);
                 $('#dimensi_rak').val(data.result.dimensi_rak);
                 $('#ukuran_u_rak').val(data.result.ukuran_u_rak);
                 $('#harga_rak').val(data.result.harga_rak);
@@ -339,6 +347,7 @@ $(document).ready(function() {
                 $('#brand-rak').text(data.brand_rak);
                 $('#type-rak').text(data.type_rak);
                 $('#kode-rak').text(data.kode_rak);
+                $('#sn-rak').text(data.sn_rak);
                 $('#dimensi-rak').text(data.dimensi_rak);
                 $('#ukuran-u-rak').text(data.ukuran_u_rak);
                 $('#harga-rak').text(data.harga_rak);

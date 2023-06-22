@@ -18,6 +18,7 @@ class PrinterDevice extends Model
         'tahun_anggaran',
         'harga_printer',
         'stok',
+        'sisa_stok',
         'foto_printer',
     ];
 }

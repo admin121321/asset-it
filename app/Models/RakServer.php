@@ -10,6 +10,7 @@ class RakServer extends Model
     use HasFactory;
     protected $table='rak_server';
     protected $fillable = [
+        'sn_rak',
         'brand_rak',
         'type_rak',
         'kode_rak',

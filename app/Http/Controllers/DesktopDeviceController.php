@@ -149,7 +149,6 @@ class DesktopDeviceController extends Controller
             $file->move(public_path('images-desktop/'), $fileName_new);
             $desktopImage = public_path('images-desktop/').$currentImage;
             $form_data = [
-                'id'               =>  $request->sn_desktop,
                 'sn_desktop'       =>  $request->sn_desktop,
                 'brand_desktop'    =>  $request->brand_desktop,
                 'model_desktop'    =>  $request->model_desktop,
@@ -177,7 +176,6 @@ class DesktopDeviceController extends Controller
 
         } else {
             $form_data = [
-                'id'               =>  $request->sn_desktop,
                 'sn_desktop'       =>  $request->sn_desktop,
                 'brand_desktop'    =>  $request->brand_desktop,
                 'model_desktop'    =>  $request->model_desktop,

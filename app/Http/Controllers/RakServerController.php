@@ -49,24 +49,39 @@ class RakServerController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
-
-            // $form_data = $request->all();
-            $form_data = [
-                'brand_rak'     =>  $request->brand_rak,
-                'type_rak'      =>  $request->type_rak,
-                'kode_rak'      =>  $request->kode_rak,
-                'dimensi_rak'   =>  $request->dimensi_rak,
-                'ukuran_u_rak'  =>  $request->ukuran_u_rak,
-                'sisa_u'        =>  $request->ukuran_u_rak,
-                'tahun_anggaran'=>  $request->tahun_anggaran,
-                'harga_rak'     =>  $request->harga_rak,
-                'deskripsi'     =>  $request->deskripsi,
+            if (RakServer::where('sn_rak', $request->sn_rak)->count() > 0) {
+                // view tampilan
+                $rules = array([
+                    'sn_rak' => 'required',
+                ]);
+                
+                $customMessages = [
+                    'required' => 'Kode Rak Sudah Ada',
                 ];
-            $form_data['foto_rak'] = date('YmdHis').'.'.$request->foto_rak->getClientOriginalExtension();
-            $request->foto_rak->move(public_path('images-rak'), $form_data['foto_rak']);
+        
+                // $error = $this->validate($request, $rules, $customMessages);
+                $error = Validator::make($request->all(), $rules, $customMessages);
+                return response()->json(['errors' => $error->errors()->all()]);
+            }else{
+                // $form_data = $request->all();
+                $form_data = [
+                    'sn_rak'        =>  $request->sn_rak,
+                    'brand_rak'     =>  $request->brand_rak,
+                    'type_rak'      =>  $request->type_rak,
+                    'kode_rak'      =>  $request->kode_rak,
+                    'dimensi_rak'   =>  $request->dimensi_rak,
+                    'ukuran_u_rak'  =>  $request->ukuran_u_rak,
+                    'sisa_u'        =>  $request->ukuran_u_rak,
+                    'tahun_anggaran'=>  $request->tahun_anggaran,
+                    'harga_rak'     =>  $request->harga_rak,
+                    'deskripsi'     =>  $request->deskripsi,
+                    ];
+                $form_data['foto_rak'] = date('YmdHis').'.'.$request->foto_rak->getClientOriginalExtension();
+                $request->foto_rak->move(public_path('images-rak'), $form_data['foto_rak']);
 
-            RakServer::create($form_data);
-            return response()->json(['success' => 'Data Added successfully.']);
+                RakServer::create($form_data);
+                return response()->json(['success' => 'Data Added successfully.']);
+            }
         }
     }
 
@@ -106,6 +121,7 @@ class RakServerController extends Controller
             $file->move(public_path('images-rak/'), $fileName_new);
             $rakImage = public_path('images-rak/').$currentImage;
             $form_data = [
+                'sn_rak'        =>  $request->sn_rak,
                 'brand_rak'     =>  $request->brand_rak,
                 'type_rak'      =>  $request->type_rak,
                 'kode_rak'      =>  $request->kode_rak,
@@ -128,6 +144,7 @@ class RakServerController extends Controller
 
         } else {
             $form_data = [
+                'sn_rak'        =>  $request->sn_rak,
                 'brand_rak'     =>  $request->brand_rak,
                 'type_rak'      =>  $request->type_rak,
                 'kode_rak'      =>  $request->kode_rak,

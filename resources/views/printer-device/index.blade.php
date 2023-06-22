@@ -295,6 +295,7 @@ $(document).ready(function() {
                 $('#printerdevice_datatable').DataTable().ajax.reload();
                 alert('Data Deleted');
                 }, 2000);
+                window.location.reload();
             }
         })
     });
