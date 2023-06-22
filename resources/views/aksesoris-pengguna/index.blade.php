@@ -76,10 +76,10 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                        <div class="form-group" hidden>
+                                                        <!-- <div class="form-group" hidden>
                                                             <label>Qty: </label>
                                                             <input type="text" name="qty" id="qty" value="1" class="form-control" />
-                                                        </div>
+                                                        </div> -->
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
                                                     </div>
@@ -136,9 +136,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p><strong>ID Desktop:</strong><span id="desktop-id"></span></p>
-                <p><strong>Lisensi ID:</strong> <span id="aksesoris-id"></span></p>
-                <p><strong>Qty:</strong> <span id="qtY"></span></p>
+                <p><strong>Brand Desktop   :</strong><span id="brand-desktop"></span></p>
+                <p><strong>Type Desktop    :</strong><span id="type-desktop"></span></p>
+                <p><strong>SN Desktop      :</strong><span id="sn-desktop"></span></p>
+                <p><strong>Brand Aksesoris :</strong> <span id="brand-aksesoris"></span></p>
+                <p><strong>Type  Aksesoris :</strong> <span id="type-aksesoris"></span></p>
+                <p><strong>SN  Aksesoris   :</strong> <span id="sn-aksesoris"></span></p>
+                <p><strong>Qty             :</strong> <span id="qtY"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -304,8 +308,12 @@ $(document).ready(function() {
             success:function(data)
             {
                 
-                $('#desktop-id').text(data.desktop_id);
-                $('#aksesoris-id').text(data.aksesoris_id);
+                $('#brand-desktop').text(data.brand_desktop);
+                $('#type-desktop').text(data.type_desktop);
+                $('#sn-desktop').text(data.sn_desktop);
+                $('#brand-aksesoris').text(data.brand_aksesoris);
+                $('#type-aksesoris').text(data.type_aksesoris);
+                $('#sn-aksesoris').text(data.sn_aksesoris);
                 $('#qtY').text(data.qty);
                 $('.modal-title').text('Detail');
                 $('#fModal').modal('show');

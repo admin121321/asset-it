@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 22, 2023 at 02:58 AM
+-- Generation Time: Jun 22, 2023 at 04:03 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -48,7 +48,7 @@ CREATE TABLE `aksesoris_device` (
 --
 
 INSERT INTO `aksesoris_device` (`id`, `sn_aksesoris`, `brand_aksesoris`, `model_aksesoris`, `type_aksesoris`, `garansi_aksesoris`, `tahun_anggaran`, `harga_aksesoris`, `stok`, `sisa_stok`, `foto_aksesoris`, `created_at`, `updated_at`) VALUES
-(1, 'lgcp212', 'Logitech', 'MX MASTER 3S', 'Mouse', '1 tahun', '2023-06-22', '2000000', 1, 1, '20230622023720.jpg', '2023-06-21 19:37:20', '2023-06-21 19:37:20'),
+(1, 'lgcp212', 'Logitech', 'MX MASTER 3S', 'Mouse', '1 tahun', '2023-06-22', '2000000', 1, 1, '20230622023720.jpg', '2023-06-21 19:37:20', '2023-06-21 20:31:27'),
 (2, 'qwe3213', '21312', '213123', 'Mouse', '213213', '2023-06-22', '13213', 1, 1, '20230622024829.jpg', '2023-06-21 19:48:29', '2023-06-21 19:48:29');
 
 -- --------------------------------------------------------
@@ -71,7 +71,7 @@ CREATE TABLE `aksesoris_pengguna` (
 --
 
 INSERT INTO `aksesoris_pengguna` (`id`, `desktop_id`, `aksesoris_id`, `qty`, `created_at`, `updated_at`) VALUES
-(4, '21345523213', '1232', '1', '2023-05-16 21:51:09', '2023-05-16 21:51:09');
+(6, '1', '1', '1', '2023-06-21 20:49:24', '2023-06-21 20:49:24');
 
 --
 -- Triggers `aksesoris_pengguna`
@@ -194,7 +194,7 @@ CREATE TABLE `lisensi_pengguna` (
 DELIMITER $$
 CREATE TRIGGER `lisensi_keluar` AFTER DELETE ON `lisensi_pengguna` FOR EACH ROW BEGIN
 
-   UPDATE lisensi_software SET stok = stok + OLD.qty
+   UPDATE lisensi_software SET sisa_stok = sisa_stok + OLD.qty
 
    WHERE id = OLD.lisensi_id;
 
@@ -339,7 +339,7 @@ CREATE TABLE `network_lokasi` (
 DELIMITER $$
 CREATE TRIGGER `network_keluar` AFTER DELETE ON `network_lokasi` FOR EACH ROW BEGIN
 
-   UPDATE network_device SET stok = stok + OLD.qty
+   UPDATE network_device SET sisa_stok = sisa_stok + OLD.qty
 
    WHERE id = OLD.network_id;
 
@@ -432,7 +432,7 @@ CREATE TABLE `printer_pengguna` (
 DELIMITER $$
 CREATE TRIGGER `printer_keluar` AFTER DELETE ON `printer_pengguna` FOR EACH ROW BEGIN
 
-   UPDATE printer_devices SET stok = stok + OLD.qty
+   UPDATE printer_devices SET sisa_stok = sisa_stok + OLD.qty
 
    WHERE id = OLD.printer_id;
 
@@ -867,7 +867,7 @@ ALTER TABLE `aksesoris_device`
 -- AUTO_INCREMENT for table `aksesoris_pengguna`
 --
 ALTER TABLE `aksesoris_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `desktop_device`

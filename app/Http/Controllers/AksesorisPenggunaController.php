@@ -52,7 +52,7 @@ class AksesorisPenggunaController extends Controller
             // 'id'            =>  'required',
             'desktop_id'   =>  'required',
             'aksesoris_id'=>  'required',
-            'qty'       =>  'required',
+            // 'qty'       =>  'required',
         );
  
         $error = Validator::make($request->all(), $rules);
@@ -62,10 +62,17 @@ class AksesorisPenggunaController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }else{
 
-            AksesorisPengguna::create($request->all());
+            // AksesorisPengguna::create($request->all());
+            $form_data = [
+                'desktop_id'   =>  $request->desktop_id,
+                'aksesoris_id' =>  $request->aksesoris_id,
+                'qty'          =>  '1',
+                ];
+            AksesorisPengguna::create($form_data);
             $form_data = AksesorisDevice::findOrFail($request->aksesoris_id);
             $form_data->sisa_stok -= $request->qty;
             $form_data->save();
+            // AksesorisPengguna::create($form_data);
            
 
             return response()->json(['success' => 'Data Added successfully.']);
@@ -118,7 +125,12 @@ class AksesorisPenggunaController extends Controller
     {
         if(request()->ajax())
         {
-            $data = AksesorisPengguna::findOrFail($id);
+            // $data = AksesorisPengguna::findOrFail($id);
+            $data = AksesorisPengguna::join('desktop_device', 'desktop_device.id', '=', 'aksesoris_pengguna.desktop_id')
+                                    ->join('aksesoris_device', 'aksesoris_device.id', '=', 'aksesoris_pengguna.aksesoris_id')
+                                    ->select('aksesoris_pengguna.*', 'aksesoris_device.brand_aksesoris', 'aksesoris_device.model_aksesoris', 'aksesoris_device.type_aksesoris',
+                                             'aksesoris_device.sn_aksesoris', 'desktop_device.brand_desktop','desktop_device.type_desktop', 'desktop_device.sn_desktop', ) 
+                                    ->findOrFail($id);
             return response()->json($data);
         }
     }
