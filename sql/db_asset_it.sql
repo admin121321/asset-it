@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 22, 2023 at 05:43 AM
+-- Generation Time: Jun 26, 2023 at 10:23 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -48,8 +48,8 @@ CREATE TABLE `aksesoris_device` (
 --
 
 INSERT INTO `aksesoris_device` (`id`, `sn_aksesoris`, `brand_aksesoris`, `model_aksesoris`, `type_aksesoris`, `garansi_aksesoris`, `tahun_anggaran`, `harga_aksesoris`, `stok`, `sisa_stok`, `foto_aksesoris`, `created_at`, `updated_at`) VALUES
-(1, 'lgcp212', 'Logitech', 'MX MASTER 3S', 'Mouse', '1 tahun', '2023-06-22', '2000000', 1, 1, '20230622023720.jpg', '2023-06-21 19:37:20', '2023-06-21 20:31:27'),
-(2, 'qwe3213', '21312', '213123', 'Mouse', '213213', '2023-06-22', '13213', 1, 1, '20230622024829.jpg', '2023-06-21 19:48:29', '2023-06-21 19:48:29');
+(1, 'lgcp212', 'Logitech', 'MX MASTER 3S', 'Mouse', '1 tahun', '2023-06-22', '2000000', 1, 0, '20230622023720.jpg', '2023-06-21 19:37:20', '2023-06-22 01:44:42'),
+(2, 'qwe3213', '21312', '213123', 'Mouse', '213213', '2023-06-22', '13213', 1, 0, '20230622024829.jpg', '2023-06-21 19:48:29', '2023-06-22 01:46:47');
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,8 @@ CREATE TABLE `aksesoris_pengguna` (
 --
 
 INSERT INTO `aksesoris_pengguna` (`id`, `desktop_id`, `aksesoris_id`, `qty`, `created_at`, `updated_at`) VALUES
-(6, '1', '1', '1', '2023-06-21 20:49:24', '2023-06-21 20:49:24');
+(10, '2', '1', '1', '2023-06-22 01:44:42', '2023-06-22 01:44:42'),
+(11, '2', '2', '1', '2023-06-22 01:46:47', '2023-06-22 01:46:47');
 
 --
 -- Triggers `aksesoris_pengguna`
@@ -104,7 +105,7 @@ CREATE TABLE `desktop_device` (
   `harga_desktop` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ram_desktop` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hardisk_desktop` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `processor_desktop` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `processor_desktop` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_desktop` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stok` int NOT NULL,
   `sisa_stok` int NOT NULL,
@@ -119,7 +120,7 @@ CREATE TABLE `desktop_device` (
 --
 
 INSERT INTO `desktop_device` (`id`, `sn_desktop`, `brand_desktop`, `model_desktop`, `type_desktop`, `garansi_desktop`, `tahun_anggaran`, `harga_desktop`, `ram_desktop`, `hardisk_desktop`, `processor_desktop`, `core_desktop`, `stok`, `sisa_stok`, `foto_desktop`, `deskripsi_desktop`, `created_at`, `updated_at`) VALUES
-(1, '3456y7', 'Dell', 'Latitude', 'PC', '2 Tahun', '2023-06-20', '222222222222222', '4 GB', '1 TB', 'Intel Inside', 'i7', 1, 0, '20230621030458.png', 'Ok', '2023-06-20 20:04:58', '2023-06-20 20:08:42');
+(2, 'DL-2131', 'Dell', 'Latitude 3320', 'LAPTOP', '1 Tahun', '2023-06-15', '2000000', '8 GB', '500 TB', 'intel inside i5', '2', 1, 0, '20230622082723.jpg', 'sudah dengan OS', '2023-06-22 01:27:23', '2023-06-22 01:43:44');
 
 -- --------------------------------------------------------
 
@@ -141,7 +142,7 @@ CREATE TABLE `desktop_pengguna` (
 --
 
 INSERT INTO `desktop_pengguna` (`id`, `user_id`, `desktop_id`, `qty`, `created_at`, `updated_at`) VALUES
-(6, '1', '1', '1', '2023-06-20 20:08:42', '2023-06-20 20:08:42');
+(7, '2', '2', '1', '2023-06-22 01:43:44', '2023-06-22 01:43:44');
 
 --
 -- Triggers `desktop_pengguna`
@@ -189,6 +190,13 @@ CREATE TABLE `lisensi_pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `lisensi_pengguna`
+--
+
+INSERT INTO `lisensi_pengguna` (`id`, `desktop_id`, `lisensi_id`, `qty`, `created_at`, `updated_at`) VALUES
+(34, '2', '3', '1', '2023-06-22 01:47:37', '2023-06-22 01:47:37');
+
+--
 -- Triggers `lisensi_pengguna`
 --
 DELIMITER $$
@@ -231,7 +239,7 @@ CREATE TABLE `lisensi_software` (
 --
 
 INSERT INTO `lisensi_software` (`id`, `sn_lisensi`, `brand_lisensi`, `model_lisensi`, `type_lisensi`, `tahun_anggaran`, `masa_aktif`, `harga_lisensi`, `key_lisensi`, `bit_os`, `stok`, `sisa_stok`, `foto_lisensi`, `created_at`, `updated_at`) VALUES
-(1, 'AF4332', 'Adobe', 'Reader', 'Aplikasi', '2023-06-22', '2023-06-23', '22', '321dfweqer234e2342', '64 bit', 20, 20, '20230622051729.png', '2023-06-21 22:17:29', '2023-06-21 22:17:29');
+(3, 'ASDSA', 'ADS', 'asdas', 'Aplikasi', '2023-06-22', '2023-06-22', '22', '222', '32 bit', 2, 1, '20230622062300.jpg', '2023-06-21 23:23:00', '2023-06-22 01:47:37');
 
 -- --------------------------------------------------------
 
@@ -303,6 +311,13 @@ CREATE TABLE `network_akses` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `network_akses`
+--
+
+INSERT INTO `network_akses` (`id`, `network_id`, `ip_akses`, `akun_akses`, `password_akses`, `created_at`, `updated_at`) VALUES
+(4, '2', '192.168.1.2', 'admin', 'admin', '2023-06-26 03:23:14', '2023-06-26 03:23:14');
+
 -- --------------------------------------------------------
 
 --
@@ -326,6 +341,13 @@ CREATE TABLE `network_device` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `network_device`
+--
+
+INSERT INTO `network_device` (`id`, `sn_network`, `brand_network`, `model_network`, `type_network`, `port_network`, `garansi_network`, `tahun_anggaran`, `harga_network`, `stok`, `sisa_stok`, `foto_network`, `created_at`, `updated_at`) VALUES
+(2, 'CN-012F2', 'Cisco', 'Router Rak', 'Router Managed', '24', '2', '2023-06-26', '2333333', 1, 0, '20230626102032.PNG', '2023-06-26 03:20:32', '2023-06-26 03:21:38');
+
 -- --------------------------------------------------------
 
 --
@@ -340,6 +362,13 @@ CREATE TABLE `network_lokasi` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `network_lokasi`
+--
+
+INSERT INTO `network_lokasi` (`id`, `network_id`, `lokasi`, `qty`, `created_at`, `updated_at`) VALUES
+(8, '2', 'Lantai', '1', '2023-06-26 03:21:38', '2023-06-26 03:21:38');
 
 --
 -- Triggers `network_lokasi`
@@ -419,6 +448,13 @@ CREATE TABLE `printer_devices` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `printer_devices`
+--
+
+INSERT INTO `printer_devices` (`id`, `serial_number`, `brand_printer`, `model_printer`, `type_printer`, `tahun_anggaran`, `harga_printer`, `stok`, `sisa_stok`, `foto_printer`, `created_at`, `updated_at`) VALUES
+(123457, 'asdasd', 'asdas', 'asdas', 'PRINTER', '2023-06-22', '123123', 1, 0, '20230622065631.jpg', '2023-06-21 23:56:31', '2023-06-22 00:15:04');
+
 -- --------------------------------------------------------
 
 --
@@ -433,6 +469,13 @@ CREATE TABLE `printer_pengguna` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `printer_pengguna`
+--
+
+INSERT INTO `printer_pengguna` (`id`, `user_id`, `printer_id`, `qty`, `created_at`, `updated_at`) VALUES
+(25, '1', '123457', '1', '2023-06-22 00:15:04', '2023-06-22 00:15:04');
 
 --
 -- Triggers `printer_pengguna`
@@ -875,19 +918,19 @@ ALTER TABLE `aksesoris_device`
 -- AUTO_INCREMENT for table `aksesoris_pengguna`
 --
 ALTER TABLE `aksesoris_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `desktop_device`
 --
 ALTER TABLE `desktop_device`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `desktop_pengguna`
 --
 ALTER TABLE `desktop_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -899,13 +942,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `lisensi_pengguna`
 --
 ALTER TABLE `lisensi_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `lisensi_software`
 --
 ALTER TABLE `lisensi_software`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `logos`
@@ -923,19 +966,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `network_akses`
 --
 ALTER TABLE `network_akses`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `network_device`
 --
 ALTER TABLE `network_device`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `network_lokasi`
 --
 ALTER TABLE `network_lokasi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -947,13 +990,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `printer_devices`
 --
 ALTER TABLE `printer_devices`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123457;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123458;
 
 --
 -- AUTO_INCREMENT for table `printer_pengguna`
 --
 ALTER TABLE `printer_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `rak_server`

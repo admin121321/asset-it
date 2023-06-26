@@ -40,6 +40,7 @@
                                                         <th>Tahun Anggaran</th>
                                                         <th>Type Network</th>
                                                         <th>Stok</th>
+                                                        <th>Stok Tersisa</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
                                                 </thead>
@@ -101,9 +102,11 @@
                                                             <label>Garansi : </label>
                                                             <input type="number" name="garansi_network" id="garansi_network" class="form-control" />
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label>Stok : </label>
-                                                            <input type="number" name="stok" id="stok" class="form-control" />
+                                                        <div class="form-group" hidden>
+                                                            <label>Stok: </label>
+                                                            <select class="form-control" id="stok" name="stok" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Foto Lisensi: </label>
@@ -170,6 +173,7 @@ $(document).ready(function() {
             {data: 'tahun_anggaran', name: 'tahun_anggaran'},
             {data: 'type_network', name: 'type_network'},
             {data: 'stok', name: 'stok'},
+            {data: 'sisa_stok', name: 'sisa_stok'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

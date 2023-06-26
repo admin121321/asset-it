@@ -71,7 +71,7 @@ class NetworkLokasiController extends Controller
 
             NetworkLokasi::create($request->all());
             $form_data = NetworkDevice::findOrFail($request->network_id);
-            $form_data->stok -= $request->qty;
+            $form_data->sisa_stok -= $request->qty;
             $form_data->save();
            
 
@@ -112,7 +112,7 @@ class NetworkLokasiController extends Controller
             else{    
                 $network_lokasi->update($request->all());
                 $form_data = NetworkDevice::findOrFail($request->network_id);
-                $form_data->stok -= $request->qty;
+                $form_data->sisa_stok -= $request->qty;
             }
  
         return response()->json([

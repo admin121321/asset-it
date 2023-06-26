@@ -31,10 +31,10 @@
                                             <table class="table table-striped table-bordered zero-configuration printerpengguna_datatable"> 
                                                 <thead>
                                                     <tr>
-                                                        <th>Brand Netwrok</th>
-                                                        <th>Model Network</th>
-                                                        <th>Type Network</th>
-                                                        <th>Port Network</th>
+                                                        <th>Brand Device</th>
+                                                        <th>SN Device</th>
+                                                        <th>Type Device</th>
+                                                        <th>Port Device</th>
                                                         <th>Lokasi</th>
                                                         <th>Qty</th>
                                                         <th width="180px">Action</th>
@@ -73,8 +73,10 @@
                                                             <input type="text" name="lokasi" id="lokasi" class="form-control" />
                                                         </div>
                                                         <div class="form-group" hidden>
-                                                            <label>Qty: </label>
-                                                            <input type="text" name="qty" id="qty" value="1" class="form-control" />
+                                                            <label>QTY: </label>
+                                                            <select class="form-control" id="qty" name="qty" aria-label="Floating label select example">
+                                                                <option value="1">1</option>
+                                                            </select>
                                                         </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
@@ -155,7 +157,7 @@ $(document).ready(function() {
         ajax: "{{ route('network-lokasi.index') }}",
         columns: [
             {data: 'brand_network', name: 'brand_network'},
-            {data: 'model_network', name: 'model_network'},
+            {data: 'sn_network', name: 'sn_network'},
             {data: 'type_network', name: 'type_network'},
             {data: 'port_network', name: 'port_network'},
             {data: 'lokasi', name: 'lokasi'},
