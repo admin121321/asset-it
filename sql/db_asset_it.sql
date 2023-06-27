@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 26, 2023 at 10:23 AM
+-- Generation Time: Jun 27, 2023 at 03:00 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -740,6 +740,26 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `le
 (1, 'administrator', 'admin@asset-it.com', NULL, '$2y$10$c39U00KR/YYp51FxSmaU/Ovkfds6SYShRvoa3Xa2kN2PtbANWvn6m', '1', '12345', '1', NULL, '2023-05-10 18:44:35', '2023-05-10 18:44:35'),
 (2, 'user', 'user@asset-it.com', NULL, '$2y$10$r76Y.wf5hdTwZrDZpGMJg.bGhJEDErZuRMaR9AGNbgZAqohgBoBFy', '0', '123123213', '1', NULL, '2023-05-10 19:32:31', '2023-05-10 19:32:31');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_divisi`
+--
+
+CREATE TABLE `users_divisi` (
+  `id` bigint UNSIGNED NOT NULL,
+  `nama_divisi` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `users_divisi`
+--
+
+INSERT INTO `users_divisi` (`id`, `nama_divisi`, `created_at`, `updated_at`) VALUES
+(2, 'Akuntansi', '2023-06-26 19:58:43', '2023-06-26 19:58:51');
+
 --
 -- Indexes for dumped tables
 --
@@ -905,6 +925,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `users_divisi`
+--
+ALTER TABLE `users_divisi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1038,6 +1064,12 @@ ALTER TABLE `ssid_wifi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users_divisi`
+--
+ALTER TABLE `users_divisi`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
