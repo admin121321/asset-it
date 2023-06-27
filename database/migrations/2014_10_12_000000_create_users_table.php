@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('level_login');
             $table->string('card_id');
             $table->string('divisi_id');
+            $table->string('foto');
             $table->rememberToken();
             $table->timestamps();
         });

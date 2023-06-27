@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 27, 2023 at 03:00 AM
+-- Generation Time: Jun 27, 2023 at 09:30 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -727,6 +727,7 @@ CREATE TABLE `users` (
   `level_login` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `card_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `divisi_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -736,9 +737,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level_login`, `card_id`, `divisi_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'administrator', 'admin@asset-it.com', NULL, '$2y$10$c39U00KR/YYp51FxSmaU/Ovkfds6SYShRvoa3Xa2kN2PtbANWvn6m', '1', '12345', '1', NULL, '2023-05-10 18:44:35', '2023-05-10 18:44:35'),
-(2, 'user', 'user@asset-it.com', NULL, '$2y$10$r76Y.wf5hdTwZrDZpGMJg.bGhJEDErZuRMaR9AGNbgZAqohgBoBFy', '0', '123123213', '1', NULL, '2023-05-10 19:32:31', '2023-05-10 19:32:31');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level_login`, `card_id`, `divisi_id`, `foto`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'administrator', 'admin@asset-it.com', NULL, '$2y$10$c39U00KR/YYp51FxSmaU/Ovkfds6SYShRvoa3Xa2kN2PtbANWvn6m', '1', '12345', '1', '', NULL, '2023-05-10 18:44:35', '2023-05-10 18:44:35'),
+(2, 'user', 'user@asset-it.com', NULL, '$2y$10$r76Y.wf5hdTwZrDZpGMJg.bGhJEDErZuRMaR9AGNbgZAqohgBoBFy', '0', '123123213', '1', '', NULL, '2023-05-10 19:32:31', '2023-05-10 19:32:31'),
+(3, 'panjul', 'panjul@asset-it.com', NULL, '$2y$10$UqgGcJSwYAA07HnhXqKxLOkdvltxIBgRrwN..gmC3AYHBLiM1IVZK', 'USERS', '23213123', '2', '20230627035042.VEAM One 3.PNG', NULL, '2023-06-26 20:50:43', '2023-06-26 20:50:43');
 
 -- --------------------------------------------------------
 
@@ -1064,7 +1066,7 @@ ALTER TABLE `ssid_wifi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users_divisi`
