@@ -10,6 +10,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\User;
 use App\Models\PrinterPengguna;
 use App\Models\PrinterDevice;
@@ -158,3 +159,5 @@ class PrinterPenggunaController extends Controller
         
     }
 }
+
+# Created by Sudiman Syah Widodo 2023

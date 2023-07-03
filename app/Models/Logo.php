@@ -10,6 +10,8 @@ class Logo extends Model
     use HasFactory;
     protected $table = 'logos';
     protected $fillable = [
-        'gambar_logo'
+        'id',
+        'gambar_logo',
+        'nama_perusahaan'
     ];
 }

@@ -22,7 +22,7 @@
                             <div class="card-body">
                                 <p>Logo</p>
                                 <!-- DataTables -->
-                                <div align="right">
+                                <div align="right" hidden>
                                     <button type="button" name="create_record" id="create_record" class="btn btn-success"> <i class="bi bi-plus-square"></i> Add</button>
                                 </div>
                                 <div class="section-body">
@@ -33,7 +33,7 @@
                                             <table class="table table-striped table-bordered zero-configuration logo_datatable"> 
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
+                                                        <th>Nama Perusahaan</th>
                                                         <th>Logo</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
@@ -54,10 +54,23 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <span id="form_result"></span>
+                                                        <div class="form-group" hidden>
+                                                            <label>ID: </label>
+                                                            <select class="form-control" id="id" name="id" aria-label="Floating label select example">
+                                                                    <option value="1" id="id">1</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nama Perusahaan: </label>
+                                                            <input type="text" name="nama_perusahaan" id="nama_perusahaan" class="form-control" />
+                                                        </div>
                                                         <div class="form-group">
                                                             <label>Logo: </label>
                                                             <input type="file" name="gambar_logo" id="gambar_logo" class="form-control form-control-sm" accept="images-logo/*" onchange="readURL(this);" />
                                                             <input type="hidden" name="hidden_image" id="hidden_image">
+                                                        </div>
+                                                        <div class="form-floating mb-3" name="tampilgambar" id="tampilgambar">
+                                                            <img name="tampilgambar" id="tampilgambar">
                                                         </div>
                                                         <input type="hidden" name="action" id="action" value="Add" />
                                                         <input type="hidden" name="hidden_id" id="hidden_id" />
@@ -118,7 +131,7 @@ $(document).ready(function() {
         serverSide: true,
         ajax: "{{ route('logo.index') }}",
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'nama_perusahaan', name: 'nama_perusahaan'},
             {data: 'gambar_logo', name: 'gambar_logo', "render": function (data, type, row, meta) {
                     return '<img src="/images-logo/' + data + '" alt="' + data + '"height="100px" width="100px"/>';
                 } },
@@ -208,7 +221,7 @@ $(document).ready(function() {
                 // tinyMCE.activeEditor.setContent(data.result.deskripsi);
                 $('#tampilgambar').html(
                 `<img src="/images-logo/${data.result.gambar_logo}" width="100" class="img-fluid img-thumbnail">`);
-                // $('#deskripsi').val(data.result.deskripsi);
+                $('#nama_perusahaan').val(data.result.nama_perusahaan);
                 $('#hidden_id').val(id);
                 $('.modal-title').text('Edit Record');
                 $('#action_button').val('Update');

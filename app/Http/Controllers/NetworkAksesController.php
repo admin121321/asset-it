@@ -9,6 +9,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\NetworkAkses;
 use App\Models\NetworkDevice;
 use App\Models\PrinterPengguna;
@@ -128,3 +129,6 @@ class NetworkAksesController extends Controller
     }
 
 }
+
+
+# Created by Sudiman Syah Widodo

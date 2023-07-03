@@ -9,10 +9,11 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="#">
-                    <b class="logo-abbr"><img src="{{ asset('assets/images/logo.png') }}" alt=""> </b>
-                    <span class="logo-compact"><img src="{{ asset('assets/images/logo-compact.png') }}" alt=""></span>
+                    <b class="logo-abbr"><img src="{{ asset('assets/images/logo-ati.png') }}" alt=""> </b>
+                    <span class="logo-compact"><img src="{{ asset('assets/images/logo-ati.png') }}" alt=""></span>
                     <span class="brand-title">
-                        <img src="{{ asset('assets/images/logo-text.png') }}" alt="">
+                        <!-- <img src="{{ asset('assets/images/logo-text.png') }}" alt=""> -->
+                        <h3 style="color:white;"> Asset TI </h3>
                     </span>
                 </a>
             </div>
@@ -34,20 +35,20 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
-                        <div class="input-group-prepend">
+                        <!-- <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                        </div>
-                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        </div> -->
+                        <!-- <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
+                        <!-- <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-email-outline"></i>
                                 <span class="badge badge-pill gradient-1">3</span>
                             </a>
@@ -171,7 +172,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                 @guest
                     @if (Route::has('login'))
                     @endif
@@ -187,19 +188,19 @@
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li>
+                                        <!-- <li>
                                             <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
                                                 <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         
                                         <hr class="my-2">
-                                        <li>
+                                        <!-- <li>
                                             <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                        </li>
+                                        </li> -->
                                         <li> <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                             document.getElementById('logout-form').submit();">

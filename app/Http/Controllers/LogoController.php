@@ -64,7 +64,7 @@ class LogoController extends Controller
     public function update(Request $request, Logo $logo)
     {
         $rules = array(
-            'gambar_logo'             =>  'required',
+            // 'gambar_logo'             =>  'required',
         );
  
         $error = Validator::make($request->all(), $rules);
@@ -83,7 +83,9 @@ class LogoController extends Controller
             $file->move(public_path('images-logo/'), $fileName_new);
             $logoImage = public_path('images-logo/').$currentImage;
             $form_data = [ 
-                'gambar_logo'              =>  $fileName_new
+                'id'              => $request->id,
+                'nama_aplikasi'   => $request->nama_aplikasi,
+                'gambar_logo'     =>  $fileName_new
             ];
             File::delete($fileName);
 
@@ -96,7 +98,7 @@ class LogoController extends Controller
 
         } else {
             $form_data = [
-                
+                'nama_perusahaan'   => $request->nama_perusahaan,
             ];
         }
  
@@ -120,3 +122,6 @@ class LogoController extends Controller
     }
 
 }
+
+
+# Created by Sudiman Syah Widodo

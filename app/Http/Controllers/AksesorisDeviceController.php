@@ -10,6 +10,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\AksesorisDevice;
 
 class AksesorisDeviceController extends Controller
@@ -179,4 +180,16 @@ class AksesorisDeviceController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data  = AksesorisDevice::all();
+        $pdf = PDF::loadview('users.users-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_users.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
+
+# Created by Sudiman Syah Widodo

@@ -3,9 +3,11 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href=#">Quixlab</a> 2018</p>
+                @foreach(App\Models\Logo::all() as $logos)
+                    <p>Copyright &copy; Designed & Developed by <a href=#">&nbsp; {{ $logos->nama_perusahaan}}</a> 2023</p>
+                @endforeach
             </div>
         </div>
         <!--**********************************
-            Footer end
+            Footer end Created By Sudiman Syah Widodo 2023
         ***********************************-->

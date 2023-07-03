@@ -9,6 +9,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\NetworkDevice;
 
 class NetworkDeviceController extends Controller
@@ -183,3 +184,6 @@ class NetworkDeviceController extends Controller
         
     }
 }
+
+
+# Created by Sudiman Syah Widodo 2023

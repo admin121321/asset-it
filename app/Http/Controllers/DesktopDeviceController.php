@@ -11,6 +11,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\DesktopDevice;
 
 class DesktopDeviceController extends Controller
@@ -229,3 +230,6 @@ class DesktopDeviceController extends Controller
         
     }
 }
+
+
+# Created by Sudiman Syah Widodo

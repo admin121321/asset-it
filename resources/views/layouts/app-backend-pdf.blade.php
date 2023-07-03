@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
-
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    @extends('layouts.css')
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -28,7 +28,11 @@
         Preloader end
     ********************-->
     <div id="app">
-        
+        <main class="py-4">
+            @yield('content')
+        </main>
+    @include('tampilan.footer')
     </div>
+    @extends('layouts.js')
 </body>
 </html>

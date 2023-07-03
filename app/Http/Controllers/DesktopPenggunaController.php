@@ -10,6 +10,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\User;
 use App\Models\DesktopDevice;
 use App\Models\DesktopPengguna;
@@ -139,3 +140,6 @@ class DesktopPenggunaController extends Controller
         
     }
 }
+
+
+# Created by Sudiman Syah Widodo

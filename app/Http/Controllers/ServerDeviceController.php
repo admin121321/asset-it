@@ -10,6 +10,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\ServerDevice;
 use App\Models\ServerSpek;
 use App\Models\ServerPenggunaan;
@@ -311,3 +312,5 @@ class ServerDeviceController extends Controller
         
     }
 }
+
+# Created by Sudiman Syah Widodo 2023

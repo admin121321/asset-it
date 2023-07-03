@@ -15,3 +15,5 @@ class Authenticate extends Middleware
         return $request->expectsJson() ? null : route('login');
     }
 }
+
+# Created by Sudiman Syah Widodo 2023

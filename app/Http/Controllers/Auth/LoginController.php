@@ -38,3 +38,4 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 }
+# Created by Sudiman Syah Widodo 2023

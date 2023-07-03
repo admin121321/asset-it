@@ -11,6 +11,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\PrinterDevice;
 
 class PrinterDeviceController extends Controller
@@ -188,3 +189,5 @@ class PrinterDeviceController extends Controller
         
     }
 }
+
+# Created by Sudiman Syah Widodo 2023

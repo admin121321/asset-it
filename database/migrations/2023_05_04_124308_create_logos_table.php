@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('logos', function (Blueprint $table) {
             $table->id();
             $table->string('gambar_logo');
+            $table->string('nama_perusahaan');
             $table->timestamps();
         });
     }
