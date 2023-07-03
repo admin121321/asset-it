@@ -11,6 +11,7 @@ use Validator;
 use Auth;
 use File;
 use DB;
+use PDF;
 use App\Models\User;
 use App\Models\UserDivisi;
 
@@ -202,5 +203,18 @@ class UserController extends Controller
                         ->findOrFail($id);
             return response()->json($data);
         }
+    }
+
+    public function pdf()
+    {
+        // $users  = User::all();
+        $data = User::join('users_divisi', 'users_divisi.id', '=' ,'users.divisi_id',)
+                    ->select('users.*', 'users_divisi.nama_divisi') 
+                    ->get();
+        $pdf = PDF::loadview('users.users-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_users.pdf');
+ 
+        // return view('users.users-pdf');
     }
 }
