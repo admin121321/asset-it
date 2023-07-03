@@ -183,6 +183,16 @@ class NetworkDeviceController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data  = NetworkDevice::all();
+        $pdf = PDF::loadview('network-device.network-device-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_network_device.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 
