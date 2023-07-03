@@ -24,7 +24,7 @@
                         <div class="col-12">
                             <label for="yourUsername" class="form-label">Email</label>
                             <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupPrepend"></span>
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -54,15 +54,15 @@
                         <div class="col-12">
                             <button class="btn btn-primary w-100" type="submit">Login</button>
                         </div>
-                        <div class="col-12">
+                        <!-- <div class="col-12">
                             <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
-                        </div>
+                        </div> -->
                   </form>
                   @endif
                   @if (Route::has('register'))
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                        </li> -->
                     @endif
                 @else
                 <div class="pt-4 pb-2">
@@ -77,7 +77,7 @@
               </div>
 
               <div class="credits">
-                Designed by <a href="#">ATI</a>
+                <!-- Created By <a href="#">Sudiman Syah Widodo</a> -->
               </div>
 
             </div>

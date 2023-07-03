@@ -6,6 +6,8 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Favicon -->
+    <link href="{{ asset('assets/images/logo-ati.png') }}" rel="icon">
 
     <title>{{ config('app.name') }}</title>
     @extends('layouts.css')

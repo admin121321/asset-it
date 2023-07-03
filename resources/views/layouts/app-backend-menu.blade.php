@@ -8,7 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
-
+    <!-- Favicon -->
+    <link href="{{ asset('assets/images/logo-ati.png') }}" rel="icon">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

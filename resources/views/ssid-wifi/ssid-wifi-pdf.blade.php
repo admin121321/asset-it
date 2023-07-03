@@ -9,8 +9,7 @@
 <div class="main-content">
     <div class="section-header">
         <br />
-        <h3 style="text-align: center;">Laporan List User</h3>
-        <h5 style="text-align: center;">Pengguna Device IT</h5>
+        <h3 style="text-align: center;">Laporan List SSID WIFI</h3>
     </div>
     <div class="container-fluid">
         <div class="card">
@@ -22,22 +21,30 @@
                         <div class="col-12 table-responsive">
                         <br />
                             @if ($data->isEmpty())
-                                <p>Tidak Ada Data User</p>
+                                <p>Tidak Ada Data SSID WIFI</p>
                             @else
                             <table class="table table-striped table-bordered zero-configuration"> 
                                     <thead>
                                         <tr>
-                                            <th><p>ID Card</p></th>
-                                            <th><p>Nama</p></th>
-                                            <th><p>Divisi</p></th>
+                                            <th>SSID Name</th>
+                                            <th>IP Segment</th>
+                                            <th>Provider</th>
+                                            <th>Lokasi</th>
+                                            <th>Akun Login</th>
+                                            <th>Pass Lama</th>
+                                            <th>Pass Baru</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($data as $user)
+                                    @foreach ($data as $ssid)
                                         <tr>
-                                            <td><p>{{ $user->card_id }}</p></td>
-                                            <td><p>{{ $user->name }}</p></td>
-                                            <td><p>{{ $user->nama_divisi }}</p></td>
+                                            <td><p>{{ $ssid->ssid_name }}</p></td>
+                                            <td><p>{{ $ssid->ip_segment }}</p></td>
+                                            <td><p>{{ $ssid->provider }}</p></td>
+                                            <td><p>{{ $ssid->lokasi_ssid }}</p></td>
+                                            <td><p>{{ $ssid->user_ssid }}</p></td>
+                                            <td><p>{{ $ssid->password_lama }}</p></td>
+                                            <td><p>{{ $ssid->password_baru }}</p></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

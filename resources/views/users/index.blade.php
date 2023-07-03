@@ -210,7 +210,19 @@ $(document).ready(function() {
             {data: 'card_id',    name: 'card_id'},
             {data: 'name',    name: 'name'},
             {data: 'nama_divisi',    name: 'nama_divisi'},
-            {data: 'level_login',    name: 'level_login'},
+            {data: 'level_login', name: 'level_login', orderable:true,
+                render: function(data, type, row, meta){
+                    if(row.level_login==0){
+                    return `
+                            USERS
+                    `
+                    }
+                    else{
+                        return `
+                           ADMIN
+                        `
+                    }
+                }},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

@@ -148,6 +148,16 @@ class SsidWifiController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data  = SsidWifi::all();
+        $pdf = PDF::loadview('ssid-wifi.ssid-wifi-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_ssid_wifi.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 # Created by Sudiman Syah Widodo 2023
