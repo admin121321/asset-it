@@ -128,6 +128,18 @@ class NetworkAksesController extends Controller
         
     }
 
+    public function pdf()
+    {
+        $data = NetworkAkses::join('network_device', 'network_device.id', '=', 'network_akses.network_id')
+                            ->select('network_akses.*', 'network_device.brand_network',  'network_device.model_network', 'network_device.sn_network', 'network_device.type_network') 
+                            ->get();
+        $pdf = PDF::loadview('network-akses.network-akses-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_network_akses.pdf');
+ 
+        // return view('users.users-pdf');
+    }
+
 }
 
 
