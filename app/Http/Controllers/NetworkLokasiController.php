@@ -106,7 +106,8 @@ class NetworkLokasiController extends Controller
         $network_lokasi = NetworkLokasi::find($request->hidden_id);
             if($network_lokasi->qty='1'){
                 $network_lokasi->update([
-                    'user_id'   =>  $request->network_id,
+                    'network_id'   =>  $request->network_id,
+                    'lokasi'       =>  $request->lokasi,
                     // 'printer_id'=>  $request->printer_id,
                 ]);
             }
@@ -148,6 +149,18 @@ class NetworkLokasiController extends Controller
         NetworkLokasi::where('id',$id)->delete();
 		return redirect()->back();
         
+    }
+
+    public function pdf()
+    {
+        $data = NetworkLokasi::join('network_device', 'network_device.id', '=', 'network_lokasi.network_id')
+                            ->select('network_lokasi.*', 'network_device.brand_network',  'network_device.model_network', 'network_device.sn_network', 'network_device.type_network', 'network_device.port_network') 
+                            ->get();
+        $pdf = PDF::loadview('network-lokasi.network-lokasi-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_network_lokasi.pdf');
+ 
+        // return view('users.users-pdf');
     }
 }
 
