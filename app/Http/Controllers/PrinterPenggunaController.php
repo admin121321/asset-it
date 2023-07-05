@@ -23,7 +23,7 @@ class PrinterPenggunaController extends Controller
         if ($request->ajax()) {
             $data = PrinterPengguna::join('users', 'users.id', '=' ,'printer_pengguna.user_id')
                                     ->join('printer_devices', 'printer_devices.id', '=', 'printer_pengguna.printer_id')
-                                    ->select('printer_pengguna.*', 'users.name', 'printer_devices.brand_printer', 'printer_devices.model_printer', 'printer_devices.serial_number', ) 
+                                    ->select('printer_pengguna.*', 'users.name', 'users.card_id', 'printer_devices.brand_printer', 'printer_devices.model_printer', 'printer_devices.serial_number', 'printer_devices.type_printer', ) 
                                     ->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('user_id', function($data){
@@ -157,6 +157,19 @@ class PrinterPenggunaController extends Controller
         PrinterPengguna::where('id',$id)->delete();
 		return redirect()->back();
         
+    }
+    
+    public function pdf()
+    {
+        $data = PrinterPengguna::join('users', 'users.id', '=' ,'printer_pengguna.user_id')
+                                    ->join('printer_devices', 'printer_devices.id', '=', 'printer_pengguna.printer_id')
+                                    ->select('printer_pengguna.*', 'users.name', 'users.card_id', 'printer_devices.brand_printer', 'printer_devices.model_printer', 'printer_devices.serial_number', 'printer_devices.type_printer',) 
+                                    ->get();
+        $pdf = PDF::loadview('printer-pengguna.printer-pengguna-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_printer_pengguna.pdf');
+ 
+        // return view('users.users-pdf');
     }
 }
 

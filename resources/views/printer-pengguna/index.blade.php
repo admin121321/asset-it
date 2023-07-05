@@ -19,6 +19,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <p>Printer Pengguna</p>
+                                <a href="{{ route('printer-pengguna.pdf') }}" class="btn btn-primary mb-4">Export PDF</a>
                                 <!-- DataTables -->
                                 <div align="right">
                                     <button type="button" name="create_record" id="create_record" class="btn btn-success"> <i class="bi bi-plus-square"></i> Add</button>
@@ -35,6 +36,7 @@
                                                         <th>Model Printer</th>
                                                         <th>SN Printer</th>
                                                         <th>Pengguna</th>
+                                                        <th>ID Card</th>
                                                         <th>Qty</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
@@ -165,6 +167,7 @@ $(document).ready(function() {
             {data: 'model_printer', name: 'model_printer'},
             {data: 'serial_number', name: 'serial_number'},
             {data: 'name', name: 'name'},
+            {data: 'card_id', name: 'card_id'},
             {data: 'qty', name: 'qty'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
