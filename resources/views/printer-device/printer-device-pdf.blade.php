@@ -9,7 +9,7 @@
 <div class="main-content">
     <div class="section-header">
         <br />
-        <h3 style="text-align: center;">Laporan List Device Network</h3>
+        <h3 style="text-align: center;">Laporan List Printer Device</h3>
     </div>
     <div class="container-fluid">
         <div class="card">
@@ -21,38 +21,34 @@
                         <div class="col-12 table-responsive">
                         <br />
                             @if ($data->isEmpty())
-                                <p>Tidak Ada Data Device Network</p>
+                                <p>Tidak Ada Data Device Printer</p>
                             @else
                             <table class="table table-striped table-bordered zero-configuration"> 
                                     <thead>
                                         <tr>
                                             <th>Serial Number</th>
-                                            <th>Brand Device</th>
-                                            <th>Model Device</th>
-                                            <th>Type Device</th>
-                                            <th>Port Device</th>
-                                            <th>Masa Garansi</th>
+                                            <th>Brand Printer</th>
+                                            <th>Model Printer</th>
+                                            <th>Type Printer</th>
                                             <th>Tahun Anggaran</th>
-                                            <th>Harga Device</th>
+                                            <th>Harga Printer</th>
                                             <th>Stok Awal</th>
                                             <th>Sisa Stok</th>
-                                            <th>Foto</th>
+                                            <th>Gambar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($data as $network)
+                                    @foreach ($data as $printer)
                                         <tr>
-                                            <td><p>{{ $network->sn_network }}</p></td>
-                                            <td><p>{{ $network->brand_network }}</p></td>
-                                            <td><p>{{ $network->model_network }}</p></td>
-                                            <td><p>{{ $network->type_network }}</p></td>
-                                            <td><p>{{ $network->port_network }}</p></td>
-                                            <td><p>{{ $network->garansi_network }}</p></td>
-                                            <td><p>{{ $network->tahun_anggaran }}</p></td>
-                                            <td><p>{{ $network->harga_network }}</p></td>
-                                            <td><p>{{ $network->stok }}</p></td>
-                                            <td><p>{{ $network->sisa_stok }}</p></td>
-                                            <td> <img src="{{ public_path('/images-network/'.$network->foto_network ) }}" style="width: 100px; height: 100px"></td>
+                                            <td><p>{{ $printer->serial_number }}</p></td>
+                                            <td><p>{{ $printer->brand_printer }}</p></td>
+                                            <td><p>{{ $printer->model_printer }}</p></td>
+                                            <td><p>{{ $printer->type_printer  }}</p></td>
+                                            <td><p>{{ $printer->tahun_anggaran  }}</p></td>
+                                            <td><p>{{ $printer->harga_printer  }}</p></td>
+                                            <td><p>{{ $printer->stok  }}</p></td>
+                                            <td><p>{{ $printer->sisa_stok  }}</p></td>
+                                            <td> <img src="{{ public_path('/images-printer/'.$printer->foto_printer ) }}" style="width: 100px; height: 100px"></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
