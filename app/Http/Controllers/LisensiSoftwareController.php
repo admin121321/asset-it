@@ -200,6 +200,16 @@ class LisensiSoftwareController extends Controller
          return redirect()->back();
          
      }
+
+     public function pdf()
+    {
+        $data = LisensiSoftware::all();
+        $pdf = PDF::loadview('lisensi-software.lisensi-software-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_lisensi_software.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 
