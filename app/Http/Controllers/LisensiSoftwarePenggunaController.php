@@ -145,6 +145,21 @@ class LisensiSoftwarePenggunaController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = LisensiSoftwarePengguna::join('desktop_device', 'desktop_device.id', '=', 'lisensi_pengguna.desktop_id')
+                                        ->join('lisensi_software', 'lisensi_software.id', '=', 'lisensi_pengguna.lisensi_id')
+                                        ->select('lisensi_pengguna.*', 'lisensi_software.brand_lisensi', 'lisensi_software.sn_lisensi',
+                                        'lisensi_software.model_lisensi', 'lisensi_software.type_lisensi', 'desktop_device.brand_desktop', 
+                                        'desktop_device.sn_desktop', 'desktop_device.model_desktop','desktop_device.type_desktop') 
+                                        ->get();
+        $pdf = PDF::loadview('lisensi-software-pengguna.lisensi-software-pengguna-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_lisensi_software_pengguna.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 
