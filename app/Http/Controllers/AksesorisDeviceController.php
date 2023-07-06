@@ -184,9 +184,9 @@ class AksesorisDeviceController extends Controller
     public function pdf()
     {
         $data  = AksesorisDevice::all();
-        $pdf = PDF::loadview('users.users-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        $pdf = PDF::loadview('aksesoris-device.aksesoris-device-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
         // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
-    	return $pdf->download('list_users.pdf');
+    	return $pdf->download('list_aksesoris_device.pdf');
  
         // return view('users.users-pdf');
     }
