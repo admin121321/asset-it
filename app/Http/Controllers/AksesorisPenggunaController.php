@@ -136,6 +136,20 @@ class AksesorisPenggunaController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = AksesorisPengguna::join('desktop_device', 'desktop_device.id', '=', 'aksesoris_pengguna.desktop_id')
+                                ->join('aksesoris_device', 'aksesoris_device.id', '=', 'aksesoris_pengguna.aksesoris_id')
+                                ->select('aksesoris_pengguna.*', 'aksesoris_device.sn_aksesoris','aksesoris_device.brand_aksesoris', 'aksesoris_device.model_aksesoris', 'aksesoris_device.type_aksesoris',
+                                'desktop_device.brand_desktop','desktop_device.sn_desktop','desktop_device.model_desktop','desktop_device.type_desktop') 
+                                ->get();
+        $pdf = PDF::loadview('aksesoris-pengguna.aksesoris-pengguna-pdf', ['data'=>$data])->setPaper('F4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_aksesoris_pengguna.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 # Created by Sudiman Syah Widodo
