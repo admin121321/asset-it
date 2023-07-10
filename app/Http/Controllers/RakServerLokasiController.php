@@ -102,6 +102,20 @@ class RakServerLokasiController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = RakServerLokasi::join('rak_server', 'rak_server.id', '=' ,'rak_server_lokasi.rak_id')
+                                ->select('rak_server_lokasi.*', 'rak_server.brand_rak', 'rak_server.kode_rak',) 
+                                ->get();
+        // $customPaper = array(0,0,1500,950);
+        // $pdf = PDF::loadview('rak-server-lokasi.rak-server-lokasi-pdf', ['data'=>$data])->setPaper($customPaper);
+        $pdf = PDF::loadview('rak-server-lokasi.rak-server-lokasi-pdf', ['data'=>$data])->setPaper('f4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_rak_server_lokasi.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 # Created by Sudiman Syah Widodo 2023

@@ -9,7 +9,7 @@
 <div class="main-content">
     <div class="section-header">
         <br />
-        <h3 style="text-align: center;">Laporan List Printer Device</h3>
+        <h3 style="text-align: center;">Laporan List Rak Server</h3>
     </div>
     <div class="container-fluid">
         <div class="card">
@@ -21,7 +21,7 @@
                         <div class="col-12 table-responsive">
                         <br />
                             @if ($data->isEmpty())
-                                <p>Tidak Ada Data Device Printer</p>
+                                <p>Tidak Ada Data Rak Server</p>
                             @else
                             <table class="table table-striped table-bordered zero-configuration"> 
                                     <thead>
