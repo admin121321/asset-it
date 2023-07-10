@@ -21,6 +21,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <p>Rak Server</p>
+                                <a href="{{ route('rak-server.pdf') }}" class="btn btn-primary mb-4">Export PDF</a>
                                 <!-- DataTables -->
                                 <div align="right">
                                     <button type="button" name="create_record" id="create_record" class="btn btn-success"> <i class="bi bi-plus-square"></i> Add</button>

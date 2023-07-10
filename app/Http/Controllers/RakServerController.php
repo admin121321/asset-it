@@ -187,6 +187,18 @@ class RakServerController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = RakServer::latest()->get();
+        $customPaper = array(0,0,1500,950);
+        $pdf = PDF::loadview('rak-server.rak-server-pdf', ['data'=>$data])->setPaper($customPaper);
+        // $pdf = PDF::loadview('desktop-pengguna.desktop-pengguna-pdf', ['data'=>$data])->setPaper('f4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_rak_server.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 # Created by Sudiman Syah Widodo 2023
