@@ -31,17 +31,8 @@
                                             <th>Brand Desktop</th>
                                             <th>Model Desktop</th>
                                             <th>Type Desktop</th>
-                                            <th>RAM Desktop</th>
-                                            <th>Hardisk Desktop</th>
-                                            <th>Processor Desktop</th>
-                                            <th>Core Processor Desktop</th>
-                                            <th>Garansi</th>
-                                            <th>Thn Anggaran</th>
-                                            <th>Harga</th>
-                                            <th>Stok</th>
-                                            <th>Sisa Stok</th>
-                                            <th>Foto</th>
-                                            <th>Deskripsi</th>
+                                            <th>Nama Pengguna</th>
+                                            <th>ID Pengguna</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,17 +42,8 @@
                                             <td><p>{{ $desktop->brand_desktop }}</p></td>
                                             <td><p>{{ $desktop->model_desktop }}</p></td>
                                             <td><p>{{ $desktop->type_desktop  }}</p></td>
-                                            <td><p>{{ $desktop->ram_desktop }}</p></td>
-                                            <td><p>{{ $desktop->hardisk_desktop }}</p></td>
-                                            <td><p>{{ $desktop->processor_desktop }}</p></td>
-                                            <td><p>{{ $desktop->core_desktop }}</p></td>
-                                            <td><p>{{ $desktop->garansi_desktop  }}</p></td>
-                                            <td><p>{{ $desktop->tahun_anggaran  }}</p></td>
-                                            <td><p>{{ $desktop->harga_desktop  }}</p></td>
-                                            <td><p>{{ $desktop->stok  }}</p></td>
-                                            <td><p>{{ $desktop->sisa_stok  }}</p></td>
-                                            <td> <img src="{{ public_path('/images-desktop/'.$desktop->foto_desktop ) }}" style="width: 50px; height: 50px"></td>
-                                            <td><p>{{ $desktop->deskripsi_desktop  }}</p></td>
+                                            <td><p>{{ $desktop->name  }}</p></td>
+                                            <td><p>{{ $desktop->card_id  }}</p></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

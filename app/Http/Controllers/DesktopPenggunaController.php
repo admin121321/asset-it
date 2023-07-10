@@ -139,6 +139,22 @@ class DesktopPenggunaController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = DesktopPengguna::join('users', 'users.id', '=' ,'desktop_pengguna.user_id')
+                                ->join('desktop_device', 'desktop_device.id', '=', 'desktop_pengguna.desktop_id')
+                                ->select('desktop_pengguna.*', 'users.name','users.card_id', 'desktop_device.brand_desktop', 'desktop_device.model_desktop',
+                                        'desktop_device.sn_desktop','desktop_device.type_desktop') 
+                                ->get();
+        // $customPaper = array(0,0,1500,950);
+        // $pdf = PDF::loadview('desktop-device.desktop-device-pdf', ['data'=>$data])->setPaper($customPaper);
+        $pdf = PDF::loadview('desktop-pengguna.desktop-pengguna-pdf', ['data'=>$data])->setPaper('f4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_desktop_pengguna.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 
