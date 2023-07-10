@@ -229,6 +229,18 @@ class DesktopDeviceController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = DesktopDevice::all();
+        $customPaper = array(0,0,1500,950);
+        $pdf = PDF::loadview('desktop-device.desktop-device-pdf', ['data'=>$data])->setPaper($customPaper);
+        // $pdf = PDF::loadview('desktop-device.desktop-device-pdf', ['data'=>$data])->setPaper('f4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_desktop_device.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 

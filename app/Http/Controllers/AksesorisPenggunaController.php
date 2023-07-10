@@ -21,9 +21,10 @@ class AksesorisPenggunaController extends Controller
      {
         if ($request->ajax()) {
             $data = AksesorisPengguna::join('desktop_device', 'desktop_device.id', '=', 'aksesoris_pengguna.desktop_id')
-                                    ->join('aksesoris_device', 'aksesoris_device.id', '=', 'aksesoris_pengguna.aksesoris_id')
-                                    ->select('aksesoris_pengguna.*', 'aksesoris_device.brand_aksesoris', 'aksesoris_device.model_aksesoris', 'aksesoris_device.type_aksesoris','desktop_device.brand_desktop') 
-                                    ->get();
+                                ->join('aksesoris_device', 'aksesoris_device.id', '=', 'aksesoris_pengguna.aksesoris_id')
+                                ->select('aksesoris_pengguna.*', 'aksesoris_device.sn_aksesoris','aksesoris_device.brand_aksesoris', 'aksesoris_device.model_aksesoris', 'aksesoris_device.type_aksesoris',
+                                'desktop_device.brand_desktop','desktop_device.sn_desktop','desktop_device.model_desktop','desktop_device.type_desktop') 
+                                ->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('desktop_id', function($data){
                     return $data->brand_desktop;

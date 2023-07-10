@@ -32,9 +32,12 @@
                                             <table class="table table-striped table-bordered zero-configuration printerpengguna_datatable"> 
                                                 <thead>
                                                     <tr>
+                                                        <th>SN Device</th>
                                                         <th>Brand Device</th>
-                                                        <th>Type Aksesoris</th>
+                                                        <th>SN Aksesoris</th>
+                                                        <th>Brand aksesoris</th>
                                                         <th>Model Aksesoris</th>
+                                                        <th>Type Aksesoris</th>
                                                         <th>Qty</th>
                                                         <th width="180px">Action</th>
                                                     </tr>
@@ -162,9 +165,12 @@ $(document).ready(function() {
         serverSide: true,
         ajax: "{{ route('aksesoris-pengguna.index') }}",
         columns: [
+            {data: 'sn_desktop', name: 'sn_dektop'},
             {data: 'brand_desktop', name: 'brand_dektop'},
-            {data: 'type_aksesoris', name: 'type_aksesoris'},
+            {data: 'sn_aksesoris', name: 'sn_aksesoris'},
+            {data: 'brand_aksesoris', name: 'brand_aksesoris'},
             {data: 'model_aksesoris', name: 'model_aksesoris'},
+            {data: 'type_aksesoris', name: 'type_aksesoris'},
             {data: 'qty', name: 'qty'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
