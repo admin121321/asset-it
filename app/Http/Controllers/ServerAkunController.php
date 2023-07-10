@@ -131,6 +131,20 @@ class ServerAkunController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = ServerAkun::join('server_device', 'server_device.id', '=' ,'server_akun.server_id',)
+                                ->select('server_akun.*', 'server_device.sn_server', 'server_device.model_server', 'server_device.type_server') 
+                                ->get();
+        // $customPaper = array(0,0,2300,1500);
+        // $pdf = PDF::loadview('server-akun.server-akun-pdf', ['data'=>$data])->setPaper($customPaper);
+        $pdf = PDF::loadview('server-akun.server-akun-pdf', ['data'=>$data])->setPaper('f4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_server_akun_device.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 # Created by Sudiman Syah Widodo 2023

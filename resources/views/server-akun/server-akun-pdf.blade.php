@@ -26,33 +26,23 @@
                             <table class="table table-striped table-bordered zero-configuration"> 
                                     <thead>
                                         <tr>
-                                            <th>Serial Number</th>
-                                            <th>Brand rak</th>
-                                            <th>Type rak</th>
-                                            <th>Kode rak</th>
-                                            <th>Dimensi rak</th>
-                                            <th>Ukuran U rak</th>
-                                            <th>Sisa Penggunaan U rak</th>
-                                            <th>Tahun Anggaran</th>
-                                            <th>Harga rak</th>
-                                            <th>Deskripsi</th>
-                                            <th>Foto</th>
+                                            <th>SN Server</th>
+                                            <th>Model Server</th>
+                                            <th>Type Server</th>
+                                            <th>Nama Akun</th>
+                                            <th>Password</th>
+                                            <th>Tujuan Akun</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($data as $rak)
+                                    @foreach ($data as $server)
                                         <tr>
-                                            <td><p>{{ $rak->sn_rak }}</p></td>
-                                            <td><p>{{ $rak->brand_rak }}</p></td>
-                                            <td><p>{{ $rak->type_rak }}</p></td>
-                                            <td><p>{{ $rak->kode_rak  }}</p></td>
-                                            <td><p>{{ $rak->dimensi_rak  }}</p></td>
-                                            <td><p>{{ $rak->ukuran_u_rak  }}</p></td>
-                                            <td><p>{{ $rak->sisa_u  }}</p></td>
-                                            <td><p>{{ $rak->tahun_anggaran  }}</p></td>
-                                            <td><p>{{ $rak->harga_rak  }}</p></td>
-                                            <td><p>{{ $rak->deskripsi  }}</p></td>
-                                            <td> <img src="{{ public_path('/images-rak/'.$rak->foto_rak ) }}" style="width: 100px; height: 100px"></td>
+                                            <td><p>{{ $server->sn_server }}</p></td>
+                                            <td><p>{{ $server->model_server }}</p></td>
+                                            <td><p>{{ $server->type_server }}</p></td>
+                                            <td><p>{{ $server->akun_server }}</p></td>
+                                            <td><p>{{ $server->password_server }}</p></td>
+                                            <td><p>{{ $server->tujuan_akses_server }}</p></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
