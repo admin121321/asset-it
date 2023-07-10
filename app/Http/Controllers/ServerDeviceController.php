@@ -311,6 +311,25 @@ class ServerDeviceController extends Controller
 		return redirect()->back();
         
     }
+
+    public function pdf()
+    {
+        $data = ServerDevice::join('server_spek', 'server_spek.id', '=' ,'server_device.id',)
+                                ->join('server_penggunaan', 'server_penggunaan.id', '=' ,'server_device.id',)
+                                ->select('server_device.*', 'server_spek.ram_server','server_spek.hardisk_server',
+                                'server_spek.processor_server','server_spek.core_server','server_spek.os_server','server_penggunaan.url_server',
+                                'server_penggunaan.port_akses_server','server_penggunaan.ip_address_server','server_penggunaan.ip_management_server',
+                                'server_penggunaan.hostname_server','server_penggunaan.web_server','server_penggunaan.php_server', 
+                                'server_penggunaan.db_server', 'server_penggunaan.application_server','server_penggunaan.deskripsi_server') 
+                                ->get();
+        $customPaper = array(0,0,2300,1500);
+        $pdf = PDF::loadview('server-device.server-device-pdf', ['data'=>$data])->setPaper($customPaper);
+        // $pdf = PDF::loadview('rak-server-pengguna.rak-server-pengguna-pdf', ['data'=>$data])->setPaper('f4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_server_device.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 # Created by Sudiman Syah Widodo 2023

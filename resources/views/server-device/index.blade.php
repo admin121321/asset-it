@@ -19,6 +19,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <p>Server Device</p>
+                                <a href="{{ route('server-device.pdf') }}" class="btn btn-primary mb-4">Export PDF</a>
                                 <!-- DataTables -->
                                 <div align="right">
                                     <button type="button" name="create_record" id="create_record" class="btn btn-success"> <i class="bi bi-plus-square"></i> Add</button>
@@ -231,7 +232,8 @@
                     <p><strong>SN:</strong><span id="sn-server"></span></p>
                     <p><strong>Type:</strong><span id="type-server"></span></p>
                     <p><strong>Harga:</strong><span id="harga-server"></span></p>
-                    <p><strong>Garansi:</strong><span id="garansi-server"></span></p>
+                    <p><strong>Masa Garansi:</strong><span id="garansi-server"></span></p>
+                    <p><strong>Masa Support:</strong><span id="support-server"></span></p>
                     <p><strong>Stok:</strong><span id="stok-server"></span></p>
                     <p><strong>Tahun Anggaran:</strong><span id="tahun-server"></span></p>
                     <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
