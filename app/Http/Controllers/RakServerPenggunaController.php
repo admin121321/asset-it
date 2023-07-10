@@ -140,6 +140,22 @@ class RakServerPenggunaController extends Controller
         }
 
     }
+
+    public function pdf()
+    {
+        $data = RakServerPengguna::join('rak_server', 'rak_server.id', '=' ,'rak_server_pengguna.rak_id')
+                                ->join('server_device', 'server_device.id', '=' ,'rak_server_pengguna.server_id')
+                                ->select('rak_server_pengguna.*', 'rak_server.brand_rak', 'rak_server.kode_rak', 'rak_server.type_rak',
+                                'server_device.sn_server','server_device.type_server', 'server_device.model_server', 'server_device.brand_server',) 
+                                ->get();
+        // $customPaper = array(0,0,1500,950);
+        // $pdf = PDF::loadview('rak-server-lokasi.rak-server-lokasi-pdf', ['data'=>$data])->setPaper($customPaper);
+        $pdf = PDF::loadview('rak-server-pengguna.rak-server-pengguna-pdf', ['data'=>$data])->setPaper('f4', 'landscape');
+        // ->setPaper([0, 0, 685.98, 396.85], 'landscape')
+    	return $pdf->download('list_rak_server_pengguna.pdf');
+ 
+        // return view('users.users-pdf');
+    }
 }
 
 # Created by Sudiman Syah Widodo 2023
