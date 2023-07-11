@@ -17,12 +17,19 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes();
+// Auth::routes();
+// Disable Link Register
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+  ]);
 // home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // aksesoris Device
 Route::get('/aksesoris-device', [App\Http\Controllers\AksesorisDeviceController::class, 'index'])->name('aksesoris-device.index');
 Route::post('/aksesoris-device/store', [App\Http\Controllers\AksesorisDeviceController::class, 'store'])->name('aksesoris-device.store');
+Route::get('/aksesoris-device/detail/{id}', [App\Http\Controllers\AksesorisDeviceController::class, 'detail'])->name('aksesoris-device.detail');
 Route::get('/aksesoris-device/edit/{id}', [App\Http\Controllers\AksesorisDeviceController::class, 'edit'])->name('aksesoris-device.edit');
 Route::post('/aksesoris-device/update', [App\Http\Controllers\AksesorisDeviceController::class, 'update'])->name('aksesoris-device.update');
 Route::get('/aksesoris-device/destroy/{id}', [App\Http\Controllers\AksesorisDeviceController::class, 'destroy'])->name('aksesoris-device.destroy');

@@ -24,6 +24,7 @@ class AksesorisDeviceController extends Controller
                 ->addColumn('action', function($data){
                     $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Edit</button>';
                     $button .= '   <button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Delete</button>';
+                    $button .= '<button type="button" name="edit" id="'.$data->id.'" class="detailButton btn btn-success btn-sm"> <i class="bi bi-pencil-square"></i>Detail</button>';
                     return $button;
                 })
                 ->make(true);
@@ -168,6 +169,17 @@ class AksesorisDeviceController extends Controller
             'success' => 'Data is successfully updated',
             
         ]);
+    }
+
+    public function detail($id)
+    {
+
+        if (request()->ajax()) 
+        {
+            $data = AksesorisDevice::findOrFail($id);
+            return response()->json($data);
+        }
+
     }
 
     public function destroy($id)

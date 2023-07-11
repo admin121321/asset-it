@@ -147,7 +147,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
+                                                        <h4 align="center" style="margin:0;">Apakah Anda Yakin Untuk Menghapus ini?</h4>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -169,14 +169,38 @@
         <!--**********************************
             Content body end
         ***********************************-->
-<!-- <script>
-    tinymce.init({
-      selector: '#deskripsi',
-      menubar: true,
-      toolbar: true,
-      inline: false,
-    });
-  </script> -->
+         <!-- Modal Detail -->
+         <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <span id="detail_result"></span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Lisensi Software</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- <p><strong>ID Netwok:</strong><span id="network-id"></span></p> -->
+                    <p><strong>Brand:</strong><span id="brand-aksesoris"></span></p>
+                    <p><strong>Model:</strong><span id="model-aksesoris"></span></p>
+                    <p><strong>SN:</strong><span id="sn-aksesoris"></span></p>
+                    <p><strong>Type:</strong><span id="type-aksesoris"></span></p>
+                    <p><strong>Harga:</strong><span id="harga-aksesoris"></span></p>
+                    <p><strong>Garansi:</strong><span id="garansi-aksesoris"></span></p>
+                    <p><strong>Tahun Anggaran:</strong><span id="tahun-anggaran"></span></p>
+                    <p><strong>Harga:</strong><span id="harga-aksesoris"></span></p>
+                    <p><strong>Stok (Jumlah Device yang bisa digunakan):</strong><span id="stok-aksesoris"></span></p>
+                    <p><strong>Sisa Stok (Sisa Device yang bisa gunakan):</strong><span id="sisa-stok"></span></p>
+                    <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
+                        <img name="tampil-gambar" id="tampilgambar">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -324,6 +348,47 @@ $(document).ready(function() {
                 }, 2000);
                 window.location.reload();
             }
+        })
+    });
+
+    // detail
+    $(document).on('click', '.detailButton', function(event){
+        event.preventDefault(); 
+        var id = $(this).attr('id'); alert(id);
+        $('#detail_result').html('');
+
+        $.ajax({
+            url :"/aksesoris-device/detail/"+id+"/",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType:"json",
+            processData: false,  
+            contentType: false,
+            cache: false,
+            success:function(data)
+            {
+                
+                // $('#network-id').text(data.network_id);
+                $('#sn-aksesoris').val(data.sn_aksesoris);
+                $('#brand-aksesoris').val(data.brand_aksesoris);
+                $('#model-aksesoris').val(data.model_aksesoris);
+                $('#type-aksesoris').val(data.type_aksesoris).change();
+                $('#garansi-aksesoris').val(data.garansi_aksesoris);
+                $('#tahun-anggaran').val(data.tahun_anggaran);
+                $('#harga-aksesoris').val(data.harga_aksesoris);
+                $('#stok-aksesoris').val(data.stok);
+                $('#sisa-stok').val(data.sisa_stok);
+                $('#tampil-gambar').html(
+                `<img src="/images-aksesoris/${data.foto_aksesoris}" width="100" class="img-fluid img-thumbnail">`);
+                $('#hidden_id').val(id);
+                $('.modal-title').text('Detail');
+                $('#fModal').modal('show');
+
+                console.log(
+                    'SN Lisensi: '+data.sn_lisensi,
+                     $('#sn-desktop')
+                    );
+                
+            },
         })
     });
 });

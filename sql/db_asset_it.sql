@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 27, 2023 at 09:30 AM
+-- Generation Time: Jul 11, 2023 at 03:49 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -194,7 +194,7 @@ CREATE TABLE `lisensi_pengguna` (
 --
 
 INSERT INTO `lisensi_pengguna` (`id`, `desktop_id`, `lisensi_id`, `qty`, `created_at`, `updated_at`) VALUES
-(34, '2', '3', '1', '2023-06-22 01:47:37', '2023-06-22 01:47:37');
+(35, '2', '3', '1', '2023-07-09 20:39:18', '2023-07-09 20:39:18');
 
 --
 -- Triggers `lisensi_pengguna`
@@ -239,7 +239,7 @@ CREATE TABLE `lisensi_software` (
 --
 
 INSERT INTO `lisensi_software` (`id`, `sn_lisensi`, `brand_lisensi`, `model_lisensi`, `type_lisensi`, `tahun_anggaran`, `masa_aktif`, `harga_lisensi`, `key_lisensi`, `bit_os`, `stok`, `sisa_stok`, `foto_lisensi`, `created_at`, `updated_at`) VALUES
-(3, 'ASDSA', 'ADS', 'asdas', 'Aplikasi', '2023-06-22', '2023-06-22', '22', '222', '32 bit', 2, 1, '20230622062300.jpg', '2023-06-21 23:23:00', '2023-06-22 01:47:37');
+(3, 'AD-02123', 'Adobe', 'Adobe Reader', 'Aplikasi', '2023-06-22', '2023-06-22', '22', 'Fsd234asdwq3q2e2', '32 bit', 2, 1, '20230622062300.jpg', '2023-06-21 23:23:00', '2023-07-09 20:39:52');
 
 -- --------------------------------------------------------
 
@@ -250,9 +250,17 @@ INSERT INTO `lisensi_software` (`id`, `sn_lisensi`, `brand_lisensi`, `model_lise
 CREATE TABLE `logos` (
   `id` bigint UNSIGNED NOT NULL,
   `gambar_logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_perusahaan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `logos`
+--
+
+INSERT INTO `logos` (`id`, `gambar_logo`, `nama_perusahaan`, `created_at`, `updated_at`) VALUES
+(1, '20230703065941.png', 'DPMPTSP DKI JAKARTA', '2023-07-02 23:59:41', '2023-07-03 20:50:45');
 
 -- --------------------------------------------------------
 
@@ -346,7 +354,7 @@ CREATE TABLE `network_device` (
 --
 
 INSERT INTO `network_device` (`id`, `sn_network`, `brand_network`, `model_network`, `type_network`, `port_network`, `garansi_network`, `tahun_anggaran`, `harga_network`, `stok`, `sisa_stok`, `foto_network`, `created_at`, `updated_at`) VALUES
-(2, 'CN-012F2', 'Cisco', 'Router Rak', 'Router Managed', '24', '2', '2023-06-26', '2333333', 1, 0, '20230626102032.PNG', '2023-06-26 03:20:32', '2023-06-26 03:21:38');
+(2, 'CN-012F2', 'Cisco', 'Router Rak', 'Router Managed', '24', '2', '2023-06-26', '2333333', 1, 0, '20230626102032.PNG', '2023-06-26 03:20:32', '2023-07-03 21:04:07');
 
 -- --------------------------------------------------------
 
@@ -368,7 +376,7 @@ CREATE TABLE `network_lokasi` (
 --
 
 INSERT INTO `network_lokasi` (`id`, `network_id`, `lokasi`, `qty`, `created_at`, `updated_at`) VALUES
-(8, '2', 'Lantai', '1', '2023-06-26 03:21:38', '2023-06-26 03:21:38');
+(9, '2', 'Lantai 1', '1', '2023-07-03 21:04:07', '2023-07-03 21:04:07');
 
 --
 -- Triggers `network_lokasi`
@@ -738,9 +746,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level_login`, `card_id`, `divisi_id`, `foto`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'administrator', 'admin@asset-it.com', NULL, '$2y$10$c39U00KR/YYp51FxSmaU/Ovkfds6SYShRvoa3Xa2kN2PtbANWvn6m', '1', '12345', '1', '', NULL, '2023-05-10 18:44:35', '2023-05-10 18:44:35'),
-(2, 'user', 'user@asset-it.com', NULL, '$2y$10$r76Y.wf5hdTwZrDZpGMJg.bGhJEDErZuRMaR9AGNbgZAqohgBoBFy', '0', '123123213', '1', '', NULL, '2023-05-10 19:32:31', '2023-05-10 19:32:31'),
-(3, 'panjul', 'panjul@asset-it.com', NULL, '$2y$10$UqgGcJSwYAA07HnhXqKxLOkdvltxIBgRrwN..gmC3AYHBLiM1IVZK', 'USERS', '23213123', '2', '20230627035042.VEAM One 3.PNG', NULL, '2023-06-26 20:50:43', '2023-06-26 20:50:43');
+(1, 'administrator', 'admin@asset-it.com', NULL, '$2y$10$c39U00KR/YYp51FxSmaU/Ovkfds6SYShRvoa3Xa2kN2PtbANWvn6m', '1', '12345', '2', '', NULL, '2023-05-10 18:44:35', '2023-05-10 18:44:35'),
+(2, 'user', 'user@asset-it.com', NULL, '$2y$10$r76Y.wf5hdTwZrDZpGMJg.bGhJEDErZuRMaR9AGNbgZAqohgBoBFy', '0', '123123213', '2', '', NULL, '2023-05-10 19:32:31', '2023-05-10 19:32:31'),
+(3, 'panjul', 'panjul@asset-it.com', NULL, '$2y$10$UqgGcJSwYAA07HnhXqKxLOkdvltxIBgRrwN..gmC3AYHBLiM1IVZK', '0', '23213123', '2', '20230627035042.VEAM One 3.PNG', NULL, '2023-06-26 20:50:43', '2023-06-26 20:50:43');
 
 -- --------------------------------------------------------
 
@@ -970,19 +978,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `lisensi_pengguna`
 --
 ALTER TABLE `lisensi_pengguna`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `lisensi_software`
 --
 ALTER TABLE `lisensi_software`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `logos`
---
-ALTER TABLE `logos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1006,7 +1008,7 @@ ALTER TABLE `network_device`
 -- AUTO_INCREMENT for table `network_lokasi`
 --
 ALTER TABLE `network_lokasi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
