@@ -46,6 +46,30 @@
                                         </div>
                                     </div>
                                     <!-- card-body -->
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">            
+                                                <div class="d-inline-block">
+                                                    <h3 class="text-black">{{ DB::table('server_device')->where('type_server','FISIK')->count(); }}</h3>
+                                                    <p class="text-black mb-0">FISIK</p>
+                                                </div>
+                                                &nbsp;
+                                                &nbsp;
+                                                &nbsp;
+                                                <div class="d-inline-block">
+                                                    <h3 class="text-black">{{ DB::table('server_device')->where('type_server','STORAGE')->count(); }}</h3>
+                                                    <p class="text-black mb-0">STORAGE</p>
+                                                </div>
+                                                &nbsp;
+                                                &nbsp;
+                                                &nbsp;
+                                                <div class="d-inline-block">
+                                                    <h3 class="text-black">{{ DB::table('server_device')->where('type_server','VM')->count(); }}</h3>
+                                                    <p class="text-black mb-0">VM</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Modal -->
                                     <!-- input and Update -->
                                     <div class="modal fade bd-example-modal-lg" id="formModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -217,52 +241,52 @@
 
         <!-- Modal -->
         <div class="modal fade" id="fModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <span id="detail_result"></span>
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Desktop</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <span id="detail_result"></span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Desktop</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- <p><strong>ID Netwok:</strong><span id="network-id"></span></p> -->
+                    <label><h3>Data</h3></label>
+                        <p><strong>Brand:</strong><span id="brand-server"></span></p>
+                        <p><strong>Model:</strong><span id="model-server"></span></p>
+                        <p><strong>SN:</strong><span id="sn-server"></span></p>
+                        <p><strong>Type:</strong><span id="type-server"></span></p>
+                        <p><strong>Harga:</strong><span id="harga-server"></span></p>
+                        <p><strong>Masa Garansi:</strong><span id="garansi-server"></span></p>
+                        <p><strong>Masa Support:</strong><span id="support-server"></span></p>
+                        <p><strong>Stok:</strong><span id="stok-server"></span></p>
+                        <p><strong>Tahun Anggaran:</strong><span id="tahun-server"></span></p>
+                        <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
+                            <img name="tampil-gambar" id="tampilgambar">
+                        </div>
+                        <br>
+                    <label><h3>Spesifikasi</h3></label>
+                        <p><strong>Processor:</strong><span id="processor-server"></span></p>
+                        <p><strong>Core:</strong><span id="core-server"></span></p>
+                        <p><strong>RAM:</strong><span id="ram-server"></span></p>
+                        <p><strong>Hardisk:</strong><span id="hardisk-server"></span></p>
+                        <p><strong>OS:</strong><span id="os-server"></span></p>
+                        <br>
+                    <label><h3>Penggunaan</h3></label>
+                        <p><strong>Hostname:</strong><span id="hostname-server"></span></p>
+                        <p><strong>IP Address:</strong><span id="ip-address-server"></span></p>
+                        <p><strong>IP Management:</strong><span id="ip-management-server"></span></p>
+                        <p><strong>Port Akses:</strong><span id="port-akses-server"></span></p>
+                        <p><strong>Nama Aplikasi:</strong><span id="application-server"></span></p>
+                        <p><strong>Web Server dan Versi:</strong><span id="web-server"></span></p>
+                        <p><strong>PHP Versi:</strong><span id="php-server"></span></p>
+                        <p><strong>DB  Versi:</strong><span id="db-server"></span></p>
+                        <p><strong>Deskripsi:</strong><span id="deskripsi-server-a"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <!-- <p><strong>ID Netwok:</strong><span id="network-id"></span></p> -->
-                <label><h3>Data</h3></label>
-                    <p><strong>Brand:</strong><span id="brand-server"></span></p>
-                    <p><strong>Model:</strong><span id="model-server"></span></p>
-                    <p><strong>SN:</strong><span id="sn-server"></span></p>
-                    <p><strong>Type:</strong><span id="type-server"></span></p>
-                    <p><strong>Harga:</strong><span id="harga-server"></span></p>
-                    <p><strong>Masa Garansi:</strong><span id="garansi-server"></span></p>
-                    <p><strong>Masa Support:</strong><span id="support-server"></span></p>
-                    <p><strong>Stok:</strong><span id="stok-server"></span></p>
-                    <p><strong>Tahun Anggaran:</strong><span id="tahun-server"></span></p>
-                    <div class="form-floating mb-3" name="tampil-gambar" id="tampil-gambar">
-                        <img name="tampil-gambar" id="tampilgambar">
-                    </div>
-                    <br>
-                <label><h3>Spesifikasi</h3></label>
-                    <p><strong>Processor:</strong><span id="processor-server"></span></p>
-                    <p><strong>Core:</strong><span id="core-server"></span></p>
-                    <p><strong>RAM:</strong><span id="ram-server"></span></p>
-                    <p><strong>Hardisk:</strong><span id="hardisk-server"></span></p>
-                    <p><strong>OS:</strong><span id="os-server"></span></p>
-                    <br>
-                <label><h3>Penggunaan</h3></label>
-                    <p><strong>Hostname:</strong><span id="hostname-server"></span></p>
-                    <p><strong>IP Address:</strong><span id="ip-address-server"></span></p>
-                    <p><strong>IP Management:</strong><span id="ip-management-server"></span></p>
-                    <p><strong>Port Akses:</strong><span id="port-akses-server"></span></p>
-                    <p><strong>Nama Aplikasi:</strong><span id="application-server"></span></p>
-                    <p><strong>Web Server dan Versi:</strong><span id="web-server"></span></p>
-                    <p><strong>PHP Versi:</strong><span id="php-server"></span></p>
-                    <p><strong>DB  Versi:</strong><span id="db-server"></span></p>
-                    <p><strong>Deskripsi:</strong><span id="deskripsi-server-a"></span></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
         </div>
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>

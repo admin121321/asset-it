@@ -49,6 +49,16 @@
                                         </div>
                                     </div>
                                     <!-- card-body -->
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">            
+                                                <div class="d-inline-block">
+                                                    <h3 class="text-black">{{ DB::table('rak_server')->count(); }}</h3>
+                                                    <p class="text-black mb-0">Total</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Modal -->
                                     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">

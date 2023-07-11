@@ -50,6 +50,23 @@
                                         </div>
                                     </div>
                                     <!-- card-body -->
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-inline-block">
+                                                    <h3 class="text-black">{{ DB::table('network_device')->where('sisa_stok','0')->count(); }}</h3>
+                                                    <p class="text-black mb-0">Terpakai</p>
+                                                </div>
+                                                &nbsp;
+                                                &nbsp;
+                                                &nbsp;
+                                                <div class="d-inline-block">
+                                                    <h3 class="text-black">{{ DB::table('network_device')->where('sisa_stok','1')->count(); }}</h3>
+                                                    <p class="text-black mb-0">Belum Terpakai</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Modal -->
                                     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
