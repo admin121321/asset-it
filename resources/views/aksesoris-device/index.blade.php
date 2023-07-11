@@ -100,6 +100,7 @@
                                                                 <option value="Mouse">Mouse</option>
                                                                 <option value="WebCam">WebCam</option>
                                                                 <option value="Keyboard">Keyboard</option>
+                                                                <option value="Monitor">Monitor</option>
                                                             </select>             
                                                         </div>
                                                         <div class="form-group">
